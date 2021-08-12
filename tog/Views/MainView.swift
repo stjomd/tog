@@ -14,8 +14,8 @@ struct MainView: View {
         .tabItem { Label("Home", systemImage: "house") }
       TicketsView()
         .tabItem { Label("Tickets", systemImage: "ticket") }
-      OffersView()
-        .tabItem { Label("Offers", systemImage: "giftcard") }
+      ServicesView()
+        .tabItem { Label("Services", systemImage: "cart") }
       SettingsView()
         .tabItem { Label("Settings", systemImage: "gearshape") }
     }
