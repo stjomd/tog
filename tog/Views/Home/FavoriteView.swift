@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct FavoriteView: View {
   
   let origin: String
@@ -23,14 +21,14 @@ struct FavoriteView: View {
           HStack(spacing: 6) {
             Text("\(origin)")
               .font(.headline)
-            Image(systemName: "arrow.right")
+            Globals.Icons.rightArrow
               .foregroundColor(.gray)
           }
           Text(destination)
             .font(.headline)
         }
         Spacer()
-        Image(systemName: "ellipsis.circle")
+        Globals.Icons.more
       }
       // Trips
       ForEach(journeys, id: \.self) { journey in

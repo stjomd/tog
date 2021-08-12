@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
   
   @State var origin: String = "Wien Penzing"
   @State var destination: String = ""
@@ -19,7 +19,7 @@ struct ContentView: View {
           HStack {
             TextField("Origin", text: $origin)
             Spacer()
-            Image(systemName: "location.circle.fill")
+            Globals.Icons.location
           }
           TextField("Destination", text: $destination)
         }
@@ -35,10 +35,10 @@ struct ContentView: View {
   
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
-    ContentView()
+    HomeView()
+    HomeView()
       .preferredColorScheme(.dark)
   }
 }
