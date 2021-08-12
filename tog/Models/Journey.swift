@@ -19,4 +19,5 @@ extension Journey {
   static let s45 = Journey(origin: "Wien Penzing", destination: "Wien Heiligenstadt", departure: Date(), arrival: Date(), train: "S45")
   static let s50 = Journey(origin: "Wien Penzing", destination: "Wien Westbahnhof", departure: Date(), arrival: Date(), train: "S50")
   static let rex = Journey(origin: "Wien Penzing", destination: "Wien Westbahnhof", departure: Date(), arrival: Date(), train: "REX")
+  static let cjx = Journey(origin: "Wien Hütteldorf", destination: "Amstetten", departure: Date(), arrival: Date(), train: "CJX")
 }
