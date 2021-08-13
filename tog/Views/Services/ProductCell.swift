@@ -13,25 +13,8 @@ struct ProductCell: View {
   let description: String
   let image: Image?
   
-  private var circleColorComponents: (red: Double, green: Double, blue: Double) {
-    let value = Double(title.first?.asciiValue ?? 15)
-    let red   = sin(value) * sin(value)
-    let green = 0.5 + sin(value) * cos(value)
-    let blue  = cos(value) * cos(value)
-    return (red: red, green: green, blue: blue)
-  }
-  private var circleColor: Color {
-    let (red, green, blue) = circleColorComponents
-    return Color(red: red, green: green, blue: blue)
-  }
-  private var circleTextColor: Color {
-    let (red, green, blue) = circleColorComponents
-    if 0.299*red + 0.587*green + 0.114*blue > 186/255 {
-      return .black
-    } else {
-      return .white
-    }
-  }
+  private var circleColor: Color
+  private var circleTextColor: Color
   
   var body: some View {
     HStack(alignment: .top) {
@@ -65,6 +48,10 @@ struct ProductCell: View {
     self.title = title
     self.description = description
     self.image = image
+    // Color setup
+    let colorComponents = ColorService.components(from: title)
+    self.circleColor = colorComponents.color
+    self.circleTextColor = colorComponents.contrastingColor(bright: .white, dark: .black)
   }
   
   
