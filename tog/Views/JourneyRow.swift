@@ -18,7 +18,7 @@ struct JourneyRow: View {
   
   var body: some View {
     HStack {
-      Text("\(dateFormatter.string(from: journey.departure)) dep.")
+      Text(dateFormatter.string(from: journey.departure))
       Rectangle()
         .foregroundColor(.gray.opacity(0.2))
         .overlay(
@@ -32,15 +32,14 @@ struct JourneyRow: View {
             .font(.callout)
         )
         .frame(height: 28)
-      Text("arr. \(dateFormatter.string(from: journey.arrival))")
+        .padding(.horizontal, 4)
+      Text(dateFormatter.string(from: journey.arrival))
     }
   }
   
   private func color(for train: String) -> Color {
     switch train {
-    case "REX":
-      return Globals.Colors.Transport.rex
-    case "CJX":
+    case "REX", "CJX":
       return Globals.Colors.Transport.rex
     case _ where train.hasPrefix("S"):
       return Globals.Colors.Transport.sBahn
