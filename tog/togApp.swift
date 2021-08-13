@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct togApp: App {
-    var body: some Scene {
-        WindowGroup {
-            MainView()
-        }
+  let dataService: DataService = OEBBDataService()
+  var body: some Scene {
+    WindowGroup {
+      MainView()
+        .environmentObject(dataService)
     }
+  }
 }
