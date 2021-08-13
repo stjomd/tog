@@ -33,7 +33,7 @@ struct ColorComponents {
 enum ColorService {
   
   /// A value used when reducing a string. Changing this value will affect the generated colors slightly.
-  private static let reductionBound = 1009
+  private static let reductionBound = 131
   
   /// Generates color components from a string.
   /// - parameter string: The string to be converted.
@@ -53,7 +53,7 @@ enum ColorService {
   ///   - background: The color components that represent the background color.
   /// - returns: Either `bright` or `dark`, depending on whether `background` represents a dark or a bright background.
   static func choose(bright: Color, dark: Color, against background: ColorComponents) -> Color {
-    if 0.299*background.red + 0.587*background.green + 0.114*background.blue > 186/255 {
+    if 0.299*background.red + 0.587*background.green + 0.114*background.blue > 166/255 {
       return dark
     } else {
       return bright
