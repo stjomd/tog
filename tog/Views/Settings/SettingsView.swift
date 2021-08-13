@@ -12,8 +12,14 @@ struct SettingsView: View {
     NavigationView {
       List {
         Section {
-          Text("Max Mustermann")
-            .bold()
+          VStack(alignment: .leading) {
+            Text("Max Mustermann")
+              .bold()
+            Text("max.mustermann@gmx.at")
+              .font(.subheadline)
+              .opacity(0.5)
+          }
+          .padding(.vertical, 4)
         }
         Section {
           SettingsRow("Account Settings", icon: .sfSymbol("gearshape.fill"))
@@ -22,7 +28,7 @@ struct SettingsView: View {
           SettingsRow("Newsletters, Specials & News", icon: .sfSymbol("envelope.fill"))
         }
         Section {
-          SettingsRow("Help", icon: .sfSymbol("questionmark.circle"))
+          SettingsRow("Help", icon: .sfSymbol("questionmark.circle.fill"))
           SettingsRow("Support", icon: .sfSymbol("person.fill.questionmark"))
         }
         Section {
