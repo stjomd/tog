@@ -6,34 +6,86 @@
 //
 
 import Foundation
+import CoreData
+import SwiftCSV
 import Zip
 
 class OEBBDataService: DataService {
   
-  private let urlSession = URLSession.shared
-  private let url = Bundle.main.url(forResource: "oebb-data", withExtension: "zip")
+  private let zipURL = Bundle.main.url(forResource: "oebb-data", withExtension: "zip")
+  private var unzippedURL = FileManager.documentsDirectoryURL.appendingPathComponent("oebb-data")
   
-  override init() {
+  private let context: NSManagedObjectContext
+  
+  init(context: NSManagedObjectContext) {
+    self.context = context
     super.init()
-    downloadData()
+    if true { // TODO: change to: !FileManager.default.fileExists(atPath: unzippedURL.path) {
+      DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+        self?.downloadData()
+        self?.setupDatabase()
+      }
+    }
   }
+  
+  // MARK: - CSV to Database
+  
+  private func loadStops() {
+    guard let csv = try? CSV(url: unzippedURL.appendingPathComponent("stops.txt")) else {
+      fatalError("CSV Error")
+    }
+    for row in csv.enumeratedRows {
+      if let id = Int(row[0]), let latitude = Double(row[4]), let longitude = Double(row[5]) {
+        Stop.createWith(id: id, name: row[2], latitude: latitude, longitude: longitude, using: context)
+      }
+    }
+    do {
+      try context.save()
+    } catch {
+      fatalError(error.localizedDescription)
+    }
+  }
+  
+  // MARK: - Database Setup
+  
+  private func setupDatabase() {
+    clearDatabase()
+    loadStops()
+  }
+  
+  private func clearDatabase() {
+    // Stops
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Stop")
+    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    do {
+      try context.execute(deleteRequest)
+    } catch {
+      fatalError("Couldn't clear stops")
+    }
+  }
+  
+  // MARK: - Bundle Download
   
   // Download from the ÖBB's url results in a corrupted zip file that cannot be unpacked...
   // Therefore the data is loaded from the bundle :(
   private func downloadData() {
-    guard let url = url else {
+    guard let url = zipURL else {
       fatalError("No URL for data")
     }
     let destination = FileManager.documentsDirectoryURL.appendingPathComponent("oebb-data")
-    if !FileManager.default.fileExists(atPath: destination.path) {
+    if true {
       do {
         try Zip.unzipFile(url, destination: destination, overwrite: true, password: nil)
+        unzippedURL = destination
       } catch {
         fatalError("Couldn't unzip")
       }
     }
   }
   
+  // MARK: - HTTP Download
+  
+  //  private let urlSession = URLSession.shared
   //  private let url = URL(string: "https://data.oebb.at/oebb?dataset=uddi:cd36722f-1b9a-11e8-8087-b71b4f81793a&file=uddi:d3e25791-7889-11e8-8fc8-edb0b0e1f0ef/GFTS_Fahrplan_OEBB.zip")!
   //  private func downloadData() {
   //    urlSession.downloadTask(with: url) { localURL, response, error in
