@@ -33,7 +33,7 @@ struct SearchResultsSection: View {
   init(query: Binding<String>, onResultTapGesture action: @escaping ((Stop) -> Void) = {_ in return}) {
     self._query = query
     self.action = action
-    self.stops  = dataService.fetchStops(by: query.wrappedValue)
+    self.stops  = dataService.stops(by: query.wrappedValue)
   }
   
 }

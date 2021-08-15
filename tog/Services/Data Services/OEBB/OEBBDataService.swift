@@ -32,7 +32,7 @@ class OEBBDataService {
 
 // MARK: - DataService Methods
 extension OEBBDataService: DataService {
-  public func fetchStops(by name: String) -> [Stop] {
+  public func stops(by name: String) -> [Stop] {
     let request: NSFetchRequest<Stop> = Stop.fetchRequest()
     request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", name)
     do {
