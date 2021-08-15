@@ -43,7 +43,6 @@ struct InputField: UIViewRepresentable {
     textField.placeholder = placeholder
     textField.delegate = context.coordinator
     textField.addTarget(context.coordinator, action: #selector(Coordinator.textFieldDidChangeInput(_:)), for: .editingChanged)
-    textField.tag = id
     InputField.container[id] = WeakReference.to(textField)
     return textField
   }
@@ -78,6 +77,7 @@ struct InputField: UIViewRepresentable {
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
       textField.resignFirstResponder()
+      // Focus on next text field
       if let nextResponder = InputField.container[owner.id + 1] {
         nextResponder.object?.becomeFirstResponder()
       }
