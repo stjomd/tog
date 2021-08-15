@@ -21,6 +21,7 @@ enum Globals {
     static let location = Image(systemName: "location.circle.fill")
     static let rightArrow = Image(systemName: "arrow.right")
     static let more = Image(systemName: "ellipsis.circle")
+    static let clear = Image(systemName: "delete.left")
   }
   
 }

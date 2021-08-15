@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InputField: UIViewRepresentable {
   
+  // MARK: - Weak Reference for the dictionary
   final class WeakReference {
     weak var object: UITextField?
     static func to(_ object: UITextField) -> WeakReference {
@@ -18,12 +19,16 @@ struct InputField: UIViewRepresentable {
     }
   }
   
+  // MARK: - Properties
+  
   private static var container: [Int: WeakReference] = [:]
   
-  let id: Int
-  var placeholder: String
-  @Binding var text: String
-  @Binding var isEditing: Bool
+  private let id: Int
+  private let placeholder: String
+  @Binding private var text: String
+  @Binding private var isEditing: Bool
+  
+  // MARK: - Implementation
   
   static func focus(on id: Int) {
     if let textField = container[id]?.object {
@@ -90,7 +95,9 @@ struct InputField: UIViewRepresentable {
   
 }
 
-struct InputFieldAdjustedForPreview: View {
+// MARK: - Previews
+
+fileprivate struct InputFieldAdjustedForPreview: View {
   @Binding var text: String
   var body: some View {
     InputField("Search", id: 0, text: $text, isEditing: .constant(false))

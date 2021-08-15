@@ -9,18 +9,33 @@ import SwiftUI
 
 struct HomeView: View {
   
-  @State var origin: Stop? = nil
-  @State var destination: Stop? = nil
+  @State private var origin: Stop? = nil
+  @State private var destination: Stop? = nil
   
-  @State var query = ["", ""]
-  @State var showing = [false, false]
+  @State private var query = ["", ""]
+  @State private var showing = [false, false]
+  
+  private var completedSearch: Bool {
+    guard let origin = origin, let destination = destination else { return false }
+    // The following line guarantees that the text input & station name match (after a selection)
+    return origin.name == query[0] && destination.name == query[1]
+  }
   
   var body: some View {
     NavigationView {
       List {
         Section(header: Text("Buy tickets")) {
-          InputField("Origin", id: 0, text: $query[0], isEditing: $showing[0])
-          InputField("Destination", id: 1, text: $query[1], isEditing: $showing[1])
+          ClearableInputField("Origin", id: 0, text: $query[0], isEditing: $showing[0])
+          ClearableInputField("Destination", id: 1, text: $query[1], isEditing: $showing[1])
+          if completedSearch, let origin = origin, let destination = destination {
+            NavigationLink(destination: TicketsSearchView(origin: origin, destination: destination)) {
+              HStack {
+                Image(systemName: "magnifyingglass")
+                Text("Find tickets...")
+                  .bold()
+              }
+            }
+          }
         }
         DisjunctSections(sections: [
           DisjunctSearchResultsSection(when: $showing[0], query: $query[0]) { selectedStop in
@@ -28,7 +43,7 @@ struct HomeView: View {
             InputField.focus(on: 1)
           },
           DisjunctSearchResultsSection(when: $showing[1], query: $query[1]) { selectedStop in
-            origin = selectedStop
+            destination = selectedStop
             InputField.unfocus(from: 1)
           }
         ], otherwise: {

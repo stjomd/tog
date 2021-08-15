@@ -10,14 +10,18 @@ import CoreData
 
 struct SearchResultsSection: View {
   
-  @Binding var query: String
-  @Autowired var dataService: DataService!
+  @Binding   private var query: String
+  @Autowired private var dataService: DataService!
   
   private var stops:  [Stop] = []
   private var action: (Stop) -> Void
   
   var body: some View {
     Section(header: Text("Search Results")) {
+      if stops.isEmpty {
+        Text("No results")
+          .opacity(0.3)
+      }
       ForEach(stops, id: \.id) { stop in
         Button(action: {
           query = stop.name
