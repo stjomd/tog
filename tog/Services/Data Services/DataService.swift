@@ -7,12 +7,11 @@
 
 import Foundation
 
-// TODO: should be a protocol, not possible due to compiler limitations (environment object not allowed to be a protocol type)
-class DataService: ObservableObject {
-}
-
-extension FileManager {
-  static var documentsDirectoryURL: URL {
-    Self.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-  }
+protocol DataService {
+  
+  /// Fetches stops from the database that match the given name.
+  /// - parameter name: The name against which the search is to be performed.
+  /// - returns: An array of stops that match.
+  func fetchStops(by name: String) -> [Stop]
+  
 }

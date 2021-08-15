@@ -11,12 +11,9 @@ import CoreData
 struct SearchResultsSection: View {
   
   @Binding var query: String
+  @Autowired var dataService: DataService!
   
-  private var fetchRequest: FetchRequest<Stop>
-  private var stops: FetchedResults<Stop> {
-    fetchRequest.wrappedValue
-  }
-  
+  private var stops:  [Stop] = []
   private var action: (Stop) -> Void
   
   var body: some View {
@@ -33,15 +30,10 @@ struct SearchResultsSection: View {
     }
   }
   
-  init(query: Binding<String>,
-       onResultTapGesture action: @escaping ((Stop) -> Void) = {_ in return}) {
+  init(query: Binding<String>, onResultTapGesture action: @escaping ((Stop) -> Void) = {_ in return}) {
     self._query = query
-    self.fetchRequest = FetchRequest<Stop>(
-      entity: Stop.entity(),
-      sortDescriptors: [],
-      predicate: NSPredicate(format: "name CONTAINS[cd] %@", query.wrappedValue)
-    )
     self.action = action
+    self.stops  = dataService.fetchStops(by: query.wrappedValue)
   }
   
 }

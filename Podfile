@@ -7,6 +7,7 @@ target 'tog' do
 
   # Pods for tog
   pod 'SwiftCSV', '~> 0.6'
+  pod 'Swinject', '~> 2.8.0'
   pod 'Zip', '~> 2.1'
 
   target 'togTests' do
