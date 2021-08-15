@@ -37,3 +37,12 @@ struct SearchResultsSection: View {
   }
   
 }
+
+struct SearchResultsSection_Previews: PreviewProvider {
+  static var previews: some View {
+    List {
+      SearchResultsSection(query: .constant("Wien"))
+    }
+    .listStyle(InsetGroupedListStyle())
+  }
+}
