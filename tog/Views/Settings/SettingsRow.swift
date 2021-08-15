@@ -14,8 +14,8 @@ struct SettingsRow: View {
     case sfSymbol(String)
   }
   
-  let title: String
-  let icon: Icon?
+  private let title: String
+  private let icon: Icon?
   
   private var iconSystemName: String? {
     guard let icon = icon else { return nil }
@@ -28,16 +28,10 @@ struct SettingsRow: View {
       return systemName
     }
   }
-  private var iconColor: Color
-  private var iconBackgroundColor: Color
   
   init(_ title: String, icon: Icon? = nil) {
     self.title = title
     self.icon = icon
-    // Color setup
-    let colorComponents = ColorService.components(from: title)
-    self.iconBackgroundColor = colorComponents.color
-    self.iconColor = colorComponents.contrastingColor(bright: .white, dark: .black)
   }
   
   var body: some View {
