@@ -10,9 +10,9 @@ import CoreData
 import Swinject
 @testable import tog
 
-class MockCoreData: CoreDataStore {
+class MockCoreDataStore {
   // Create an in-memory container
-  override var persistentContainer: NSPersistentContainer {
+  var persistentContainer: NSPersistentContainer = {
     let description = NSPersistentStoreDescription()
     description.type = NSInMemoryStoreType
     let container = NSPersistentContainer(name: "Model")
@@ -23,13 +23,12 @@ class MockCoreData: CoreDataStore {
       }
     }
     return container
-  }
+  }()
 }
 
 class DataServiceTests: XCTestCase {
   
   var container: Container!
-  var coreDataStore: CoreDataStore!
   
   var context: NSManagedObjectContext!
   var dataService: DataService!
@@ -38,8 +37,7 @@ class DataServiceTests: XCTestCase {
     // Put setup code here. This method is called before the invocation of each test method in the class.
     try super.setUpWithError()
     // Core Data
-    coreDataStore = MockCoreData()
-    let cdContext = coreDataStore.persistentContainer.viewContext
+    let cdContext = MockCoreDataStore().persistentContainer.viewContext
     // DI Registration
     container = Container()
     container.register(NSManagedObjectContext.self, factory: { _ in cdContext })
@@ -52,7 +50,6 @@ class DataServiceTests: XCTestCase {
   override func tearDownWithError() throws {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     container = nil
-    coreDataStore = nil
     context = nil
     dataService = nil
     try super.tearDownWithError()

@@ -14,8 +14,6 @@ struct togApp: App {
   
   /// Core Data's managed object context type.
   typealias CDContext = NSManagedObjectContext
-  private let coreDataStore = CoreDataStore()
-  
   /// Swinject Container.
   static let container = Container()
   
@@ -30,7 +28,7 @@ struct togApp: App {
   }
   
   private func registerDependencies() {
-    Self.container.register(CDContext.self)    { _ in coreDataStore.persistentContainer.viewContext }
+    Self.container.register(CDContext.self)    { _ in CoreDataStore.shared.persistentContainer.viewContext }
     Self.container.register(DataService.self)  { r in OEBBDataService(context: r.resolve(CDContext.self)!) }
     Self.container.register(ColorService.self) { _ in ColorService() }
   }
