@@ -8,6 +8,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref }}
     - name: Install dependencies
       run: pod install
     - name: Build
