@@ -103,8 +103,8 @@
 		95FDDF2026C6C7890086ECAE /* oebb-data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "oebb-data.zip"; sourceTree = "<group>"; };
 		95FDDF2226C6CB8B0086ECAE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		95FDDF2526C7E04C0086ECAE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		95FDDF2B26C7E6FB0086ECAE /* Stop+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Stop+CoreDataClass.swift"; path = "/Users/stjomd/Documents/Programming/tog/tog/Models/Stop+CoreDataClass.swift"; sourceTree = "<absolute>"; };
-		95FDDF2C26C7E6FB0086ECAE /* Stop+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Stop+CoreDataProperties.swift"; path = "/Users/stjomd/Documents/Programming/tog/tog/Models/Stop+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		95FDDF2B26C7E6FB0086ECAE /* Stop+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Stop+CoreDataClass.swift"; path = "tog/Models/Stop+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		95FDDF2C26C7E6FB0086ECAE /* Stop+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Stop+CoreDataProperties.swift"; path = "tog/Models/Stop+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		95FDDF2F26C7E8BC0086ECAE /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		95FDDF3226C80B640086ECAE /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		95FDDF3526C8459D0086ECAE /* SearchResultsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsSection.swift; sourceTree = "<group>"; };
