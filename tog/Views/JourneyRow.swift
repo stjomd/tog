@@ -20,7 +20,7 @@ struct JourneyRow: View {
     HStack {
       Text(dateFormatter.string(from: journey.departure))
       Rectangle()
-        .foregroundColor(.gray.opacity(0.2))
+        .foregroundColor(Color.gray.opacity(0.2))
         .overlay(
           Rectangle()
             .foregroundColor(color(for: journey.train))
