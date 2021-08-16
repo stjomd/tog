@@ -1,0 +1,21 @@
+name: Continuous Integration
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: pod install
+    - name: Build
+      run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'generic/platform=iOS' -configuration Release build CODE_SIGNING_ALLOWED=NO
+    - name: Run tests
+      run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'platform=iOS Simulator,name=iPhone 12' test
+    - name: Upload reports
+      uses: actions/upload-artifact@v2
+      with:
+        name: Report
+        path: ~/Library/Developer/Xcode/DerivedData/tog-*/Logs/Test/*.xcresult
