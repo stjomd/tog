@@ -7,7 +7,6 @@
 
 import XCTest
 import CoreData
-import Swinject
 @testable import tog
 
 class MockCoreDataStore {
@@ -27,29 +26,19 @@ class MockCoreDataStore {
 }
 
 class DataServiceTests: XCTestCase {
-  
-  var container: Container!
-  
+    
   var context: NSManagedObjectContext!
   var dataService: DataService!
   
   override func setUpWithError() throws {
     // Put setup code here. This method is called before the invocation of each test method in the class.
     try super.setUpWithError()
-    // Core Data
-    let cdContext = MockCoreDataStore().persistentContainer.viewContext
-    // DI Registration
-    container = Container()
-    container.register(NSManagedObjectContext.self, factory: { _ in cdContext })
-    container.register(DataService.self, factory: { r in OEBBDataService(context: r.resolve(NSManagedObjectContext.self)!) })
-    // Injection
-    context = cdContext
-    dataService = container.resolve(DataService.self)
+    context = MockCoreDataStore().persistentContainer.viewContext
+    dataService = OEBBDataService(context: context, populate: false)
   }
   
   override func tearDownWithError() throws {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
-    container = nil
     context = nil
     dataService = nil
     try super.tearDownWithError()
@@ -64,6 +53,8 @@ class DataServiceTests: XCTestCase {
     let cdStops = try context.fetch(Stop.fetchRequest()) as [Stop]
     // Then
     let dsStops = dataService.stops(by: "Wien")
+    print(cdStops.map { $0.name })
+    print(dsStops.map { $0.name })
     XCTAssertEqual(cdStops.count, dsStops.count)
   }
   

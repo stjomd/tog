@@ -13,14 +13,16 @@ import Zip
 class OEBBDataService {
   
   private let context: NSManagedObjectContext
+  private let shouldPopulate: Bool
   
   private let zipURL = Bundle.main.url(forResource: "oebb-data", withExtension: "zip")
   private let unzippedURL = FileManager.documentsDirectoryURL.appendingPathComponent("oebb-data")
   
-  init(context: NSManagedObjectContext) {
+  init(context: NSManagedObjectContext, populate: Bool) {
     self.context = context
-    if true { // TODO: change to: !FileManager.default.fileExists(atPath: unzippedURL.path) {
-      DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+    self.shouldPopulate = populate
+    if populate {
+      DispatchQueue.global(qos: .userInitiated).async { [weak self] in
         self?.downloadData()
         self?.setupDatabase()
       }
@@ -44,7 +46,29 @@ extension OEBBDataService: DataService {
 }
 
 
-// MARK: - Deserializing
+// MARK: - Database Population (mocks)
+extension OEBBDataService {
+  private func setupDatabase() {
+    clearDatabase()
+    loadStops()
+  }
+  private func clearDatabase() {
+    // Stops
+    let fetchRequest: NSFetchRequest<Stop> = Stop.fetchRequest()
+    do {
+      // Cannot use batch request for compatibility with in-memory store (used in the tests)
+      let contents = try context.fetch(fetchRequest) as [Stop]
+      for object in contents {
+        context.delete(object)
+      }
+      try context.save()
+    } catch {
+      fatalError("Couldn't clear stops")
+    }
+  }
+}
+
+// MARK: Deserializing
 extension OEBBDataService {
   private func loadStops() {
     guard let csv = try? CSV(url: unzippedURL.appendingPathComponent("stops.txt"), loadColumns: false) else {
@@ -64,25 +88,6 @@ extension OEBBDataService {
 }
 
 
-// MARK: - Database Setup
-extension OEBBDataService {
-  private func setupDatabase() {
-    clearDatabase()
-    loadStops()
-  }
-  private func clearDatabase() {
-    // Stops
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Stop")
-    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-    do {
-      try context.execute(deleteRequest)
-    } catch {
-      fatalError("Couldn't clear stops")
-    }
-  }
-}
-
-
 // MARK: - Data Download
 extension OEBBDataService {
   
@@ -95,7 +100,7 @@ extension OEBBDataService {
     do {
       try Zip.unzipFile(url, destination: unzippedURL, overwrite: true, password: nil)
     } catch {
-      fatalError("Couldn't unzip")
+      fatalError("Couldn't unzip \(error.localizedDescription)")
     }
   }
   
