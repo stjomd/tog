@@ -56,7 +56,7 @@ struct DisjunctSections<Disjunct, Default>: View where Disjunct: View, Default: 
   private let count: Int
 
   var body: some View {
-    // TODO: No loops supported in ViewBuilder unfortunately
+    // NOTE: No loops supported in ViewBuilder unfortunately
     if 0 < count && sections[0].condition {
       sections[0].content
     } else if 1 < count && sections[1].condition {
