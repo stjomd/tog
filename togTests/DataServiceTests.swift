@@ -10,11 +10,20 @@ import CoreData
 @testable import tog
 
 class MockCoreDataStore {
+  // Load model once to prevent bug in NSManagedObjectModel.init
+  // (Multiple NSEntityDescriptions claim the NSManagedObject subclass 'Stop' so +entity is unable to disambiguate.)
+  private static let model: NSManagedObjectModel? = {
+    guard let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd"),
+          let model = NSManagedObjectModel(contentsOf: modelURL) else {
+      return nil
+    }
+    return model
+  }()
   // Create an in-memory container
   var persistentContainer: NSPersistentContainer = {
     let description = NSPersistentStoreDescription()
     description.type = NSInMemoryStoreType
-    let container = NSPersistentContainer(name: "Model")
+    let container = NSPersistentContainer(name: "Model", managedObjectModel: model!)
     container.persistentStoreDescriptions = [description]
     container.loadPersistentStores { description, error in
       if let error = error {
@@ -26,7 +35,7 @@ class MockCoreDataStore {
 }
 
 class DataServiceTests: XCTestCase {
-    
+  
   var context: NSManagedObjectContext!
   var dataService: DataService!
   
