@@ -8,35 +8,70 @@
 import XCTest
 
 class togUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+  
+  var app: XCUIApplication!
+  
+  override func setUpWithError() throws {
+    try super.setUpWithError()
+    continueAfterFailure = false
+    app = XCUIApplication()
+    app.launchArguments.append("UITEST")
+    app.launch()
+  }
+  
+  override func tearDownWithError() throws {
+    app = nil
+    try super.tearDownWithError()
+  }
+  
+  func test_whenBothStopsChosen_thenFindTicketsButton() throws {
+    let tablesQuery = XCUIApplication().tables
+    let originTextField = tablesQuery.textFields["Origin"]
+    let destinationTextField = tablesQuery.textFields["Destination"]
+    // When
+    XCTAssertFalse(tablesQuery.buttons["Find tickets..."].exists)
+    originTextField.tap()
+    originTextField.typeText("Penzing")
+    tablesQuery.cells["Wien Penzing Bahnhof"].buttons["Wien Penzing Bahnhof"].tap()
+    
+    XCTAssertFalse(tablesQuery.buttons["Find tickets..."].exists)
+    destinationTextField.typeText("Hütteldorf")
+    tablesQuery.cells["Wien Hütteldorf Bahnhof"].buttons["Wien Hütteldorf Bahnhof"].tap()
+    
+    // Then
+    XCTAssertTrue(tablesQuery.buttons["Find tickets..."].exists)
+    tablesQuery.buttons["Find tickets..."].tap()
+    
+    XCTAssertTrue(app.staticTexts["Wien Penzing Bahnhof"].exists)
+    XCTAssertTrue(app.staticTexts["Wien Hütteldorf Bahnhof"].exists)
+  }
+  
+  func test_whenBothStopsChosenAndInputTextChanges_thenNoFindTicketsButton() throws {
+    let tablesQuery = XCUIApplication().tables
+    let originTextField = tablesQuery.textFields["Origin"]
+    let destinationTextField = tablesQuery.textFields["Destination"]
+    // When
+    XCTAssertFalse(tablesQuery.buttons["Find tickets..."].exists)
+    originTextField.tap()
+    originTextField.typeText("Penzing")
+    tablesQuery.cells["Wien Penzing Bahnhof"].buttons["Wien Penzing Bahnhof"].tap()
+    XCTAssertFalse(tablesQuery.buttons["Find tickets..."].exists)
+    destinationTextField.typeText("Hütteldorf")
+    tablesQuery.cells["Wien Hütteldorf Bahnhof"].buttons["Wien Hütteldorf Bahnhof"].tap()
+    XCTAssertTrue(tablesQuery.buttons["Find tickets..."].exists)
+    // And when (1 - destination input doesn't match)
+    destinationTextField.tap()
+    app.keyboards.keys["delete"].tap()
+    // Then (1 - Find tickets button is hidden)
+    XCTAssertFalse(tablesQuery.buttons["Find tickets..."].exists)
+    // -- Restore (1) in preparation for (2)
+    destinationTextField.typeText(" Bahnhof") // restore destination text field
+    XCTAssertTrue(tablesQuery.buttons["Find tickets..."].exists)
+    // And when (2 - origin input doesn't match)
+    originTextField.tap()
+    app.keyboards.keys["delete"].tap()
+    // Then (2 - Find tickets button is hidden)
+    XCTAssertFalse(tablesQuery.buttons["Find tickets..."].exists)
+  }
+  
 }

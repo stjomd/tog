@@ -14,54 +14,39 @@ struct SettingsRow: View {
     case sfSymbol(String)
   }
   
-  let title: String
-  let icon: Icon?
+  private let title: String
+  private let icon: Icon?
   
-  private var iconColor: Color
-  private var iconBackgroundColor: Color
+  private var iconSystemName: String? {
+    guard let icon = icon else { return nil }
+    switch icon {
+    case .letter:
+      guard let first = title.first else { return nil }
+      let letter = String(first).lowercased()
+      return "\(letter).circle"
+    case let .sfSymbol(systemName):
+      return systemName
+    }
+  }
   
   init(_ title: String, icon: Icon? = nil) {
     self.title = title
     self.icon = icon
-    // Color setup
-    let colorComponents = ColorService.components(from: title)
-    self.iconBackgroundColor = colorComponents.color
-    self.iconColor = colorComponents.contrastingColor(bright: .white, dark: .black)
   }
   
   var body: some View {
     HStack(alignment: .center) {
-      if let icon = icon {
-        switch icon {
-        case .letter:
-          iconBackground
-            .overlay(
-              Text(String(title.first ?? " "))
-                .font(.headline)
-                .fontWeight(.semibold)
-                .foregroundColor(iconColor)
-            )
-        case let .sfSymbol(systemName):
-          iconBackground
-            .overlay(
-              Image(systemName: systemName)
-                .font(.callout)
-                .foregroundColor(iconColor)
-            )
-        }
+      if let systemName = iconSystemName {
+        Image(systemName: systemName)
+          .resizable()
+          .font(Font.body.bold())
+          .aspectRatio(contentMode: .fit)
+          .frame(width: 20, height: 20)
+          .padding(.trailing, 4)
       }
       Text(title)
-        .padding(.leading, icon == nil ? 0 : 4)
     }
-    .padding(.vertical, 4)
   }
-  
-  var iconBackground: some View {
-    RoundedRectangle(cornerSize: CGSize(width: 6, height: 6))
-      .foregroundColor(iconBackgroundColor)
-      .frame(width: 28, height: 28)
-  }
-  
 }
 
 struct SettingsRow_Previews: PreviewProvider {
@@ -75,6 +60,7 @@ struct SettingsRow_Previews: PreviewProvider {
       .padding()
     List {
       SettingsRow("Payment Methods", icon: .letter)
+      SettingsRow("Support", icon: .sfSymbol("person.fill"))
       SettingsRow("Support")
     }
     .listStyle(InsetGroupedListStyle())

@@ -9,12 +9,14 @@ import SwiftUI
 
 struct ProductCell: View {
   
-  let title: String
-  let description: String
-  let image: Image?
+  @Autowired private var colorService: ColorService!
   
-  private var circleColor: Color
-  private var circleTextColor: Color
+  private let title: String
+  private let description: String
+  private let image: Image?
+  
+  private var circleColor: Color = .primary
+  private var circleTextColor: Color = .primary
   
   var body: some View {
     HStack(alignment: .top) {
@@ -49,16 +51,18 @@ struct ProductCell: View {
     self.description = description
     self.image = image
     // Color setup
-    let colorComponents = ColorService.components(from: title)
-    self.circleColor = colorComponents.color
-    self.circleTextColor = colorComponents.contrastingColor(bright: .white, dark: .black)
+    let components = colorService.components(from: title)
+    self.circleColor = components.color
+    self.circleTextColor = components.contrastingColor(bright: .white, dark: .black)
   }
   
   
 }
 
 struct ProductCell_Previews: PreviewProvider {
+  
   static let alphabet: [Character] = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+  
   static var previews: some View {
     
     ProductCell(title: "Easy-Out-Ticket", description: "Local transport tickets for 2–5 passengers", image: Image(systemName: "person.2.fill"))
@@ -76,5 +80,7 @@ struct ProductCell_Previews: PreviewProvider {
       }
     }
     .listStyle(InsetGroupedListStyle())
+    
   }
+  
 }
