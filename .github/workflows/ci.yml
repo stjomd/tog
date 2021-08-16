@@ -8,6 +8,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+    - name: Select Xcode version
+      run: sudo xcode-select -switch /Applications/Xcode_12.5.app
     - name: Install dependencies
       run: pod install
     - name: Build
