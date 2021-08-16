@@ -26,10 +26,10 @@ struct SearchResultsSection: View {
         Button(action: {
           query = stop.name
           action(stop)
-        }) {
+        }, label: {
           Text(stop.name)
             .foregroundColor(.primary)
-        }
+        })
       }
     }
   }
