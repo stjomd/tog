@@ -9,20 +9,20 @@ import Foundation
 import CoreData
 
 class CoreDataStore {
-  
+
   static let shared = CoreDataStore()
-  
+
   var persistentContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: "Model")
-    container.loadPersistentStores { description, error in
+    container.loadPersistentStores { _, error in
       if let error = error {
         print(error)
       }
     }
     return container
   }()
-  
+
   private init() {
   }
-  
+
 }

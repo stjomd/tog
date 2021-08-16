@@ -9,13 +9,13 @@ import SwiftUI
 import CoreData
 
 struct SearchResultsSection: View {
-  
+
   @Binding   private var query: String
   @Autowired private var dataService: DataService!
-  
-  private var stops:  [Stop] = []
+
+  private var stops: [Stop] = []
   private var action: (Stop) -> Void
-  
+
   var body: some View {
     Section(header: Text("Search Results")) {
       if stops.isEmpty {
@@ -33,13 +33,13 @@ struct SearchResultsSection: View {
       }
     }
   }
-  
+
   init(query: Binding<String>, onResultTapGesture action: @escaping ((Stop) -> Void) = {_ in return}) {
     self._query = query
     self.action = action
     self.stops  = dataService.stops(by: query.wrappedValue)
   }
-  
+
 }
 
 struct SearchResultsSection_Previews: PreviewProvider {

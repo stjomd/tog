@@ -8,9 +8,9 @@
 import XCTest
 
 class TogUITests: XCTestCase {
-  
+
   var app: XCUIApplication!
-  
+
   override func setUpWithError() throws {
     try super.setUpWithError()
     continueAfterFailure = false
@@ -18,12 +18,12 @@ class TogUITests: XCTestCase {
     app.launchArguments.append("UITEST")
     app.launch()
   }
-  
+
   override func tearDownWithError() throws {
     app = nil
     try super.tearDownWithError()
   }
-  
+
   func test_whenBothStopsChosen_thenFindTicketsButton() throws {
     let tablesQuery = XCUIApplication().tables
     let originTextField = tablesQuery.textFields["Origin"]
@@ -33,19 +33,19 @@ class TogUITests: XCTestCase {
     originTextField.tap()
     originTextField.typeText("Penzing")
     tablesQuery.cells["Wien Penzing Bahnhof"].buttons["Wien Penzing Bahnhof"].tap()
-    
+
     XCTAssertFalse(tablesQuery.buttons["Find tickets..."].exists)
     destinationTextField.typeText("Hütteldorf")
     tablesQuery.cells["Wien Hütteldorf Bahnhof"].buttons["Wien Hütteldorf Bahnhof"].tap()
-    
+
     // Then
     XCTAssertTrue(tablesQuery.buttons["Find tickets..."].exists)
     tablesQuery.buttons["Find tickets..."].tap()
-    
+
     XCTAssertTrue(app.staticTexts["Wien Penzing Bahnhof"].exists)
     XCTAssertTrue(app.staticTexts["Wien Hütteldorf Bahnhof"].exists)
   }
-  
+
   func test_whenBothStopsChosenAndInputTextChanges_thenNoFindTicketsButton() throws {
     let tablesQuery = XCUIApplication().tables
     let originTextField = tablesQuery.textFields["Origin"]
@@ -73,5 +73,5 @@ class TogUITests: XCTestCase {
     // Then (2 - Find tickets button is hidden)
     XCTAssertFalse(tablesQuery.buttons["Find tickets..."].exists)
   }
-  
+
 }

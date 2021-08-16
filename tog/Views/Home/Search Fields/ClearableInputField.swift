@@ -33,7 +33,7 @@ struct ClearableInputField: View {
   }
 }
 
-fileprivate struct ClearableInputFieldAdjustedForPreview: View {
+private struct ClearableInputFieldAdjustedForPreview: View {
   @Binding var isEditing: Bool
   var body: some View {
     ClearableInputField("Search Field", id: 0, text: .constant(""), isEditing: $isEditing)

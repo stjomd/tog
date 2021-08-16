@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct SettingsRow: View {
-  
+
   enum Icon {
     case letter
     case sfSymbol(String)
   }
-  
+
   private let title: String
   private let icon: Icon?
-  
+
   private var iconSystemName: String? {
     guard let icon = icon else { return nil }
     switch icon {
@@ -28,12 +28,12 @@ struct SettingsRow: View {
       return systemName
     }
   }
-  
+
   init(_ title: String, icon: Icon? = nil) {
     self.title = title
     self.icon = icon
   }
-  
+
   var body: some View {
     HStack(alignment: .center) {
       if let systemName = iconSystemName {
