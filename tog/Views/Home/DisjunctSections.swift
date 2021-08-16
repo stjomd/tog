@@ -45,17 +45,18 @@ class DisjunctSection<SectionType> {
 /// }
 /// .listStyle(GroupedListStyle())
 /// ```
-/// Due to compiler limitations, this view currently only supports choosing between 6 (5 disjunct and 1 default) sections.
-/// If you provide more sections, the excessive views are ignored and this view functions as if you had provided 6 sections.
+/// Due to compiler limitations, this view currently only supports choosing between 6 (5 disjunct and 1 default)
+/// sections. If you provide more sections, the excessive views are ignored and this view functions as if you had
+/// provided 6 sections.
 struct DisjunctSections<Disjunct, Default>: View where Disjunct: View, Default: View {
-  
+
   let sections: [DisjunctSection<Disjunct>]
   let main: Default
-  
+
   private let count: Int
-  
+
   var body: some View {
-    // TODO: No loops supported in ViewBuilder unfortunately
+    // NOTE: No loops supported in ViewBuilder unfortunately
     if 0 < count && sections[0].condition {
       sections[0].content
     } else if 1 < count && sections[1].condition {
@@ -70,17 +71,17 @@ struct DisjunctSections<Disjunct, Default>: View where Disjunct: View, Default: 
       main
     }
   }
-  
+
   /// Creates a view that displays one of the sections provided based on a condition, and a different section otherwise.
   ///
-  /// Due to compiler limitations, up to 6 (5 disjunct and 1 default) sections are supported.
-  /// If you provide more sections, the excessive views are ignored and this view functions as if you had provided 6 sections.
+  /// Due to compiler limitations, up to 6 (5 disjunct and 1 default) sections are supported. If you provide more
+  /// sections, the excessive views are ignored and this view functions as if you had provided 6 sections.
   init(sections: [DisjunctSection<Disjunct>], otherwise main: () -> Default) {
     self.sections = sections
     self.count = sections.count
     self.main = main()
   }
-  
+
 }
 
 struct DisjunctSections_Previews: PreviewProvider {

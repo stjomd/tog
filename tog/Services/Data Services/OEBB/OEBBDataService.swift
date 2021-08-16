@@ -11,13 +11,13 @@ import SwiftCSV
 import Zip
 
 class OEBBDataService {
-  
+
   private let context: NSManagedObjectContext
   private let shouldPopulate: Bool
-  
+
   private let zipURL = Bundle.main.url(forResource: "oebb-data", withExtension: "zip")
   private let unzippedURL = FileManager.documentsDirectoryURL.appendingPathComponent("oebb-data")
-  
+
   init(context: NSManagedObjectContext, populate: Bool) {
     self.context = context
     self.shouldPopulate = populate
@@ -31,7 +31,6 @@ class OEBBDataService {
 
 }
 
-
 // MARK: - DataService Methods
 extension OEBBDataService: DataService {
   public func stops(by name: String) -> [Stop] {
@@ -44,7 +43,6 @@ extension OEBBDataService: DataService {
     }
   }
 }
-
 
 // MARK: - Database Population (mocks)
 extension OEBBDataService {
@@ -87,10 +85,9 @@ extension OEBBDataService {
   }
 }
 
-
 // MARK: - Data Download
 extension OEBBDataService {
-  
+
   // Download from the ÖBB's url results in a corrupted zip file that cannot be unpacked...
   // Therefore the data is loaded from the bundle :(
   private func downloadData() {
@@ -103,9 +100,9 @@ extension OEBBDataService {
       fatalError("Couldn't unzip \(error.localizedDescription)")
     }
   }
-  
+
   //  private let urlSession = URLSession.shared
-  //  private let url = URL(string: "https://data.oebb.at/oebb?dataset=uddi:cd36722f-1b9a-11e8-8087-b71b4f81793a&file=uddi:d3e25791-7889-11e8-8fc8-edb0b0e1f0ef/GFTS_Fahrplan_OEBB.zip")!
+  //  private let url = URL(string: "<#Link to ÖBB zip archive#>")!
   //  private func downloadData() {
   //    urlSession.downloadTask(with: url) { localURL, response, error in
   //      guard let localURL = localURL else {
@@ -130,5 +127,5 @@ extension OEBBDataService {
   //      }
   //    }.resume()
   //  }
-  
+
 }

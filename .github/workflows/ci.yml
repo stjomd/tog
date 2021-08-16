@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Tests
 
 on: [push]
 
@@ -15,6 +15,7 @@ jobs:
     - name: Run tests
       run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'platform=iOS Simulator,name=iPhone 12' test
     - name: Upload reports
+      if: ${{ always() }}
       uses: actions/upload-artifact@v2
       with:
         name: Report

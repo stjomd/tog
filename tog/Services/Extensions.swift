@@ -16,6 +16,6 @@ extension FileManager {
 @propertyWrapper
 struct Autowired<T> {
   var wrappedValue: T? {
-    togApp.container.resolve(T.self)
+    TogApp.container.resolve(T.self)
   }
 }

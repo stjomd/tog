@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct HomeView: View {
-  
-  @State private var origin: Stop? = nil
-  @State private var destination: Stop? = nil
-  
+
+  @State private var origin: Stop?
+  @State private var destination: Stop?
+
   @State private var query = ["", ""]
   @State private var showing = [false, false]
-  
+
   private var completedSearch: Bool {
     guard let origin = origin, let destination = destination else { return false }
     // The following line guarantees that the text input & station name match (after a selection)
     return origin.name == query[0] && destination.name == query[1]
   }
-  
+
   var body: some View {
     NavigationView {
       List {
@@ -54,7 +54,7 @@ struct HomeView: View {
       .navigationTitle("Tog")
     }
   }
-  
+
 }
 
 // MARK: - Wrapper for a disjunct results section
@@ -71,8 +71,10 @@ class DisjunctSearchResultsSection: DisjunctSection<SearchResultsSection> {
 struct FavoriteDestinationsSection: View {
   var body: some View {
     Section(header: Text("Favorite Destinations")) {
-      FavoriteView(origin: "Wien Penzing", destination: "Wien Westbahnhof", journeys: [Journey.s50, Journey.s50, Journey.rex])
-      FavoriteView(origin: "Wien", destination: "Flughafen Wien", journeys: [Journey.s45, Journey.s45])
+      FavoriteView(origin: "Wien Penzing", destination: "Wien Westbahnhof",
+                   journeys: [Journey.s50, Journey.s50, Journey.rex])
+      FavoriteView(origin: "Wien", destination: "Flughafen Wien",
+                   journeys: [Journey.s45, Journey.s45])
     }
   }
 }

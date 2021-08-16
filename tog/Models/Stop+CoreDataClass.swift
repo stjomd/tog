@@ -11,5 +11,5 @@ import CoreData
 
 @objc(Stop)
 public class Stop: NSManagedObject {
-  
+
 }

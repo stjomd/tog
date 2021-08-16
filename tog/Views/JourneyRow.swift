@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct JourneyRow: View {
-  
+
   let journey: Journey
   var dateFormatter: DateFormatter {
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm"
     return formatter
   }
-  
+
   var body: some View {
     HStack {
       Text(dateFormatter.string(from: journey.departure))
@@ -36,7 +36,7 @@ struct JourneyRow: View {
       Text(dateFormatter.string(from: journey.arrival))
     }
   }
-  
+
   private func color(for train: String) -> Color {
     switch train {
     case "REX", "CJX":
@@ -47,7 +47,7 @@ struct JourneyRow: View {
       return Globals.Colors.Transport.other
     }
   }
-  
+
 }
 
 struct JourneyRow_Previews: PreviewProvider {

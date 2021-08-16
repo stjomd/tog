@@ -10,13 +10,22 @@ import CoreData
 @testable import tog
 
 class MockCoreDataStore {
+  // Load model once to prevent bug in NSManagedObjectModel.init
+  // (Multiple NSEntityDescriptions claim the NSManagedObject subclass 'Stop' so +entity is unable to disambiguate.)
+  private static let model: NSManagedObjectModel? = {
+    guard let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd"),
+          let model = NSManagedObjectModel(contentsOf: modelURL) else {
+      return nil
+    }
+    return model
+  }()
   // Create an in-memory container
   var persistentContainer: NSPersistentContainer = {
     let description = NSPersistentStoreDescription()
     description.type = NSInMemoryStoreType
-    let container = NSPersistentContainer(name: "Model")
+    let container = NSPersistentContainer(name: "Model", managedObjectModel: model!)
     container.persistentStoreDescriptions = [description]
-    container.loadPersistentStores { description, error in
+    container.loadPersistentStores { _, error in
       if let error = error {
         print(error)
       }
@@ -26,24 +35,24 @@ class MockCoreDataStore {
 }
 
 class DataServiceTests: XCTestCase {
-    
+
   var context: NSManagedObjectContext!
   var dataService: DataService!
-  
+
   override func setUpWithError() throws {
     // Put setup code here. This method is called before the invocation of each test method in the class.
     try super.setUpWithError()
     context = MockCoreDataStore().persistentContainer.viewContext
     dataService = OEBBDataService(context: context, populate: false)
   }
-  
+
   override func tearDownWithError() throws {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     context = nil
     dataService = nil
     try super.tearDownWithError()
   }
-  
+
   func test_whenGivenStops_fetchingReturnsStops() throws {
     // When
     Stop.createWith(id: 15, name: "Wien Hütteldorf", latitude: 0.5, longitude: 0.5, using: context)
@@ -57,7 +66,7 @@ class DataServiceTests: XCTestCase {
     print(dsStops.map { $0.name })
     XCTAssertEqual(cdStops.count, dsStops.count)
   }
-  
+
   func test_whenNoStops_FetchingReturnsEmptyArray() throws {
     // When no stops
     let request: NSFetchRequest<Stop> = Stop.fetchRequest()
@@ -66,5 +75,5 @@ class DataServiceTests: XCTestCase {
     // Then
     XCTAssertTrue(dataService.stops(by: "").isEmpty)
   }
-  
+
 }
