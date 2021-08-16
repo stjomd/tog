@@ -64,7 +64,8 @@ struct ProductCell_Previews: PreviewProvider {
 
   static var previews: some View {
 
-    ProductCell(title: "Easy-Out-Ticket", description: "Local transport tickets for 2–5 passengers", image: Image(systemName: "person.2.fill"))
+    ProductCell(title: "Easy-Out-Ticket", description: "Local transport tickets for 2–5 passengers",
+                image: Image(systemName: "person.2.fill"))
       .previewLayout(.sizeThatFits)
       .padding()
 

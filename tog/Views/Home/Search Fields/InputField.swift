@@ -47,7 +47,11 @@ struct InputField: UIViewRepresentable {
     let textField = UITextField()
     textField.placeholder = placeholder
     textField.delegate = context.coordinator
-    textField.addTarget(context.coordinator, action: #selector(Coordinator.textFieldDidChangeInput(_:)), for: .editingChanged)
+    textField.addTarget(
+      context.coordinator,
+      action: #selector(Coordinator.textFieldDidChangeInput(_:)),
+      for: .editingChanged
+    )
     InputField.container[id] = WeakReference.to(textField)
     return textField
   }

@@ -19,7 +19,8 @@ struct ColorComponents {
     Color(red: red, green: green, blue: blue)
   }
 
-  /// Decides if this color is dark or bright and chooses a color that is supposed to be more contrast against this color.
+  /// Decides if this color is dark or bright and chooses a color that is supposed to be more contrast against this
+  /// color.
   /// - parameters:
   ///   - bright: The color to be selected against a dark background.
   ///   - dark: The color to be selected against a bright background.

@@ -102,7 +102,7 @@ extension OEBBDataService {
   }
 
   //  private let urlSession = URLSession.shared
-  //  private let url = URL(string: "https://data.oebb.at/oebb?dataset=uddi:cd36722f-1b9a-11e8-8087-b71b4f81793a&file=uddi:d3e25791-7889-11e8-8fc8-edb0b0e1f0ef/GFTS_Fahrplan_OEBB.zip")!
+  //  private let url = URL(string: "<#Link to ÖBB zip archive#>")!
   //  private func downloadData() {
   //    urlSession.downloadTask(with: url) { localURL, response, error in
   //      guard let localURL = localURL else {

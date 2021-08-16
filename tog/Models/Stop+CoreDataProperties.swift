@@ -20,7 +20,8 @@ extension Stop {
   @NSManaged public var latitude: Double
   @NSManaged public var longitude: Double
 
-  public static func createWith(id: Int, name: String, latitude: Double, longitude: Double, using context: NSManagedObjectContext) {
+  public static func createWith(id: Int, name: String, latitude: Double, longitude: Double,
+                                using context: NSManagedObjectContext) {
     let stop = Stop(context: context)
     stop.id = Int32(id)
     stop.name = name
