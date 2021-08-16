@@ -10,9 +10,8 @@ import CoreData
 
 class CoreDataStore {
   
-  static let shared = CoreDataStore()
-  
-  lazy var persistentContainer: NSPersistentContainer = {
+  // Must not be stored (& lazy) to be overridden as a mock in unit tests
+  var persistentContainer: NSPersistentContainer {
     let container = NSPersistentContainer(name: "Model")
     container.loadPersistentStores { description, error in
       if let error = error {
@@ -20,20 +19,9 @@ class CoreDataStore {
       }
     }
     return container
-  }()
-  
-  private init() {
   }
   
-  func saveContext() {
-    let context = persistentContainer.viewContext
-    if context.hasChanges {
-      do {
-        try context.save()
-      } catch {
-        print(error)
-      }
-    }
+  init() {
   }
   
 }
