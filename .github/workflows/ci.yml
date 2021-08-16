@@ -3,13 +3,15 @@ name: Continuous Integration
 on: [push]
 
 jobs:
-  build:
+  test:
     runs-on: macos-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
         ref: ${{ github.ref }}
+    - name: Select Xcode version
+      run: sudo xcode-select -switch /Applications/Xcode_12.app
     - name: Install dependencies
       run: pod install
     - name: Build
