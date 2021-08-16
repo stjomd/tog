@@ -15,6 +15,8 @@
 		953C0F4826C4626D00EF44DB /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4726C4626D00EF44DB /* Journey.swift */; };
 		953C0F4C26C4627C00EF44DB /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4A26C4627C00EF44DB /* FavoriteView.swift */; };
 		953C0F4D26C4627C00EF44DB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4B26C4627C00EF44DB /* HomeView.swift */; };
+		95A2924C26CAF97D00972011 /* Stop+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF2B26C7E6FB0086ECAE /* Stop+CoreDataClass.swift */; };
+		95A2924D26CAF97D00972011 /* Stop+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF2C26C7E6FB0086ECAE /* Stop+CoreDataProperties.swift */; };
 		95D5045326C93EB20008652A /* DisjunctSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D5045226C93EB20008652A /* DisjunctSections.swift */; };
 		95D5045526C95EB30008652A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D5045426C95EB30008652A /* Extensions.swift */; };
 		95D5045726C9A72C0008652A /* TicketsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D5045626C9A72C0008652A /* TicketsSearchView.swift */; };
@@ -36,8 +38,6 @@
 		95FDDF2126C6C7890086ECAE /* oebb-data.zip in Resources */ = {isa = PBXBuildFile; fileRef = 95FDDF2026C6C7890086ECAE /* oebb-data.zip */; };
 		95FDDF2326C6CB8B0086ECAE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 95FDDF2226C6CB8B0086ECAE /* README.md */; };
 		95FDDF2626C7E04C0086ECAE /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF2426C7E04C0086ECAE /* Model.xcdatamodeld */; };
-		95FDDF2D26C7E6FB0086ECAE /* Stop+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF2C26C7E6FB0086ECAE /* Stop+CoreDataProperties.swift */; };
-		95FDDF2E26C7E6FB0086ECAE /* Stop+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF2B26C7E6FB0086ECAE /* Stop+CoreDataClass.swift */; };
 		95FDDF3026C7E8BC0086ECAE /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF2F26C7E8BC0086ECAE /* CoreDataStore.swift */; };
 		95FDDF3326C80B640086ECAE /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF3226C80B640086ECAE /* InputField.swift */; };
 		95FDDF3626C8459D0086ECAE /* SearchResultsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF3526C8459D0086ECAE /* SearchResultsSection.swift */; };
@@ -598,11 +598,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A2924C26CAF97D00972011 /* Stop+CoreDataClass.swift in Sources */,
+				95A2924D26CAF97D00972011 /* Stop+CoreDataProperties.swift in Sources */,
 				95FDDF1026C67DA70086ECAE /* SettingsRow.swift in Sources */,
-				95FDDF2E26C7E6FB0086ECAE /* Stop+CoreDataClass.swift in Sources */,
 				953C0F4826C4626D00EF44DB /* Journey.swift in Sources */,
 				953C0F4D26C4627C00EF44DB /* HomeView.swift in Sources */,
-				95FDDF2D26C7E6FB0086ECAE /* Stop+CoreDataProperties.swift in Sources */,
 				95FDDF1D26C6B6DA0086ECAE /* OEBBDataService.swift in Sources */,
 				953C0F0626C44ED000EF44DB /* togApp.swift in Sources */,
 				95E911DD26C53D7400863A30 /* SettingsView.swift in Sources */,
