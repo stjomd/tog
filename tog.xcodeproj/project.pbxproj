@@ -367,6 +367,7 @@
 			buildPhases = (
 				12C12D33FCAE53F35ED223DD /* [CP] Check Pods Manifest.lock */,
 				953C0EFE26C44ED000EF44DB /* Sources */,
+				95A2924E26CB1B6800972011 /* SwiftLint */,
 				953C0EFF26C44ED000EF44DB /* Frameworks */,
 				953C0F0026C44ED000EF44DB /* Resources */,
 				7054B791BA91C2A8153E4068 /* [CP] Embed Pods Frameworks */,
@@ -568,6 +569,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tog-togUITests/Pods-tog-togUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		95A2924E26CB1B6800972011 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		D20C8315405057E268726ADD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
