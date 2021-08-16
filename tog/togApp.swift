@@ -10,7 +10,7 @@ import Swinject
 import CoreData.NSManagedObjectContext
 
 @main
-struct togApp: App {
+struct TogApp: App {
   
   static let isUITest = ProcessInfo.processInfo.arguments.contains("UITEST")
   
@@ -43,14 +43,14 @@ struct togApp: App {
   }
   
   private func retrieveDataService() -> DataService {
-    if togApp.isUITest {
+    if TogApp.isUITest {
       // Mock data (ÖBB's open data, predownloaded)
-      return OEBBDataService(context: togApp.container.resolve(CDContext.self)!, populate: true)
+      return OEBBDataService(context: TogApp.container.resolve(CDContext.self)!, populate: true)
     } else {
       // TODO: Register a real data service
       // Currently also mock data, since ÖBB doesn't offer any open API. In a real app the following line
       // should register a data service that actually fetches data from an API.
-      return OEBBDataService(context: togApp.container.resolve(CDContext.self)!, populate: true)
+      return OEBBDataService(context: TogApp.container.resolve(CDContext.self)!, populate: true)
     }
   }
   

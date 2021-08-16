@@ -7,7 +7,7 @@
 
 import XCTest
 
-class togUITests: XCTestCase {
+class TogUITests: XCTestCase {
   
   var app: XCUIApplication!
   

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		953C0F0626C44ED000EF44DB /* togApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F0526C44ED000EF44DB /* togApp.swift */; };
+		953C0F0626C44ED000EF44DB /* TogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F0526C44ED000EF44DB /* TogApp.swift */; };
 		953C0F0A26C44ED300EF44DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953C0F0926C44ED300EF44DB /* Assets.xcassets */; };
 		953C0F0D26C44ED300EF44DB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953C0F0C26C44ED300EF44DB /* Preview Assets.xcassets */; };
 		953C0F2326C44ED300EF44DB /* togUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F2226C44ED300EF44DB /* togUITests.swift */; };
@@ -69,7 +69,7 @@
 		81B43C2A96B10814655A195E /* Pods-togTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-togTests.debug.xcconfig"; path = "Target Support Files/Pods-togTests/Pods-togTests.debug.xcconfig"; sourceTree = "<group>"; };
 		90344C17DF6CC60BDEFDABCD /* Pods_tog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		953C0F0226C44ED000EF44DB /* tog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tog.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		953C0F0526C44ED000EF44DB /* togApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = togApp.swift; sourceTree = "<group>"; };
+		953C0F0526C44ED000EF44DB /* TogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogApp.swift; sourceTree = "<group>"; };
 		953C0F0926C44ED300EF44DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		953C0F0C26C44ED300EF44DB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		953C0F0E26C44ED300EF44DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 		953C0F0426C44ED000EF44DB /* tog */ = {
 			isa = PBXGroup;
 			children = (
-				953C0F0526C44ED000EF44DB /* togApp.swift */,
+				953C0F0526C44ED000EF44DB /* TogApp.swift */,
 				953C0F0926C44ED300EF44DB /* Assets.xcassets */,
 				95FDDF1126C67FE20086ECAE /* Services */,
 				953C0F4326C4626000EF44DB /* Globals */,
@@ -623,7 +623,7 @@
 				953C0F4826C4626D00EF44DB /* Journey.swift in Sources */,
 				953C0F4D26C4627C00EF44DB /* HomeView.swift in Sources */,
 				95FDDF1D26C6B6DA0086ECAE /* OEBBDataService.swift in Sources */,
-				953C0F0626C44ED000EF44DB /* togApp.swift in Sources */,
+				953C0F0626C44ED000EF44DB /* TogApp.swift in Sources */,
 				95E911DD26C53D7400863A30 /* SettingsView.swift in Sources */,
 				95E911E226C541EF00863A30 /* TicketPreview.swift in Sources */,
 				95D5045726C9A72C0008652A /* TicketsSearchView.swift in Sources */,
