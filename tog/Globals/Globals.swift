@@ -5,6 +5,8 @@
 //  Created by Artem Zhukov on 11.08.21.
 //
 
+// swiftlint:disable nesting
+
 import SwiftUI
 
 enum Globals {
