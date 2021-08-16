@@ -8,14 +8,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Select Xcode version
-      run: sudo xcode-select -switch /Applications/Xcode_12.5.app
     - name: Install dependencies
       run: pod install
     - name: Build
-      run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'generic/platform=iOS' -configuration Release build CODE_SIGNING_ALLOWED=NO
+      run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'generic/platform=iOS' -configuration Release build CODE_SIGNING_ALLOWED=NO SWIFT_VERSION=5.4
     - name: Run tests
-      run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'platform=iOS Simulator,name=iPhone 12' test
+      run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'platform=iOS Simulator,name=iPhone 12' test SWIFT_VERSION=5.4
     - name: Upload reports
       uses: actions/upload-artifact@v2
       with:
