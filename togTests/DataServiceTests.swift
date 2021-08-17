@@ -48,9 +48,9 @@ class DataServiceTests: XCTestCase {
 
   func test_whenGivenStops_fetchingReturnsStops() throws {
     // When
-    Stop.createWith(id: 15, name: "Wien Hütteldorf", latitude: 0.5, longitude: 0.5, using: context)
-    Stop.createWith(id: 18, name: "Wien Penzing", latitude: 0.5, longitude: 0.5, using: context)
-    Stop.createWith(id: 54, name: "Wien Breitensee", latitude: 0.5, longitude: 0.5, using: context)
+    Stop.create(withId: 15, name: "Wien Hütteldorf", latitude: 0.5, longitude: 0.5, using: context)
+    Stop.create(withId: 18, name: "Wien Penzing", latitude: 0.5, longitude: 0.5, using: context)
+    Stop.create(withId: 54, name: "Wien Breitensee", latitude: 0.5, longitude: 0.5, using: context)
     try context.save()
     let cdStops = try context.fetch(Stop.fetchRequest()) as [Stop]
     // Then

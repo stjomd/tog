@@ -74,7 +74,7 @@ extension OEBBDataService {
     }
     for row in csv.enumeratedRows {
       if let id = Int(row[0]), let latitude = Double(row[4]), let longitude = Double(row[5]) {
-        Stop.createWith(id: id, name: row[2], latitude: latitude, longitude: longitude, using: context)
+        Stop.create(withId: id, name: row[2], latitude: latitude, longitude: longitude, using: context)
       }
     }
     do {
