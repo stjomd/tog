@@ -17,10 +17,10 @@ extension Trip {
 
   @NSManaged public var id: Int32
   @NSManaged public var headsign: String
-  @NSManaged public var shortName: String
+  @NSManaged public var shortName: String?
   @NSManaged public var halts: Set<Halt>
 
-  public static func create(withId id: Int, headsign: String, shortName: String,
+  public static func create(withId id: Int, headsign: String, shortName: String?,
                             using context: NSManagedObjectContext) {
     let trip = Trip(context: context)
     trip.id = Int32(id)
