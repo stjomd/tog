@@ -9,15 +9,51 @@ import SwiftUI
 
 struct TicketsSearchView: View {
 
-  let origin: Stop
-  let destination: Stop
+  @State var origin: Stop
+  @State var destination: Stop
+
+  @State var date = Date()
+  @State var selectingDeparture = true
 
   var body: some View {
-    VStack {
-      Text(origin.name)
-      Image(systemName: "arrow.down")
-      Text(destination.name)
+    List {
+      Section {
+        Text(origin.name)
+        Text(destination.name)
+      }
+      Section {
+        HStack {
+          // Separate text and date picker because the padding doesn't look nice
+          Text(selectingDeparture ? "Departure" : "Arrival")
+          DatePicker("", selection: $date)
+            .offset(x: 10)
+        }
+        .contextMenu {
+          Button(action: { selectingDeparture = true }, label: {
+            Text("Departure")
+          })
+          Button(action: { selectingDeparture = false }, label: {
+            Text("Arrival")
+          })
+        }
+        HStack {
+          Text("Passengers")
+          Spacer()
+          Text("Me")
+            .opacity(0.3)
+        }
+      }
     }
+    .listStyle(InsetGroupedListStyle())
+    .navigationTitle("Select Journey")
+    // .navigationBarTitleDisplayMode(.inline)
+    .navigationBarItems(trailing:
+      Button(action: {
+        swap(&origin, &destination)
+      }, label: {
+        Globals.Icons.swap
+      })
+    )
   }
 
 }
@@ -29,7 +65,10 @@ struct TicketsSearchView_Previews: PreviewProvider {
   private static var results = dataService.stops(by: "Wien")
 
   static var previews: some View {
-    TicketsSearchView(origin: results[0], destination: results[1])
+    NavigationView {
+      TicketsSearchView(origin: results[0], destination: results[1])
+        .navigationTitle("Select Journey")
+    }
   }
 
 }
