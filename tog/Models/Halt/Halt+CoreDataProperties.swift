@@ -15,21 +15,36 @@ extension Halt {
     return NSFetchRequest<Halt>(entityName: "Halt")
   }
 
-  @NSManaged public var arrival: Date
-  @NSManaged public var departure: Date
+  // Arrival and departures are stored as strings but are accessed via Time
+  @NSManaged private var arrival: String
+  @NSManaged private var departure: String
   @NSManaged public var stopSequence: Int32
   @NSManaged public var stop: Stop
   @NSManaged public var trip: Trip
 
+  // Time typed getters
+  public var arrivalTime: Time {
+    guard let time = Time(arrival) else {
+      fatalError("Inconsistent arrival time")
+    }
+    return time
+  }
+  public var departureTime: Time {
+    guard let time = Time(departure) else {
+      fatalError("Inconsistent departure time")
+    }
+    return time
+  }
+
   // swiftlint:disable function_parameter_count
-  public static func create(at stop: Stop, during trip: Trip, arrival: Date, departure: Date, sequence: Int32,
+  public static func create(at stop: Stop, during trip: Trip, arrival: Time, departure: Time, sequence: Int,
                             using context: NSManagedObjectContext) {
     let halt = Halt(context: context)
     halt.stop = stop
     halt.trip = trip
-    halt.arrival = arrival
-    halt.departure = departure
-    halt.stopSequence = sequence
+    halt.arrival = arrival.description
+    halt.departure = departure.description
+    halt.stopSequence = Int32(sequence)
   }
 
 }
