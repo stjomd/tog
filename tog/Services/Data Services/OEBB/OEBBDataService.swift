@@ -146,8 +146,8 @@ private extension OEBBDataService {
     for row in csv.enumeratedRows {
       if let tripId = Int(row[0]), let stopId = Int(row[3]), let stopSequence = Int(row[4]),
          let arrival = Time(row[1]), let departure = Time(row[2]) {
-        let stop = stop(by: stopId)
-        let trip = trip(by: tripId)
+        let stop = self.stop(by: stopId)
+        let trip = self.trip(by: tripId)
         Halt.create(at: stop, during: trip, arrival: arrival, departure: departure, sequence: stopSequence,
                     using: context)
       }
