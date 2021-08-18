@@ -35,7 +35,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build and run tests
-      - run: |
+        run: |
           cd server/railway
           mvn --batch-mode clean install
       - name: Upload reports
