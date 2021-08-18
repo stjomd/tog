@@ -30,7 +30,7 @@ public class StopGenerator {
             LOGGER.info("Stops have already been generated");
         } else {
             LOGGER.info("Generating stops...");
-            CSVHandler.forEachLineIn("stops.txt", cells -> {
+            int count = CSVHandler.forEachLineIn("stops.txt", cells -> {
                 Long   id        = Long.valueOf(cells.get("stop_id"));
                 String name      = cells.get("stop_name");
                 Double latitude  = Double.valueOf(cells.get("stop_lat"));
@@ -38,7 +38,7 @@ public class StopGenerator {
                 Stop stop = new Stop(id, name, latitude, longitude);
                 stopRepository.save(stop);
             });
-            LOGGER.info("Generated stops");
+            LOGGER.info("Generated {} stop(s)", count);
         }
     }
 

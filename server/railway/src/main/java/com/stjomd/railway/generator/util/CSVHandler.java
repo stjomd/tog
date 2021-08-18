@@ -13,7 +13,7 @@ import java.util.Map;
 
 public interface CSVHandler {
 
-    static void forEachLineIn(String fileName, CSVRowOperator operator) {
+    static int forEachLineIn(String fileName, CSVRowOperator operator) {
         BufferedReader reader = openOEBBFile(fileName);
         ICsvMapReader csvReader = new CsvMapReader(reader, CsvPreference.STANDARD_PREFERENCE);
         try {
@@ -26,6 +26,7 @@ public interface CSVHandler {
         } catch (Exception e) {
             throw new CSVException("Error while iterating over file", e);
         }
+        return csvReader.getRowNumber() - 1;
     }
 
     private static BufferedReader openOEBBFile(String fileName) {
