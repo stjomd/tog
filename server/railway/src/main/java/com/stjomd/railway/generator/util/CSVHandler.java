@@ -35,7 +35,7 @@ public abstract class CSVHandler {
                 operator.operator(line);
             }
             csvReader.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new CSVException("Error while iterating over file", e);
         }
         return csvReader.getRowNumber() - 1;
