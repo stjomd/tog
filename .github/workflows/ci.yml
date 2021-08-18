@@ -41,3 +41,5 @@ jobs:
       - name: Upload reports
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
+        with:
+          check-name: Server Test Report
