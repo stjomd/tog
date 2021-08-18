@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StopServiceImpl implements StopService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StopEndpoint.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StopServiceImpl.class);
     private final StopRepository stopRepository;
 
     @Autowired
