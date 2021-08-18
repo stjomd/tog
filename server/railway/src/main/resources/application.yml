@@ -1,0 +1,19 @@
+logging:
+  file.name: ./log/backend.log
+  level:
+    root: INFO
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./database/demo
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: password # use environment variables: ${DB_PASSWORD} in a real application
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: false
+    open-in-view: false
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
