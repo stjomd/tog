@@ -14,7 +14,9 @@ import java.util.Map;
 /**
  * Provides methods for working with CSV files.
  */
-public interface CSVHandler {
+public abstract class CSVHandler {
+
+    private static final String location = "/static/oebb-data/";
 
     /**
      * Iterates over rows in a CSV file and performs an action on each iteration.
@@ -23,7 +25,7 @@ public interface CSVHandler {
      * @param operator a function that accepts cells (an array of String) and is called on each iteration.
      * @return the amount of rows iterated over.
      */
-    static int forEachRowIn(String fileName, CSVRowOperator operator) {
+    public static int forEachRowIn(String fileName, CSVRowOperator operator) {
         BufferedReader reader = openOEBBFile(fileName);
         ICsvMapReader csvReader = new CsvMapReader(reader, CsvPreference.STANDARD_PREFERENCE);
         try {
@@ -42,13 +44,13 @@ public interface CSVHandler {
     /**
      * Opens a file and returns a buffered reader for it.
      *
-     * @param fileName the name of the file in the Resources folder under <code>static/oebb-data/</code> to be opened.
+     * @param fileName the name of the file in the Resources folder under <code>location</code> to be opened.
      * @return the BufferedReader of the file.
      */
     private static BufferedReader openOEBBFile(String fileName) {
-        URL url = CSVHandler.class.getResource("/static/oebb-data/" + fileName);
+        URL url = CSVHandler.class.getResource(location + fileName);
         if (url == null)
-            throw new CSVException("Couldn't locate file: /static/oebb-data/" + fileName);
+            throw new CSVException("Couldn't locate file: " + location + fileName);
         try {
             return new BufferedReader(new InputStreamReader(url.openStream()));
         } catch (IOException e) {
