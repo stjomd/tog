@@ -5,7 +5,7 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:h2:file:./database/demo
+    url: jdbc:h2:file:./.database/db
     driver-class-name: org.h2.Driver
     username: admin
     password: password # use environment variables: ${DB_PASSWORD} in a real application
