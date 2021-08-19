@@ -45,12 +45,12 @@ struct TogApp: App {
   private func retrieveDataService() -> DataService {
     if TogApp.isUITest {
       // Mock data (ÖBB's open data, predownloaded)
-      return OEBBDataService(context: TogApp.container.resolve(CDContext.self)!, populate: true)
+      return MockDataService(context: TogApp.container.resolve(CDContext.self)!, populate: true)
     } else {
       // NOTE: Register a real data service
       // Currently also mock data, since ÖBB doesn't offer any open API. In a real app the following line
       // should register a data service that actually fetches data from an API.
-      return OEBBDataService(context: TogApp.container.resolve(CDContext.self)!, populate: true)
+      return MockDataService(context: TogApp.container.resolve(CDContext.self)!, populate: true)
     }
   }
 

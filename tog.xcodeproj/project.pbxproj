@@ -39,7 +39,7 @@
 		95FDDF1026C67DA70086ECAE /* SettingsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF0F26C67DA70086ECAE /* SettingsRow.swift */; };
 		95FDDF1326C67FF30086ECAE /* ColorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF1226C67FF30086ECAE /* ColorService.swift */; };
 		95FDDF1B26C6B6C10086ECAE /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF1A26C6B6C10086ECAE /* DataService.swift */; };
-		95FDDF1D26C6B6DA0086ECAE /* OEBBDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF1C26C6B6DA0086ECAE /* OEBBDataService.swift */; };
+		95FDDF1D26C6B6DA0086ECAE /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF1C26C6B6DA0086ECAE /* MockDataService.swift */; };
 		95FDDF1F26C6BBCD0086ECAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 95FDDF1E26C6BBCD0086ECAE /* Podfile */; };
 		95FDDF2126C6C7890086ECAE /* oebb-data.zip in Resources */ = {isa = PBXBuildFile; fileRef = 95FDDF2026C6C7890086ECAE /* oebb-data.zip */; };
 		95FDDF2326C6CB8B0086ECAE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 95FDDF2226C6CB8B0086ECAE /* README.md */; };
@@ -112,7 +112,7 @@
 		95FDDF0F26C67DA70086ECAE /* SettingsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRow.swift; sourceTree = "<group>"; };
 		95FDDF1226C67FF30086ECAE /* ColorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorService.swift; sourceTree = "<group>"; };
 		95FDDF1A26C6B6C10086ECAE /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		95FDDF1C26C6B6DA0086ECAE /* OEBBDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEBBDataService.swift; sourceTree = "<group>"; };
+		95FDDF1C26C6B6DA0086ECAE /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
 		95FDDF1E26C6BBCD0086ECAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		95FDDF2026C6C7890086ECAE /* oebb-data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "oebb-data.zip"; sourceTree = "<group>"; };
 		95FDDF2226C6CB8B0086ECAE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -385,7 +385,7 @@
 		95FDDF3126C7E9540086ECAE /* OEBB */ = {
 			isa = PBXGroup;
 			children = (
-				95FDDF1C26C6B6DA0086ECAE /* OEBBDataService.swift */,
+				95FDDF1C26C6B6DA0086ECAE /* MockDataService.swift */,
 				95FDDF2026C6C7890086ECAE /* oebb-data.zip */,
 			);
 			path = OEBB;
@@ -663,7 +663,7 @@
 				95FDDF1026C67DA70086ECAE /* SettingsRow.swift in Sources */,
 				953C0F4826C4626D00EF44DB /* Journey.swift in Sources */,
 				953C0F4D26C4627C00EF44DB /* HomeView.swift in Sources */,
-				95FDDF1D26C6B6DA0086ECAE /* OEBBDataService.swift in Sources */,
+				95FDDF1D26C6B6DA0086ECAE /* MockDataService.swift in Sources */,
 				953C0F0626C44ED000EF44DB /* TogApp.swift in Sources */,
 				95A2925326CC3B6700972011 /* Trip+CoreDataClass.swift in Sources */,
 				95E911DD26C53D7400863A30 /* SettingsView.swift in Sources */,

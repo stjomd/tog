@@ -1,5 +1,5 @@
 //
-//  OEBBDataService.swift
+//  MockDataService.swift
 //  tog
 //
 //  Created by Artem Zhukov on 13.08.21.
@@ -10,7 +10,7 @@ import CoreData
 import SwiftCSV
 import Zip
 
-class OEBBDataService {
+class MockDataService {
 
   private let context: NSManagedObjectContext
   private let shouldPopulate: Bool
@@ -32,7 +32,7 @@ class OEBBDataService {
 }
 
 // MARK: - DataService Methods
-extension OEBBDataService: DataService {
+extension MockDataService: DataService {
   public func stops(by name: String) -> [Stop] {
     let request: NSFetchRequest<Stop> = Stop.fetchRequest()
     request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", name)
@@ -54,7 +54,7 @@ extension OEBBDataService: DataService {
 }
 
 // MARK: - Internal Fetchers
-private extension OEBBDataService {
+private extension MockDataService {
   private func stop(by id: Int) -> Stop {
     let request: NSFetchRequest<Stop> = Stop.fetchRequest()
     request.predicate = NSPredicate(format: "id == %@", NSNumber(value: id))
@@ -76,7 +76,7 @@ private extension OEBBDataService {
 }
 
 // MARK: - Database Population (mocks)
-private extension OEBBDataService {
+private extension MockDataService {
   private func setupDatabase() {
     clearDatabase()
     deserialize()
@@ -98,7 +98,7 @@ private extension OEBBDataService {
 }
 
 // MARK: Deserializing
-private extension OEBBDataService {
+private extension MockDataService {
 
   private func deserialize() {
     loadStops()
@@ -157,7 +157,7 @@ private extension OEBBDataService {
 }
 
 // MARK: - Data Download
-private extension OEBBDataService {
+private extension MockDataService {
 
   // Download from the ÖBB's url results in a corrupted zip file that cannot be unpacked...
   // Therefore the data is loaded from the bundle :(

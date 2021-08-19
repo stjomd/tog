@@ -36,7 +36,7 @@ class DataServiceTests: XCTestCase {
     // Put setup code here. This method is called before the invocation of each test method in the class.
     try super.setUpWithError()
     context = MockCoreDataStore().persistentContainer.viewContext
-    dataService = OEBBDataService(context: context, populate: false)
+    dataService = MockDataService(context: context, populate: false)
   }
 
   override func tearDownWithError() throws {
