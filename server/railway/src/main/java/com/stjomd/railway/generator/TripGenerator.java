@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct;
 @Component
 public class TripGenerator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StopGenerator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TripGenerator.class);
     private final TripRepository tripRepository;
 
     @Autowired

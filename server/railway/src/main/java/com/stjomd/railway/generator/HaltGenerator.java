@@ -14,14 +14,13 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalTime;
-import java.util.Arrays;
 
 @Profile("datagen")
 @DependsOn({"stopGenerator", "tripGenerator"})
 @Component
 public class HaltGenerator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StopGenerator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HaltGenerator.class);
     private final HaltRepository haltRepository;
 
     @Autowired
