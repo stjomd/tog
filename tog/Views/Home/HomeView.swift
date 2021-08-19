@@ -11,7 +11,7 @@ struct HomeView: View {
 
   @State private var origin: Stop?
   @State private var destination: Stop?
-  
+
   @ObservedObject var originQuery = StopQuery()
   @ObservedObject var destinationQuery = StopQuery()
 
