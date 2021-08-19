@@ -1,6 +1,5 @@
 package com.stjomd.railway.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,11 +7,12 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Trip {
 
@@ -23,7 +23,15 @@ public class Trip {
     @Column(nullable = false)
     private String headsign;
 
-    @Column(nullable = true)
     private String shortName;
+
+    @OneToMany
+    private Set<Halt> halts;
+
+    public Trip(Long id, String headsign, String shortName) {
+        this.id = id;
+        this.headsign = headsign;
+        this.shortName = shortName;
+    }
 
 }
