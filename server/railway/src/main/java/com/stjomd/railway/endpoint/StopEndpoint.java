@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -29,7 +29,7 @@ public class StopEndpoint {
 
     @GetMapping
     @ResponseBody
-    public Set<StopDto> hello(@RequestParam String name) {
+    public List<StopDto> hello(@RequestParam String name) {
         log.info("GET /stops?name={}", name);
         return stopMapper.toDto(stopService.getStopsBy(name));
     }

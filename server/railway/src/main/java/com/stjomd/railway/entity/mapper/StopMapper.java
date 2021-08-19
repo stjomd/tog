@@ -4,7 +4,7 @@ import com.stjomd.railway.entity.Stop;
 import com.stjomd.railway.entity.dto.StopDto;
 import org.mapstruct.Mapper;
 
-import java.util.Set;
+import java.util.List;
 
 @Mapper
 public interface StopMapper {
@@ -13,6 +13,6 @@ public interface StopMapper {
 
     StopDto toDto(Stop entity);
 
-    Set<StopDto> toDto(Set<Stop> entities);
+    List<StopDto> toDto(List<Stop> entities);
 
 }

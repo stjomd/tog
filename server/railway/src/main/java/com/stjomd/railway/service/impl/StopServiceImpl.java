@@ -5,9 +5,10 @@ import com.stjomd.railway.repository.StopRepository;
 import com.stjomd.railway.service.StopService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -21,9 +22,12 @@ public class StopServiceImpl implements StopService {
     }
 
     @Override
-    public Set<Stop> getStopsBy(String name) {
+    public List<Stop> getStopsBy(String name) {
         log.trace("getStopsBy({})", name);
-        return stopRepository.findByNameContainingIgnoreCase(name);
+        if (name.equals(""))
+            return stopRepository.findByNameContainingIgnoreCase("Wien", PageRequest.of(0, 9));
+        else
+            return stopRepository.findByNameContainingIgnoreCase(name);
     }
 
 }
