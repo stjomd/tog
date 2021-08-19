@@ -6,10 +6,10 @@
 //
 //
 
-import Foundation
-import CoreData
-
-@objc(Halt)
-public class Halt: NSManagedObject {
-
-}
+// import Foundation
+// import CoreData
+//
+// @objc(Halt)
+// public class Halt: NSManagedObject {
+//
+// }
