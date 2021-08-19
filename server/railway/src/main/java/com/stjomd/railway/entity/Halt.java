@@ -1,6 +1,7 @@
 package com.stjomd.railway.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 public class Halt {
 
@@ -30,7 +32,13 @@ public class Halt {
     private LocalTime arrival;
 
     @Column(nullable = false)
+    private boolean arrivalNextDay = false;
+
+    @Column(nullable = false)
     private LocalTime departure;
+
+    @Column(nullable = false)
+    private boolean departureNextDay = false;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "stop_id", referencedColumnName = "id", nullable = false)
