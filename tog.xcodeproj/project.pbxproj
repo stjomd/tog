@@ -15,16 +15,11 @@
 		953C0F4826C4626D00EF44DB /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4726C4626D00EF44DB /* Journey.swift */; };
 		953C0F4C26C4627C00EF44DB /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4A26C4627C00EF44DB /* FavoriteView.swift */; };
 		953C0F4D26C4627C00EF44DB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4B26C4627C00EF44DB /* HomeView.swift */; };
-		95A2925326CC3B6700972011 /* Trip+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2925026CC3B6700972011 /* Trip+CoreDataClass.swift */; };
-		95A2925426CC3B6700972011 /* Halt+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2925126CC3B6700972011 /* Halt+CoreDataClass.swift */; };
-		95A2925526CC3B6700972011 /* Halt+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2925226CC3B6700972011 /* Halt+CoreDataProperties.swift */; };
-		95A2925626CC3B6700972011 /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2924F26CC3B6700972011 /* Trip+CoreDataProperties.swift */; };
-		95A2926026CC3D5900972011 /* Stop+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2925E26CC3D5900972011 /* Stop+CoreDataProperties.swift */; };
-		95A2926126CC3D5900972011 /* Stop+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2925F26CC3D5900972011 /* Stop+CoreDataClass.swift */; };
 		95A2926326CC48AC00972011 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926226CC48AC00972011 /* Time.swift */; };
 		95A2926526CC50EF00972011 /* TimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926426CC50EF00972011 /* TimeTests.swift */; };
 		95A2926726CED86000972011 /* TogDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926626CED86000972011 /* TogDataService.swift */; };
 		95A2926926CED9FE00972011 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926826CED9FE00972011 /* Stop.swift */; };
+		95A2926D26CEF29B00972011 /* StopQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926C26CEF29B00972011 /* StopQuery.swift */; };
 		95D5045326C93EB20008652A /* DisjunctSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D5045226C93EB20008652A /* DisjunctSections.swift */; };
 		95D5045526C95EB30008652A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D5045426C95EB30008652A /* Extensions.swift */; };
 		95D5045726C9A72C0008652A /* TicketsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D5045626C9A72C0008652A /* TicketsSearchView.swift */; };
@@ -90,16 +85,11 @@
 		953C0F4726C4626D00EF44DB /* Journey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
 		953C0F4A26C4627C00EF44DB /* FavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		953C0F4B26C4627C00EF44DB /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		95A2924F26CC3B6700972011 /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95A2925026CC3B6700972011 /* Trip+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataClass.swift"; sourceTree = "<group>"; };
-		95A2925126CC3B6700972011 /* Halt+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Halt+CoreDataClass.swift"; sourceTree = "<group>"; };
-		95A2925226CC3B6700972011 /* Halt+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Halt+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95A2925E26CC3D5900972011 /* Stop+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stop+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		95A2925F26CC3D5900972011 /* Stop+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stop+CoreDataClass.swift"; sourceTree = "<group>"; };
 		95A2926226CC48AC00972011 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		95A2926426CC50EF00972011 /* TimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTests.swift; sourceTree = "<group>"; };
 		95A2926626CED86000972011 /* TogDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogDataService.swift; sourceTree = "<group>"; };
 		95A2926826CED9FE00972011 /* Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
+		95A2926C26CEF29B00972011 /* StopQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopQuery.swift; sourceTree = "<group>"; };
 		95D5045226C93EB20008652A /* DisjunctSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjunctSections.swift; sourceTree = "<group>"; };
 		95D5045426C95EB30008652A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		95D5045626C9A72C0008652A /* TicketsSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsSearchView.swift; sourceTree = "<group>"; };
@@ -263,8 +253,6 @@
 				95FDDF2F26C7E8BC0086ECAE /* CoreDataStore.swift */,
 				95FDDF2426C7E04C0086ECAE /* Model.xcdatamodeld */,
 				95A2925726CC3C8600972011 /* Stop */,
-				95A2925826CC3C9100972011 /* Halt */,
-				95A2925926CC3C9F00972011 /* Trip */,
 				953C0F4726C4626D00EF44DB /* Journey.swift */,
 				95A2926226CC48AC00972011 /* Time.swift */,
 			);
@@ -288,28 +276,9 @@
 			isa = PBXGroup;
 			children = (
 				95A2926826CED9FE00972011 /* Stop.swift */,
-				95A2925F26CC3D5900972011 /* Stop+CoreDataClass.swift */,
-				95A2925E26CC3D5900972011 /* Stop+CoreDataProperties.swift */,
+				95A2926C26CEF29B00972011 /* StopQuery.swift */,
 			);
 			path = Stop;
-			sourceTree = "<group>";
-		};
-		95A2925826CC3C9100972011 /* Halt */ = {
-			isa = PBXGroup;
-			children = (
-				95A2925126CC3B6700972011 /* Halt+CoreDataClass.swift */,
-				95A2925226CC3B6700972011 /* Halt+CoreDataProperties.swift */,
-			);
-			path = Halt;
-			sourceTree = "<group>";
-		};
-		95A2925926CC3C9F00972011 /* Trip */ = {
-			isa = PBXGroup;
-			children = (
-				95A2925026CC3B6700972011 /* Trip+CoreDataClass.swift */,
-				95A2924F26CC3B6700972011 /* Trip+CoreDataProperties.swift */,
-			);
-			path = Trip;
 			sourceTree = "<group>";
 		};
 		95E5D7E926C9AEF400A20AA5 /* Stops Search */ = {
@@ -672,9 +641,9 @@
 				95A2926726CED86000972011 /* TogDataService.swift in Sources */,
 				95FDDF1D26C6B6DA0086ECAE /* MockDataService.swift in Sources */,
 				953C0F0626C44ED000EF44DB /* TogApp.swift in Sources */,
-				95A2925326CC3B6700972011 /* Trip+CoreDataClass.swift in Sources */,
 				95E911DD26C53D7400863A30 /* SettingsView.swift in Sources */,
 				95E911E226C541EF00863A30 /* TicketPreview.swift in Sources */,
+				95A2926D26CEF29B00972011 /* StopQuery.swift in Sources */,
 				95D5045726C9A72C0008652A /* TicketsSearchView.swift in Sources */,
 				95E911DB26C53BB400863A30 /* ServicesView.swift in Sources */,
 				95FDDF2626C7E04C0086ECAE /* Model.xcdatamodeld in Sources */,
@@ -682,18 +651,13 @@
 				95D5045326C93EB20008652A /* DisjunctSections.swift in Sources */,
 				95D5045526C95EB30008652A /* Extensions.swift in Sources */,
 				95E911D926C53AE600863A30 /* TicketsView.swift in Sources */,
-				95A2926026CC3D5900972011 /* Stop+CoreDataProperties.swift in Sources */,
-				95A2925526CC3B6700972011 /* Halt+CoreDataProperties.swift in Sources */,
-				95A2925626CC3B6700972011 /* Trip+CoreDataProperties.swift in Sources */,
 				95FDDF1B26C6B6C10086ECAE /* DataService.swift in Sources */,
-				95A2926126CC3D5900972011 /* Stop+CoreDataClass.swift in Sources */,
 				95FDDF3626C8459D0086ECAE /* SearchResultsSection.swift in Sources */,
 				95FDDF3026C7E8BC0086ECAE /* CoreDataStore.swift in Sources */,
 				95E5D7E826C9AD9600A20AA5 /* ClearableInputField.swift in Sources */,
 				95E911D626C5387B00863A30 /* MainView.swift in Sources */,
 				95E911E626C5A02000863A30 /* ProductCell.swift in Sources */,
 				95FDDF3326C80B640086ECAE /* InputField.swift in Sources */,
-				95A2925426CC3B6700972011 /* Halt+CoreDataClass.swift in Sources */,
 				95A2926926CED9FE00972011 /* Stop.swift in Sources */,
 				953C0F4526C4626000EF44DB /* Globals.swift in Sources */,
 				95E911E426C5433300863A30 /* JourneyRow.swift in Sources */,

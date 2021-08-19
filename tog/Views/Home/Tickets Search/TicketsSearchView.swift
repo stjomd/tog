@@ -46,7 +46,7 @@ struct TicketsSearchView: View {
     }
     .listStyle(InsetGroupedListStyle())
     .navigationTitle("Select Journey")
-    // .navigationBarTitleDisplayMode(.inline)
+    .navigationBarTitleDisplayMode(.inline)
     .navigationBarItems(trailing:
       Button(action: {
         swap(&origin, &destination)
@@ -62,7 +62,10 @@ struct TicketsSearchView_Previews: PreviewProvider {
 
   @Autowired
   private static var dataService: DataService!
-  private static var results = dataService.stops(by: "Wien")
+  private static var results: [Stop] = [
+    Stop(id: -1, latitude: 0.5, longitude: 0.5, name: "Wien Penzing"),
+    Stop(id: -2, latitude: 0.5, longitude: 0.5, name: "Wien Westbahnhof")
+  ]
 
   static var previews: some View {
     NavigationView {

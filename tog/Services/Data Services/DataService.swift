@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import Combine
 
 protocol DataService {
 
   /// Fetches stops from the database that match the given name.
   /// - parameter name: The name against which the search is to be performed.
-  /// - returns: An array of stops that match.
-  func stops(by name: String) -> [Stop]
+  /// - returns: A publisher that holds an array of stops.
+  func stops(by name: String) -> AnyPublisher<[Stop], Never>
 
 }

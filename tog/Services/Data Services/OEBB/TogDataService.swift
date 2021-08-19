@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreData
+import Combine
 
 class TogDataService {
   private let urlSession = URLSession.shared
@@ -15,7 +15,13 @@ class TogDataService {
 // MARK: - DataService Methods
 
 extension TogDataService: DataService {
-  func stops(by name: String) -> [Stop] {
-    return []
+  func stops(by name: String) -> AnyPublisher<[Stop], Never> {
+    var comps = URLComponents(string: Globals.baseURL.absoluteString + "/stops")!
+    comps.queryItems = [URLQueryItem(name: "name", value: name)]
+    return urlSession.dataTaskPublisher(for: comps.url!)
+      .map(\.data)
+      .decode(type: [Stop].self, decoder: JSONDecoder())
+      .replaceError(with: [])
+      .eraseToAnyPublisher()
   }
 }

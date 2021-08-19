@@ -10,9 +10,6 @@ import CoreData
 
 struct SearchResultsSection: View {
 
-  @Binding   private var query: String
-  @Autowired private var dataService: DataService!
-
   private var stops: [Stop] = []
   private var action: (Stop) -> Void
 
@@ -23,10 +20,7 @@ struct SearchResultsSection: View {
           .opacity(0.3)
       }
       ForEach(stops, id: \.id) { stop in
-        Button(action: {
-          query = stop.name
-          action(stop)
-        }, label: {
+        Button(action: { action(stop) }, label: {
           Text(stop.name)
             .foregroundColor(.primary)
         })
@@ -34,10 +28,9 @@ struct SearchResultsSection: View {
     }
   }
 
-  init(query: Binding<String>, onResultTapGesture action: @escaping ((Stop) -> Void) = {_ in return}) {
-    self._query = query
+  init(results: [Stop], onResultTapGesture action: @escaping ((Stop) -> Void) = {_ in return}) {
+    self.stops = results
     self.action = action
-    self.stops  = dataService.stops(by: query.wrappedValue)
   }
 
 }
@@ -45,7 +38,7 @@ struct SearchResultsSection: View {
 struct SearchResultsSection_Previews: PreviewProvider {
   static var previews: some View {
     List {
-      SearchResultsSection(query: .constant("Wien"))
+      SearchResultsSection(results: [Stop(id: 0, latitude: 0, longitude: 0, name: "Wien")])
     }
     .listStyle(InsetGroupedListStyle())
   }
