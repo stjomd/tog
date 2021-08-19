@@ -11,6 +11,9 @@ import SwiftUI
 
 enum Globals {
 
+  /// The base URL of the server. Should be set as an environment variable `SERVER_URL`.
+  static let baseURL = URL(string: ProcessInfo.processInfo.environment["SERVER_URL"]!)!
+
   enum Colors {
     enum Transport {
       static let sBahn = Color("SBahnColor")
