@@ -16,3 +16,7 @@ protocol DataService {
   func stops(by name: String) -> AnyPublisher<[Stop], Never>
 
 }
+
+protocol MockableDataService: DataService {
+  func mock(stops: [Stop])
+}

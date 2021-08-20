@@ -6,67 +6,42 @@
 //
 
 import XCTest
-import CoreData
+import Combine
 @testable import tog
-
-class MockCoreDataStore {
-  // Access the same model as the CoreDataStore
-  private static let model: NSManagedObjectModel = CoreDataStore.model!
-  // Create an in-memory container
-  var persistentContainer: NSPersistentContainer = {
-    let description = NSPersistentStoreDescription()
-    description.type = NSInMemoryStoreType
-    let container = NSPersistentContainer(name: "Model", managedObjectModel: model)
-    container.persistentStoreDescriptions = [description]
-    container.loadPersistentStores { _, error in
-      if let error = error {
-        print(error)
-      }
-    }
-    return container
-  }()
-}
 
 class DataServiceTests: XCTestCase {
 
-  var context: NSManagedObjectContext!
-  var dataService: DataService!
+  var dataService: MockableDataService!
 
   override func setUpWithError() throws {
-    // Put setup code here. This method is called before the invocation of each test method in the class.
     try super.setUpWithError()
-    context = MockCoreDataStore().persistentContainer.viewContext
-    // dataService = MockDataService(context: context, populate: false)
+    dataService = MockDataService(populate: false)
   }
 
   override func tearDownWithError() throws {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    context = nil
     dataService = nil
     try super.tearDownWithError()
   }
 
-//  func test_whenGivenStops_fetchingReturnsStops() throws {
-//    // When
-//    Stop.create(withId: 15, name: "Wien Hütteldorf", latitude: 0.5, longitude: 0.5, using: context)
-//    Stop.create(withId: 18, name: "Wien Penzing", latitude: 0.5, longitude: 0.5, using: context)
-//    Stop.create(withId: 54, name: "Wien Breitensee", latitude: 0.5, longitude: 0.5, using: context)
-//    try context.save()
-//    let cdStops = try context.fetch(Stop.fetchRequest()) as [Stop]
-//    // Then
-//    let dsStops = dataService.stops(by: "Wien")
-//    print(cdStops.map { $0.name })
-//    print(dsStops.map { $0.name })
-//    XCTAssertEqual(cdStops.count, dsStops.count)
-//  }
-//
-//  func test_whenNoStops_FetchingReturnsEmptyArray() throws {
-//    // When no stops
-//    let request: NSFetchRequest<Stop> = Stop.fetchRequest()
-//    let stops = try context.fetch(request) as [Stop]
-//    XCTAssertTrue(stops.isEmpty)
-//    // Then
-//    XCTAssertTrue(dataService.stops(by: "").isEmpty)
-//  }
+  func test_whenGivenStops_fetchingReturnsStops() throws {
+    // When
+    let stops = [
+      Stop(id: 15, name: "Wien Hütteldorf", latitude: 0.5, longitude: 0.5),
+      Stop(id: 18, name: "Wien Penzing", latitude: 0.5, longitude: 0.5),
+      Stop(id: 54, name: "Wien Breitensee", latitude: 0.5, longitude: 0.5)
+    ]
+    dataService.mock(stops: stops)
+    // Then
+    _ = dataService.stops(by: "Wien").sink { XCTAssertEqual(stops.count, $0.count) }
+    _ = dataService.stops(by: "te").sink { XCTAssertEqual(2, $0.count) }
+  }
+
+  func test_whenNoStops_FetchingReturnsEmptyArray() throws {
+    // When
+    dataService.mock(stops: [])
+    // Then
+    _ = dataService.stops(by: "").sink { XCTAssert($0.isEmpty) }
+    _ = dataService.stops(by: "Wien").sink { XCTAssert($0.isEmpty) }
+  }
 
 }

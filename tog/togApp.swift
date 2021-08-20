@@ -44,7 +44,7 @@ struct TogApp: App {
 
   private func retrieveDataService() -> DataService {
     if TogApp.isUITest {
-      return MockDataService()
+      return MockDataService(populate: true)
     } else {
       return TogDataService()
     }

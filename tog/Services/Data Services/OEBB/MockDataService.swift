@@ -17,14 +17,16 @@ class MockDataService {
 
   private var stops: [Stop] = []
 
-  init() {
-    deserialize()
+  init(populate: Bool) {
+    if populate {
+      deserialize()
+    }
   }
 
 }
 
 // MARK: - DataService Methods
- extension MockDataService: DataService {
+extension MockDataService: DataService {
   func stops(by name: String) -> AnyPublisher<[Stop], Never> {
     let query = name.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
     let results = stops.filter {
@@ -32,7 +34,14 @@ class MockDataService {
     }
     return Just(results).eraseToAnyPublisher()
   }
- }
+}
+
+// MARK: - MockableDataService Methods
+extension MockDataService: MockableDataService {
+  func mock(stops: [Stop]) {
+    self.stops = stops
+  }
+}
 
 // MARK: - Deserializing
 private extension MockDataService {
@@ -53,7 +62,7 @@ private extension MockDataService {
     let csv = openCSV(named: "stops.txt")
     for row in csv.enumeratedRows {
       if let id = Int(row[0]), let latitude = Double(row[4]), let longitude = Double(row[5]) {
-        let stop = Stop(id: id, latitude: latitude, longitude: longitude, name: row[2])
+        let stop = Stop(id: id, name: row[2], latitude: latitude, longitude: longitude)
         stops.append(stop)
       }
     }
