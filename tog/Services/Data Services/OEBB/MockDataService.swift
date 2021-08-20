@@ -15,23 +15,30 @@ class MockDataService {
   private let zipURL = Bundle.main.url(forResource: "oebb-data", withExtension: "zip")
   private let unzippedURL = FileManager.documentsDirectoryURL.appendingPathComponent("oebb-data")
 
+  private var stops: [Stop] = []
+
+  init() {
+    deserialize()
+  }
+
 }
 
 // MARK: - DataService Methods
-// extension MockDataService: DataService {
-//  func stops(by name: String) -> AnyPublisher<[Stop], Never> {
-//
-//  }
-//
-// }
+ extension MockDataService: DataService {
+  func stops(by name: String) -> AnyPublisher<[Stop], Never> {
+    let query = name.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
+    let results = stops.filter {
+      $0.name.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current).contains(query)
+    }
+    return Just(results).eraseToAnyPublisher()
+  }
+ }
 
-// MARK: Deserializing
+// MARK: - Deserializing
 private extension MockDataService {
 
   private func deserialize() {
     loadStops()
-    loadTrips()
-    loadHalts() // requires: Stop, Trip // causes concurrency problems
   }
 
   private func openCSV(named name: String) -> CSV {
@@ -41,38 +48,13 @@ private extension MockDataService {
     return csv
   }
 
-  // Stop
+  // Stops
   private func loadStops() {
     let csv = openCSV(named: "stops.txt")
     for row in csv.enumeratedRows {
       if let id = Int(row[0]), let latitude = Double(row[4]), let longitude = Double(row[5]) {
-        // Stop.create(withId: id, name: row[2], latitude: latitude, longitude: longitude, using: context)
-      }
-    }
-  }
-
-  // Trip
-  private func loadTrips() {
-    let csv = openCSV(named: "trips.txt")
-    for row in csv.enumeratedRows {
-      if let tripId = Int(row[2]) {
-        let headsign = row[3]
-        let shortName = (row[4] != "") ? row[4] : nil
-        // Trip.create(withId: tripId, headsign: headsign, shortName: shortName, using: context)
-      }
-    }
-  }
-
-  // Halts
-  private func loadHalts() {
-    let csv = openCSV(named: "stop_times.txt")
-    for row in csv.enumeratedRows {
-      if let tripId = Int(row[0]), let stopId = Int(row[3]), let stopSequence = Int(row[4]),
-         let arrival = Time(row[1]), let departure = Time(row[2]) {
-        // let stop = self.stop(by: stopId)
-        // let trip = self.trip(by: tripId)
-        // Halt.create(at: stop, during: trip, arrival: arrival, departure: departure, sequence: stopSequence,
-        //            using: context)
+        let stop = Stop(id: id, latitude: latitude, longitude: longitude, name: row[2])
+        stops.append(stop)
       }
     }
   }
