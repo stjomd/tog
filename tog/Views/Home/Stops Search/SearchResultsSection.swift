@@ -38,7 +38,7 @@ struct SearchResultsSection: View {
 struct SearchResultsSection_Previews: PreviewProvider {
   static var previews: some View {
     List {
-      SearchResultsSection(results: [Stop(id: 0, latitude: 0, longitude: 0, name: "Wien")])
+      SearchResultsSection(results: [Stop(id: 0, name: "Wien", latitude: 0, longitude: 0)])
     }
     .listStyle(InsetGroupedListStyle())
   }

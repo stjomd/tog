@@ -63,8 +63,8 @@ struct TicketsSearchView_Previews: PreviewProvider {
   @Autowired
   private static var dataService: DataService!
   private static var results: [Stop] = [
-    Stop(id: -1, latitude: 0.5, longitude: 0.5, name: "Wien Penzing"),
-    Stop(id: -2, latitude: 0.5, longitude: 0.5, name: "Wien Westbahnhof")
+    Stop(id: -1, name: "Wien Penzing", latitude: 0.5, longitude: 0.5),
+    Stop(id: -2, name: "Wien Westbahnhof", latitude: 0.5, longitude: 0.5)
   ]
 
   static var previews: some View {

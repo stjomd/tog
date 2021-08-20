@@ -9,8 +9,8 @@ import Foundation
 
 public struct Stop: Codable {
   public var id: Int
+  public var name: String
   public var latitude: Double
   public var longitude: Double
-  public var name: String
   // public var halts: Set<Halt>
 }
