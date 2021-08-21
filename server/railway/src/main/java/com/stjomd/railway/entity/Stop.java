@@ -33,7 +33,7 @@ public class Stop {
     @Column(nullable = false)
     private Double longitude;
 
-    @OneToMany
+    @OneToMany(mappedBy = "stop")
     private Set<Halt> halts;
 
     public Stop(Long id, String name, Double latitude, Double longitude) {

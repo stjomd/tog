@@ -29,7 +29,7 @@ public class Trip {
 
     private String shortName;
 
-    @OneToMany
+    @OneToMany(mappedBy = "trip")
     private Set<Halt> halts;
 
     public Trip(Long id, String headsign, String shortName) {
