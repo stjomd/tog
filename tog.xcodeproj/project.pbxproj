@@ -191,6 +191,30 @@
 			path = Journey;
 			sourceTree = "<group>";
 		};
+		951AB54D26D2A194008C1468 /* Halt */ = {
+			isa = PBXGroup;
+			children = (
+				951AB54726D2501B008C1468 /* Halt.swift */,
+			);
+			path = Halt;
+			sourceTree = "<group>";
+		};
+		951AB54E26D2A19A008C1468 /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				951AB54926D2559C008C1468 /* Trip.swift */,
+			);
+			path = Trip;
+			sourceTree = "<group>";
+		};
+		951AB54F26D2A19F008C1468 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				951AB54B26D29985008C1468 /* Route.swift */,
+			);
+			path = Route;
+			sourceTree = "<group>";
+		};
 		953C0EF926C44ED000EF44DB = {
 			isa = PBXGroup;
 			children = (
@@ -271,13 +295,13 @@
 			children = (
 				95FDDF2F26C7E8BC0086ECAE /* CoreDataStore.swift */,
 				95FDDF2426C7E04C0086ECAE /* Model.xcdatamodeld */,
+				95A2926226CC48AC00972011 /* Time.swift */,
 				95A2925726CC3C8600972011 /* Stop */,
 				951AB54226D24FE7008C1468 /* Journey */,
+				951AB54D26D2A194008C1468 /* Halt */,
+				951AB54E26D2A19A008C1468 /* Trip */,
+				951AB54F26D2A19F008C1468 /* Route */,
 				953C0F4726C4626D00EF44DB /* JourneyOrigg.swift */,
-				951AB54726D2501B008C1468 /* Halt.swift */,
-				951AB54926D2559C008C1468 /* Trip.swift */,
-				951AB54B26D29985008C1468 /* Route.swift */,
-				95A2926226CC48AC00972011 /* Time.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
