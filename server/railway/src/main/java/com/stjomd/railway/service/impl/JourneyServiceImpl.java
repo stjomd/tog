@@ -78,6 +78,7 @@ public class JourneyServiceImpl implements JourneyService {
                 Journey journey = new Journey(journeyLegs, 1L);
                 journeys.add(journey);
             }
+            journeys.sort(Comparator.comparing(a -> a.getLegs().get(0).getHalts().get(0).getDeparture()));
         } else {
             // TODO
         }
