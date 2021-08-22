@@ -32,7 +32,7 @@ struct FavoriteView: View {
       }
       // Trips
       ForEach(journeys, id: \.self) { journey in
-        JourneyRow(journey: journey)
+        JourneyRowOrigg(journey: journey)
       }
     }
     .padding(.vertical, 10)

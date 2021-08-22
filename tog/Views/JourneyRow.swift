@@ -2,62 +2,51 @@
 //  JourneyRow.swift
 //  tog
 //
-//  Created by Artem Zhukov on 12.08.21.
+//  Created by Artem Zhukov on 22.08.21.
 //
 
 import SwiftUI
 
 struct JourneyRow: View {
 
-  let journey: JourneyOrigg
-  var dateFormatter: DateFormatter {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm"
-    return formatter
-  }
+  @Autowired private var colorService: ColorService!
+
+  let journey: Journey
 
   var body: some View {
     HStack {
-      Text(dateFormatter.string(from: journey.departure))
+      Text(journey.departure.shortDescription)
       Rectangle()
         .foregroundColor(Color.gray.opacity(0.2))
         .overlay(
           Rectangle()
-            .foregroundColor(color(for: journey.train))
+            .foregroundColor(colorService.color(for: journey.legs.first!.trip.trainCode))
             .frame(height: 2),
           alignment: .bottom
         )
         .overlay(
-          Text(journey.train)
+          Text(journey.legs.first!.trip.name)
             .font(.callout)
         )
         .frame(height: 28)
-        .padding(.horizontal, 4)
-      Text(dateFormatter.string(from: journey.arrival))
-    }
-  }
-
-  private func color(for train: String) -> Color {
-    switch train {
-    case "REX", "CJX":
-      return Globals.Colors.Transport.rex
-    case _ where train.hasPrefix("S"):
-      return Globals.Colors.Transport.sBahn
-    default:
-      return Globals.Colors.Transport.other
+        .cornerRadius(6)
+        .padding(.horizontal, 2)
+      Text(journey.arrival.shortDescription)
     }
   }
 
 }
 
 struct JourneyRow_Previews: PreviewProvider {
+
   static var previews: some View {
-    JourneyRow(journey: .cjx)
-      .previewLayout(.sizeThatFits)
+    JourneyRow(journey: Journey.example)
       .padding()
-    JourneyRow(journey: .cjx)
+      .previewLayout(.sizeThatFits)
+    JourneyRow(journey: Journey.example)
+      .padding()
       .previewLayout(.sizeThatFits)
       .preferredColorScheme(.dark)
-      .padding()
   }
+
 }

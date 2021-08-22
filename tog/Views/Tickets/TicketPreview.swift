@@ -23,7 +23,7 @@ struct TicketPreview: View {
           .font(.headline)
       }
       // Trips
-      JourneyRow(journey: journey)
+      JourneyRowOrigg(journey: journey)
     }
     .padding(.vertical, 10)
   }

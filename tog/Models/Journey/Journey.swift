@@ -24,4 +24,32 @@ extension Journey {
   public var arrival: Time {
     legs.last!.halts.last!.arrivalTime
   }
+  public var priceString: String {
+    String(format: "%.2f €", Double(price)/100)
+  }
+}
+
+extension Journey {
+  static let example = Journey(
+    legs: [
+      JourneyLeg(
+        halts: [
+          Halt(
+            id: 0,
+            arrival: Date(),
+            departure: Date(),
+            stop: Stop(id: 0, name: "Stop", latitude: 0, longitude: 0),
+            stopSequence: 1
+          )
+        ],
+        trip: Trip(
+          id: 0,
+          headsign: "Wien Westbahnof",
+          shortName: nil,
+          route: Route(id: 0, shortName: "CJX5")
+        )
+      )
+    ],
+    price: 3450
+  )
 }

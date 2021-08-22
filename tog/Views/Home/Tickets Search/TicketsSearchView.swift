@@ -27,7 +27,7 @@ struct TicketsSearchView: View {
         Text(journeyQuery.query.origin.name)
         Text(journeyQuery.query.destination.name)
       }
-      Section {
+      Section(footer: Text("Press and hold to choose between departure and arrival")) {
         HStack {
           // Separate text and date picker because the padding doesn't look nice
           Text(journeyQuery.query.dateMode == .departure ? "Departure" : "Arrival")
@@ -49,15 +49,14 @@ struct TicketsSearchView: View {
             .opacity(0.3)
         }
       }
-      Section {
-        ForEach(journeyQuery.results, id: \.self) { result in
-          HStack {
-            Text(result.departure.shortDescription)
-            Spacer()
-            Text(result.legs.first!.trip.name)
-            Spacer()
-            Text(result.arrival.shortDescription)
+      Section(header: Text("Search Results")) {
+        if !journeyQuery.results.isEmpty {
+          ForEach(journeyQuery.results, id: \.self) { journey in
+            JourneyCell(journey: journey)
           }
+        } else {
+          Text("No results")
+            .foregroundColor(Color.primary.opacity(0.3))
         }
       }
     }

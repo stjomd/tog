@@ -28,6 +28,8 @@ enum Globals {
     static let more = Image(systemName: "ellipsis.circle")
     static let clear = Image(systemName: "delete.left")
     static let swap = Image(systemName: "arrow.up.arrow.down")
+    static let clock = Image(systemName: "timer")
+    static let money = Image(systemName: "banknote")
   }
 
 }

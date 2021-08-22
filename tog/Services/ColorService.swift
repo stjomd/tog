@@ -61,6 +61,20 @@ class ColorService {
     return background.contrastingColor(bright: bright, dark: dark)
   }
 
+  /// Returns a color that is associated with the specified train code.
+  /// - parameter code: A train code.
+  /// - returns: A SwiftUI color.
+  func color(for code: TrainCode) -> Color {
+    switch code {
+    case .rex, .rjx, .r, .rj, .cjx:
+      return Globals.Colors.Transport.rex
+    case .s:
+      return Globals.Colors.Transport.sBahn
+    default:
+      return Globals.Colors.Transport.other
+    }
+  }
+
   /// Reduces a string into an integer value.
   /// - parameter string: The string to be reduced.
   /// - returns: A positive integer value that is bound by (smaller than) `ColorService.reductionBound`.

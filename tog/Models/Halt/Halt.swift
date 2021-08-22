@@ -13,6 +13,13 @@ public struct Halt: Codable, Hashable {
   private var departure: Date
   public  var stop: Stop
   public  var stopSequence: Int
+  init(id: Int, arrival: Date, departure: Date, stop: Stop, stopSequence: Int) {
+    self.id = id
+    self.arrival = arrival
+    self.departure = departure
+    self.stop = stop
+    self.stopSequence = stopSequence
+  }
 }
 
 extension Halt {

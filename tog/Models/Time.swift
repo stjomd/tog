@@ -43,6 +43,7 @@ public struct Time {
 }
 
 extension Time: CustomStringConvertible {
+
   public var shortDescription: String {
     var string = ""
     if hours < 10 {
@@ -55,6 +56,7 @@ extension Time: CustomStringConvertible {
     string += minutes.description
     return string
   }
+
   public var description: String {
     var string = shortDescription + ":"
     if seconds < 10 {
@@ -62,5 +64,23 @@ extension Time: CustomStringConvertible {
     }
     string += seconds.description
     return string
+  }
+
+  public var textualDescription: String {
+    String(format: "%dh %dm", self.hours, self.minutes)
+  }
+
+}
+
+extension Time {
+  func duration(to time: Time) -> Time {
+    let selfSeconds = 60*60*self.hours + 60*self.minutes + self.seconds
+    let destSeconds = 60*60*time.hours + 60*time.minutes + time.seconds
+    var difference = abs(selfSeconds - destSeconds) % (24 * 3600)
+    let hours   = difference / 3600
+    difference %= 3600
+    let minutes = difference / 60
+    let seconds = difference % 60
+    return Time(hours: hours, minutes: minutes, seconds: seconds)!
   }
 }
