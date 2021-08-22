@@ -1,6 +1,8 @@
 package com.stjomd.railway.service.impl;
 
 import com.stjomd.railway.entity.Halt;
+import com.stjomd.railway.entity.Journey;
+import com.stjomd.railway.entity.JourneyLeg;
 import com.stjomd.railway.entity.Trip;
 import com.stjomd.railway.entity.query.JourneyQuery;
 import com.stjomd.railway.service.HaltService;
@@ -9,9 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -26,24 +28,60 @@ public class JourneyServiceImpl implements JourneyService {
     }
 
     @Override
-    public void getJourneys(JourneyQuery query) {
+    public List<Journey> getJourneys(JourneyQuery query) {
         log.trace("getJourneys({})", query);
-        List<Halt> relevantHalts = null;
+        List<Halt> relevantHalts;
+        List<Journey> journeys = new ArrayList<>();
         if (query.getDateMode() == JourneyQuery.DateMode.DEPARTURE) {
             relevantHalts = haltService.getDepartures(query.getOriginId(), query.getDate().toLocalTime());
-            Set<Trip> allTrips = relevantHalts.stream().map(Halt::getTrip).collect(Collectors.toSet());
-            Set<Trip> relevantTrips = new HashSet<>();
-            for (Trip t : allTrips) {
-                for (Halt h : t.getHalts()) {
-                    if (h.getStop().getId().equals(query.getDestinationId()))
-                        relevantTrips.add(t);
+            for (Halt rh : relevantHalts) {
+                Trip trip = rh.getTrip();
+                List<Halt> sortedTripHalts = trip.getHalts().stream()
+                        .sorted(Comparator.comparing(Halt::getStopSequence))
+                        .collect(Collectors.toList());
+                // Halts are sorted by sequence - in order as halts occur in real life in this trip.
+                // Build journey leg: iterate over sorted halts and look for origin stop first. After that point, add
+                // halts to the leg until destination stop. If destination stop is found before origin stop, this trip
+                // is moving in the opposite direction - discard it.
+                List<Halt> leg = new ArrayList<>();
+                boolean isWriting = false;
+                for (Halt currentHalt : sortedTripHalts) {
+                    if (!isWriting) {
+                        if (currentHalt.getStop().getId().equals(query.getOriginId())) {
+                            // Found origin stop, start writing to leg
+                            isWriting = true;
+                            leg.add(currentHalt);
+                        } else if (currentHalt.getStop().getId().equals(query.getDestinationId())) {
+                            // Trip is moving in the opposite direction, discard
+                            break;
+                        }
+                    } else {
+                        leg.add(currentHalt);
+                        if (currentHalt.getStop().getId().equals(query.getDestinationId())) {
+                            // Reached destination
+                            break;
+                        }
+                    }
                 }
+                // Check if last added halt in the leg is at destination
+                if (leg.size() > 0) {
+                    Long lastStopId = leg.get(leg.size() - 1).getStop().getId();
+                    if (!lastStopId.equals(query.getDestinationId()))
+                        continue;
+                } else {
+                    // Empty leg
+                    continue;
+                }
+                // Successfully found a journey, proceed
+                List<JourneyLeg> journeyLegs = new ArrayList<>();
+                journeyLegs.add(new JourneyLeg(leg, trip));
+                Journey journey = new Journey(journeyLegs, 1L);
+                journeys.add(journey);
             }
-            // relevantTrips contains trips that halt at origin after specified time
-            // TODO: check if these trips also halt at destination (take sequence into account)
         } else {
-            // getArrivals
+            // TODO
         }
+        return journeys;
     }
 
 }

@@ -1,7 +1,5 @@
 package com.stjomd.railway.entity.dto;
 
-import com.stjomd.railway.entity.Stop;
-import com.stjomd.railway.entity.Trip;
 import lombok.Data;
 
 import java.time.LocalTime;
@@ -15,9 +13,7 @@ public class HaltDto {
 
     private LocalTime departure;
 
-    private Stop stop;
-
-    private Trip trip;
+    private StopDto stop;
 
     private Integer stopSequence;
 
