@@ -5,6 +5,7 @@ import com.stjomd.railway.entity.Stop;
 import com.stjomd.railway.entity.Trip;
 import com.stjomd.railway.generator.util.CSVHandler;
 import com.stjomd.railway.repository.HaltRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,12 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.time.LocalTime;
 
+@Slf4j
 @Profile("datagen")
 @DependsOn({"stopGenerator", "tripGenerator"})
 @Component
 public class HaltGenerator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HaltGenerator.class);
     private final HaltRepository haltRepository;
 
     @Autowired
@@ -31,9 +32,9 @@ public class HaltGenerator {
     @PostConstruct
     private void generate() {
         if (haltRepository.findAll().size() > 0) {
-            LOGGER.info("Halts have already been generated");
+            log.info("Halts have already been generated");
         } else {
-            LOGGER.info("Generating halts...");
+            log.info("Generating halts...");
             int count = CSVHandler.forEachRowIn("stop_times.txt", cells -> {
                 LocalTime arrival = null, departure = null;
                 boolean arrivalNextDay = false, departureNextDay = false;
@@ -64,7 +65,7 @@ public class HaltGenerator {
                                      stop, trip, sequence);
                 haltRepository.save(halt);
             });
-            LOGGER.info("Generated {} halt(s)", count);
+            log.info("Generated {} halt(s)", count);
         }
     }
 

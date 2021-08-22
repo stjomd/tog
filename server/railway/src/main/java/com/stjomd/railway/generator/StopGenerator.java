@@ -4,6 +4,7 @@ import com.stjomd.railway.entity.Stop;
 import com.stjomd.railway.generator.util.CSVHandler;
 import com.stjomd.railway.repository.StopRepository;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+@Slf4j
 @Profile("datagen")
 @Component
 public class StopGenerator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StopGenerator.class);
     private final StopRepository stopRepository;
 
     @Autowired
@@ -27,9 +28,9 @@ public class StopGenerator {
     @PostConstruct
     private void generate() {
         if (stopRepository.findAll().size() > 0) {
-            LOGGER.info("Stops have already been generated");
+            log.info("Stops have already been generated");
         } else {
-            LOGGER.info("Generating stops...");
+            log.info("Generating stops...");
             int count = CSVHandler.forEachRowIn("stops.txt", cells -> {
                 Long   id        = Long.valueOf(cells.get("stop_id"));
                 String name      = cells.get("stop_name");
@@ -38,7 +39,7 @@ public class StopGenerator {
                 Stop stop = new Stop(id, name, latitude, longitude);
                 stopRepository.save(stop);
             });
-            LOGGER.info("Generated {} stop(s)", count);
+            log.info("Generated {} stop(s)", count);
         }
     }
 
