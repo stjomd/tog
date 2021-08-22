@@ -9,7 +9,7 @@ import SwiftUI
 
 struct JourneyRow: View {
 
-  let journey: Journey
+  let journey: JourneyOrigg
   var dateFormatter: DateFormatter {
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm"

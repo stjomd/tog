@@ -12,6 +12,7 @@ import CoreData.NSManagedObjectContext
 @main
 struct TogApp: App {
 
+  static let calendar = Calendar.current
   static let isUITest = ProcessInfo.processInfo.arguments.contains("UITEST")
 
   /// Core Data's managed object context type.

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TicketPreview: View {
-  let journey = Journey.cjx
+  let journey = JourneyOrigg.cjx
   var body: some View {
     VStack(alignment: .leading) {
       // Title

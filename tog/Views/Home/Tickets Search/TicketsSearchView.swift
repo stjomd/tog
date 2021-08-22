@@ -15,6 +15,8 @@ struct TicketsSearchView: View {
   @State var date = Date()
   @State var selectingDeparture = true
 
+  // @ObservedObject var journeyQuery = JourneyQuery()
+
   var body: some View {
     List {
       Section {
@@ -60,8 +62,6 @@ struct TicketsSearchView: View {
 
 struct TicketsSearchView_Previews: PreviewProvider {
 
-  @Autowired
-  private static var dataService: DataService!
   private static var results: [Stop] = [
     Stop(id: -1, name: "Wien Penzing", latitude: 0.5, longitude: 0.5),
     Stop(id: -2, name: "Wien Westbahnhof", latitude: 0.5, longitude: 0.5)

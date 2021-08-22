@@ -27,6 +27,7 @@ class MockDataService {
 
 // MARK: - DataService Methods
 extension MockDataService: DataService {
+
   func stops(by name: String) -> AnyPublisher<[Stop], Never> {
     let query = name.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
     let results = stops.filter {
@@ -34,6 +35,11 @@ extension MockDataService: DataService {
     }
     return Just(results).eraseToAnyPublisher()
   }
+
+  func journeys(by query: JourneyQueryComponents?) -> AnyPublisher<[Journey], Never> {
+    Just([]).eraseToAnyPublisher()
+  }
+
 }
 
 // MARK: - MockableDataService Methods

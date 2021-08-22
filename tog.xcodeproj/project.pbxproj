@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		951AB54426D24FF4008C1468 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951AB54326D24FF4008C1468 /* Journey.swift */; };
+		951AB54626D24FFF008C1468 /* JourneyQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951AB54526D24FFF008C1468 /* JourneyQuery.swift */; };
+		951AB54826D2501B008C1468 /* Halt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951AB54726D2501B008C1468 /* Halt.swift */; };
+		951AB54A26D2559C008C1468 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951AB54926D2559C008C1468 /* Trip.swift */; };
 		953C0F0626C44ED000EF44DB /* togApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F0526C44ED000EF44DB /* togApp.swift */; };
 		953C0F0A26C44ED300EF44DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953C0F0926C44ED300EF44DB /* Assets.xcassets */; };
 		953C0F0D26C44ED300EF44DB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953C0F0C26C44ED300EF44DB /* Preview Assets.xcassets */; };
 		953C0F2326C44ED300EF44DB /* togUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F2226C44ED300EF44DB /* togUITests.swift */; };
 		953C0F4526C4626000EF44DB /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4426C4626000EF44DB /* Globals.swift */; };
-		953C0F4826C4626D00EF44DB /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4726C4626D00EF44DB /* Journey.swift */; };
+		953C0F4826C4626D00EF44DB /* JourneyOrigg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4726C4626D00EF44DB /* JourneyOrigg.swift */; };
 		953C0F4C26C4627C00EF44DB /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4A26C4627C00EF44DB /* FavoriteView.swift */; };
 		953C0F4D26C4627C00EF44DB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4B26C4627C00EF44DB /* HomeView.swift */; };
 		95A2926326CC48AC00972011 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926226CC48AC00972011 /* Time.swift */; };
@@ -71,6 +75,10 @@
 		5842471D3300CC4007476098 /* Pods-tog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tog.debug.xcconfig"; path = "Target Support Files/Pods-tog/Pods-tog.debug.xcconfig"; sourceTree = "<group>"; };
 		81B43C2A96B10814655A195E /* Pods-togTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-togTests.debug.xcconfig"; path = "Target Support Files/Pods-togTests/Pods-togTests.debug.xcconfig"; sourceTree = "<group>"; };
 		90344C17DF6CC60BDEFDABCD /* Pods_tog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		951AB54326D24FF4008C1468 /* Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
+		951AB54526D24FFF008C1468 /* JourneyQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyQuery.swift; sourceTree = "<group>"; };
+		951AB54726D2501B008C1468 /* Halt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Halt.swift; sourceTree = "<group>"; };
+		951AB54926D2559C008C1468 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		953C0F0226C44ED000EF44DB /* tog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		953C0F0526C44ED000EF44DB /* togApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = togApp.swift; sourceTree = "<group>"; };
 		953C0F0926C44ED300EF44DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,7 +90,7 @@
 		953C0F2226C44ED300EF44DB /* togUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = togUITests.swift; sourceTree = "<group>"; };
 		953C0F2426C44ED300EF44DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953C0F4426C4626000EF44DB /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
-		953C0F4726C4626D00EF44DB /* Journey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
+		953C0F4726C4626D00EF44DB /* JourneyOrigg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JourneyOrigg.swift; sourceTree = "<group>"; };
 		953C0F4A26C4627C00EF44DB /* FavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		953C0F4B26C4627C00EF44DB /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		95A2926226CC48AC00972011 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
@@ -172,6 +180,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		951AB54226D24FE7008C1468 /* Journey */ = {
+			isa = PBXGroup;
+			children = (
+				951AB54326D24FF4008C1468 /* Journey.swift */,
+				951AB54526D24FFF008C1468 /* JourneyQuery.swift */,
+			);
+			path = Journey;
+			sourceTree = "<group>";
+		};
 		953C0EF926C44ED000EF44DB = {
 			isa = PBXGroup;
 			children = (
@@ -253,7 +270,10 @@
 				95FDDF2F26C7E8BC0086ECAE /* CoreDataStore.swift */,
 				95FDDF2426C7E04C0086ECAE /* Model.xcdatamodeld */,
 				95A2925726CC3C8600972011 /* Stop */,
-				953C0F4726C4626D00EF44DB /* Journey.swift */,
+				951AB54226D24FE7008C1468 /* Journey */,
+				953C0F4726C4626D00EF44DB /* JourneyOrigg.swift */,
+				951AB54726D2501B008C1468 /* Halt.swift */,
+				951AB54926D2559C008C1468 /* Trip.swift */,
 				95A2926226CC48AC00972011 /* Time.swift */,
 			);
 			path = Models;
@@ -636,9 +656,11 @@
 			files = (
 				95A2926326CC48AC00972011 /* Time.swift in Sources */,
 				95FDDF1026C67DA70086ECAE /* SettingsRow.swift in Sources */,
-				953C0F4826C4626D00EF44DB /* Journey.swift in Sources */,
+				953C0F4826C4626D00EF44DB /* JourneyOrigg.swift in Sources */,
 				953C0F4D26C4627C00EF44DB /* HomeView.swift in Sources */,
+				951AB54A26D2559C008C1468 /* Trip.swift in Sources */,
 				95A2926726CED86000972011 /* TogDataService.swift in Sources */,
+				951AB54626D24FFF008C1468 /* JourneyQuery.swift in Sources */,
 				95FDDF1D26C6B6DA0086ECAE /* MockDataService.swift in Sources */,
 				953C0F0626C44ED000EF44DB /* togApp.swift in Sources */,
 				95E911DD26C53D7400863A30 /* SettingsView.swift in Sources */,
@@ -649,6 +671,7 @@
 				95FDDF2626C7E04C0086ECAE /* Model.xcdatamodeld in Sources */,
 				953C0F4C26C4627C00EF44DB /* FavoriteView.swift in Sources */,
 				95D5045326C93EB20008652A /* DisjunctSections.swift in Sources */,
+				951AB54426D24FF4008C1468 /* Journey.swift in Sources */,
 				95D5045526C95EB30008652A /* Extensions.swift in Sources */,
 				95E911D926C53AE600863A30 /* TicketsView.swift in Sources */,
 				95FDDF1B26C6B6C10086ECAE /* DataService.swift in Sources */,
@@ -659,6 +682,7 @@
 				95E911E626C5A02000863A30 /* ProductCell.swift in Sources */,
 				95FDDF3326C80B640086ECAE /* InputField.swift in Sources */,
 				95A2926926CED9FE00972011 /* Stop.swift in Sources */,
+				951AB54826D2501B008C1468 /* Halt.swift in Sources */,
 				953C0F4526C4626000EF44DB /* Globals.swift in Sources */,
 				95E911E426C5433300863A30 /* JourneyRow.swift in Sources */,
 				95FDDF1326C67FF30086ECAE /* ColorService.swift in Sources */,

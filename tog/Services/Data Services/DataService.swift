@@ -15,6 +15,8 @@ protocol DataService {
   /// - returns: A publisher that holds an array of stops.
   func stops(by name: String) -> AnyPublisher<[Stop], Never>
 
+  func journeys(by query: JourneyQueryComponents?) -> AnyPublisher<[Journey], Never>
+
 }
 
 protocol MockableDataService: DataService {

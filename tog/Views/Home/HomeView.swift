@@ -76,9 +76,9 @@ struct FavoriteDestinationsSection: View {
   var body: some View {
     Section(header: Text("Favorite Destinations")) {
       FavoriteView(origin: "Wien Penzing", destination: "Wien Westbahnhof",
-                   journeys: [Journey.s50, Journey.s50, Journey.rex])
+                   journeys: [JourneyOrigg.s50, JourneyOrigg.s50, JourneyOrigg.rex])
       FavoriteView(origin: "Wien", destination: "Flughafen Wien",
-                   journeys: [Journey.s45, Journey.s45])
+                   journeys: [JourneyOrigg.s45, JourneyOrigg.s45])
     }
   }
 }
