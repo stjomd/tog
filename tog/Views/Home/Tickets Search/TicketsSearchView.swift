@@ -54,7 +54,7 @@ struct TicketsSearchView: View {
           HStack {
             Text(result.departure.shortDescription)
             Spacer()
-            Text(result.legs.first!.trip.headsign)
+            Text(result.legs.first!.trip.name)
             Spacer()
             Text(result.arrival.shortDescription)
           }

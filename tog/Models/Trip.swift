@@ -13,3 +13,9 @@ public struct Trip: Codable, Hashable {
   public var shortName: String?
   public var route: Route
 }
+
+extension Trip {
+  public var name: String {
+    shortName ?? route.shortName
+  }
+}
