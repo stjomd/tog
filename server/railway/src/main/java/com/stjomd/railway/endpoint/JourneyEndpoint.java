@@ -32,6 +32,7 @@ public class JourneyEndpoint {
     @Transactional
     @ResponseBody
     public List<JourneyDto> journey(JourneyQuery query) {
+        log.info("GET /journeys?{}", query);
         return journeyMapper.toDto(journeyService.getJourneys(query));
     }
 
