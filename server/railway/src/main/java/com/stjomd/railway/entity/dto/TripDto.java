@@ -11,4 +11,6 @@ public class TripDto {
 
     private String shortName;
 
+    private RouteDto route;
+
 }
