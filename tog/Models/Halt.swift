@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Halt: Codable {
+public struct Halt: Codable, Hashable {
   public  var id: Int
   private var arrival: Date
   private var departure: Date

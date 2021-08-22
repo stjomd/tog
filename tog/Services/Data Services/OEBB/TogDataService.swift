@@ -9,12 +9,15 @@ import Foundation
 import Combine
 
 class TogDataService {
+
   private let urlSession = URLSession.shared
+
   private let jsonDecoder: JSONDecoder = {
     let js = JSONDecoder()
     js.dateDecodingStrategy = .togServerDateStrategy
     return js
   }()
+
 }
 
 // MARK: - DataService Methods
@@ -33,50 +36,21 @@ extension TogDataService: DataService {
 
   func journeys(by query: JourneyQueryComponents?) -> AnyPublisher<[Journey], Never> {
     guard let query = query else {
-      print("xccss []")
       return Just([]).eraseToAnyPublisher()
     }
     var comps = URLComponents(string: Globals.baseURL.absoluteString + "/journeys")!
     comps.queryItems = [
-      URLQueryItem(name: "originId", value: query.originId.description),
-      URLQueryItem(name: "destinationId", value: query.destinationId.description),
-      URLQueryItem(name: "date", value: query.date),
-      URLQueryItem(name: "dateMode", value: query.dateMode),
+      URLQueryItem(name: "originId", value: query.origin.id.description),
+      URLQueryItem(name: "destinationId", value: query.destination.id.description),
+      URLQueryItem(name: "date", value: DateFormatter.longDateFormatter.string(from: query.date)),
+      URLQueryItem(name: "dateMode", value: (query.dateMode == .arrival) ? "ARRIVAL" : "DEPARTURE"),
       URLQueryItem(name: "passengers", value: query.passengers.description)
     ]
     return urlSession.dataTaskPublisher(for: comps.url!)
       .map(\.data)
       .decode(type: [Journey].self, decoder: jsonDecoder)
       .replaceError(with: [])
-      .print()
       .eraseToAnyPublisher()
   }
 
-}
-
-extension JSONDecoder.DateDecodingStrategy {
-  private static let togDateFormatter: DateFormatter = {
-    let df = DateFormatter()
-    df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    return df
-  }()
-  static let togServerDateStrategy = custom {
-    let container = try $0.singleValueContainer()
-    let string = try container.decode(String.self)
-    if let date = togDateFormatter.date(from: string) {
-      return date
-    } else {
-      throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(string)")
-    }
-//    do {
-//      return try Date(timeIntervalSince1970: container.decode(Double.self))
-//    } catch DecodingError.typeMismatch {
-//      let string = try container.decode(String.self)
-//      if let date = togDateFormatter.date(from: string) {
-//        return date
-//      } else {
-//        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(string)")
-//      }
-//    }
-  }
 }

@@ -10,17 +10,11 @@ import Combine
 
 class JourneyQuery: ObservableObject {
 
-  fileprivate static let dateFormatter: DateFormatter = {
-    let df = DateFormatter()
-    df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    return df
-  }()
-
   // MARK: - Properties
 
   @Autowired private var dataService: DataService!
 
-  @Published var query: JourneyQueryComponents?
+  @Published var query: JourneyQueryComponents = JourneyQueryComponents()
   @Published var results: [Journey] = []
   private var subscriptions: Set<AnyCancellable> = []
 
@@ -41,16 +35,23 @@ enum DateMode {
 }
 
 struct JourneyQueryComponents {
-  var originId: Int
-  var destinationId: Int
-  var date: String
-  var dateMode: String
+  var origin: Stop
+  var destination: Stop
+  var date: Date
+  var dateMode: DateMode
   var passengers: Int
   init(origin: Stop, destination: Stop, date: Date, dateMode: DateMode, passengers: Int) {
-    self.originId = origin.id
-    self.destinationId = destination.id
-    self.date = JourneyQuery.dateFormatter.string(from: date)
-    self.dateMode = (dateMode == .arrival) ? "ARRIVAL" : "DEPARTURE"
+    self.origin = origin
+    self.destination = destination
+    self.date = date
+    self.dateMode = dateMode
     self.passengers = passengers
+  }
+  init() {
+    self.origin = Stop(id: -1, name: "", latitude: 0, longitude: 0)
+    self.destination = Stop(id: -2, name: "", latitude: 0, longitude: 0)
+    self.date = Date()
+    self.dateMode = .departure
+    self.passengers = 0
   }
 }

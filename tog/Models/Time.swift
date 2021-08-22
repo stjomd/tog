@@ -43,7 +43,7 @@ public struct Time {
 }
 
 extension Time: CustomStringConvertible {
-  public var description: String {
+  public var shortDescription: String {
     var string = ""
     if hours < 10 {
       string += "0"
@@ -52,7 +52,11 @@ extension Time: CustomStringConvertible {
     if minutes < 10 {
       string += "0"
     }
-    string += minutes.description + ":"
+    string += minutes.description
+    return string
+  }
+  public var description: String {
+    var string = shortDescription + ":"
     if seconds < 10 {
       string += "0"
     }
