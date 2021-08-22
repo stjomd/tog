@@ -11,4 +11,5 @@ public struct Trip: Codable, Hashable {
   public var id: Int
   public var headsign: String
   public var shortName: String?
+  public var route: Route
 }

@@ -11,6 +11,7 @@
 		951AB54626D24FFF008C1468 /* JourneyQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951AB54526D24FFF008C1468 /* JourneyQuery.swift */; };
 		951AB54826D2501B008C1468 /* Halt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951AB54726D2501B008C1468 /* Halt.swift */; };
 		951AB54A26D2559C008C1468 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951AB54926D2559C008C1468 /* Trip.swift */; };
+		951AB54C26D29985008C1468 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951AB54B26D29985008C1468 /* Route.swift */; };
 		953C0F0626C44ED000EF44DB /* togApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F0526C44ED000EF44DB /* togApp.swift */; };
 		953C0F0A26C44ED300EF44DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953C0F0926C44ED300EF44DB /* Assets.xcassets */; };
 		953C0F0D26C44ED300EF44DB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953C0F0C26C44ED300EF44DB /* Preview Assets.xcassets */; };
@@ -79,6 +80,7 @@
 		951AB54526D24FFF008C1468 /* JourneyQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyQuery.swift; sourceTree = "<group>"; };
 		951AB54726D2501B008C1468 /* Halt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Halt.swift; sourceTree = "<group>"; };
 		951AB54926D2559C008C1468 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		951AB54B26D29985008C1468 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		953C0F0226C44ED000EF44DB /* tog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		953C0F0526C44ED000EF44DB /* togApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = togApp.swift; sourceTree = "<group>"; };
 		953C0F0926C44ED300EF44DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				953C0F4726C4626D00EF44DB /* JourneyOrigg.swift */,
 				951AB54726D2501B008C1468 /* Halt.swift */,
 				951AB54926D2559C008C1468 /* Trip.swift */,
+				951AB54B26D29985008C1468 /* Route.swift */,
 				95A2926226CC48AC00972011 /* Time.swift */,
 			);
 			path = Models;
@@ -678,6 +681,7 @@
 				95FDDF3626C8459D0086ECAE /* SearchResultsSection.swift in Sources */,
 				95FDDF3026C7E8BC0086ECAE /* CoreDataStore.swift in Sources */,
 				95E5D7E826C9AD9600A20AA5 /* ClearableInputField.swift in Sources */,
+				951AB54C26D29985008C1468 /* Route.swift in Sources */,
 				95E911D626C5387B00863A30 /* MainView.swift in Sources */,
 				95E911E626C5A02000863A30 /* ProductCell.swift in Sources */,
 				95FDDF3326C80B640086ECAE /* InputField.swift in Sources */,
