@@ -92,6 +92,7 @@ public class JourneyServiceImpl implements JourneyService {
     }
 
     private Long price(Double x1, Double y1, Double x2, Double y2) {
+        log.trace("price({}, {}, {}, {})", x1, y1, x2, y2);
         return (long) (Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)) * 100 * 13.5);
     }
 
