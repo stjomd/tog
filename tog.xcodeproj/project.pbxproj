@@ -46,8 +46,6 @@
 		95FDDF1F26C6BBCD0086ECAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 95FDDF1E26C6BBCD0086ECAE /* Podfile */; };
 		95FDDF2126C6C7890086ECAE /* oebb-data.zip in Resources */ = {isa = PBXBuildFile; fileRef = 95FDDF2026C6C7890086ECAE /* oebb-data.zip */; };
 		95FDDF2326C6CB8B0086ECAE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 95FDDF2226C6CB8B0086ECAE /* README.md */; };
-		95FDDF2626C7E04C0086ECAE /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF2426C7E04C0086ECAE /* Model.xcdatamodeld */; };
-		95FDDF3026C7E8BC0086ECAE /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF2F26C7E8BC0086ECAE /* CoreDataStore.swift */; };
 		95FDDF3326C80B640086ECAE /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF3226C80B640086ECAE /* InputField.swift */; };
 		95FDDF3626C8459D0086ECAE /* SearchResultsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF3526C8459D0086ECAE /* SearchResultsSection.swift */; };
 		98E599CF4BB7D1869F66491B /* Pods_tog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90344C17DF6CC60BDEFDABCD /* Pods_tog.framework */; };
@@ -122,8 +120,6 @@
 		95FDDF1E26C6BBCD0086ECAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		95FDDF2026C6C7890086ECAE /* oebb-data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "oebb-data.zip"; sourceTree = "<group>"; };
 		95FDDF2226C6CB8B0086ECAE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		95FDDF2526C7E04C0086ECAE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		95FDDF2F26C7E8BC0086ECAE /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		95FDDF3226C80B640086ECAE /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		95FDDF3526C8459D0086ECAE /* SearchResultsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsSection.swift; sourceTree = "<group>"; };
 		9635CF07AFE6CDDF59BE80F9 /* Pods_tog_togUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tog_togUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -295,8 +291,6 @@
 		953C0F4626C4626D00EF44DB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				95FDDF2F26C7E8BC0086ECAE /* CoreDataStore.swift */,
-				95FDDF2426C7E04C0086ECAE /* Model.xcdatamodeld */,
 				95A2926226CC48AC00972011 /* Time.swift */,
 				95A2925726CC3C8600972011 /* Stop */,
 				951AB54226D24FE7008C1468 /* Journey */,
@@ -698,7 +692,6 @@
 				95A2926D26CEF29B00972011 /* StopQuery.swift in Sources */,
 				95D5045726C9A72C0008652A /* TicketsSearchViewContents.swift in Sources */,
 				95E911DB26C53BB400863A30 /* ServicesView.swift in Sources */,
-				95FDDF2626C7E04C0086ECAE /* Model.xcdatamodeld in Sources */,
 				953C0F4C26C4627C00EF44DB /* FavoriteView.swift in Sources */,
 				95D5045326C93EB20008652A /* DisjunctSections.swift in Sources */,
 				951AB54426D24FF4008C1468 /* Journey.swift in Sources */,
@@ -707,7 +700,6 @@
 				95E911D926C53AE600863A30 /* TicketsView.swift in Sources */,
 				95FDDF1B26C6B6C10086ECAE /* DataService.swift in Sources */,
 				95FDDF3626C8459D0086ECAE /* SearchResultsSection.swift in Sources */,
-				95FDDF3026C7E8BC0086ECAE /* CoreDataStore.swift in Sources */,
 				951AB55126D2BE53008C1468 /* JourneyRow.swift in Sources */,
 				95E5D7E826C9AD9600A20AA5 /* ClearableInputField.swift in Sources */,
 				951AB54C26D29985008C1468 /* Route.swift in Sources */,
@@ -1045,19 +1037,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		95FDDF2426C7E04C0086ECAE /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				95FDDF2526C7E04C0086ECAE /* Model.xcdatamodel */,
-			);
-			currentVersion = 95FDDF2526C7E04C0086ECAE /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 953C0EFA26C44ED000EF44DB /* Project object */;
 }

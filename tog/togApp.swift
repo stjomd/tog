@@ -15,8 +15,6 @@ struct TogApp: App {
   static let calendar = Calendar.current
   static let isUITest = ProcessInfo.processInfo.arguments.contains("UITEST")
 
-  /// Core Data's managed object context type.
-  typealias CDContext = NSManagedObjectContext
   /// Swinject Container.
   static let container = Container()
 
@@ -33,8 +31,6 @@ struct TogApp: App {
   // MARK: - Register components with Swinject
 
   private func registerDependencies() {
-    // NSManagedObjectContext
-    Self.container.register(CDContext.self) { _ in CoreDataStore.shared.persistentContainer.viewContext }
     // DataService
     let dataService = retrieveDataService()
     Self.container.register(DataService.self) { _ in dataService }
