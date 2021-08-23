@@ -18,7 +18,7 @@ class StopQuery: ObservableObject {
 
   init() {
     $query
-      .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+      .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
       .flatMap(dataService.stops)
       .receive(on: DispatchQueue.main)
       .assign(to: \.results, on: self)

@@ -18,7 +18,7 @@ class JourneyQuery: ObservableObject {
 
   init() {
     $query
-      .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+      .debounce(for: .milliseconds(100), scheduler: RunLoop.main)
       .flatMap(dataService.journeys)
       .receive(on: DispatchQueue.main)
       .assign(to: \.results, on: self)
