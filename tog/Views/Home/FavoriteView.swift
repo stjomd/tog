@@ -11,7 +11,7 @@ struct FavoriteView: View {
 
   let origin: String
   let destination: String
-  var journeys: [JourneyOrigg]
+  var journeys: [Journey]
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -32,7 +32,7 @@ struct FavoriteView: View {
       }
       // Trips
       ForEach(journeys, id: \.self) { journey in
-        JourneyRowOrigg(journey: journey)
+        JourneyRow(journey: journey)
       }
     }
     .padding(.vertical, 10)
@@ -44,19 +44,19 @@ struct FavoriteJourneyView_Previews: PreviewProvider {
   static var previews: some View {
 
     FavoriteView(origin: "Wien Penzing", destination: "Wien Westbahnhof",
-                 journeys: [JourneyOrigg.s50, JourneyOrigg.rex])
+                 journeys: [Journey.example])
       .previewLayout(.sizeThatFits)
       .padding()
 
     FavoriteView(origin: "Wien Penzing", destination: "Wien Westbahnhof",
-                 journeys: [JourneyOrigg.s50, JourneyOrigg.rex])
+                 journeys: [Journey.example])
       .preferredColorScheme(.dark)
       .previewLayout(.sizeThatFits)
       .padding()
 
     List {
       FavoriteView(origin: "Wien Penzing", destination: "Wien Westbahnhof",
-                   journeys: [JourneyOrigg.s50, JourneyOrigg.rex])
+                   journeys: [Journey.example])
     }
     .listStyle(InsetGroupedListStyle())
 

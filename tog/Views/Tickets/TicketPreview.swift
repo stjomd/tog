@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct TicketPreview: View {
-  let journey = JourneyOrigg.cjx
+  let journey = Journey.example
   var body: some View {
     VStack(alignment: .leading) {
       // Title
       VStack(alignment: .leading) {
         HStack(spacing: 6) {
-          Text("\(journey.origin)")
+          Text(journey.legs.first!.halts.first!.stop.name)
             .font(.headline)
           Globals.Icons.rightArrow
             .foregroundColor(.gray)
         }
-        Text(journey.destination)
+        Text(journey.legs.last!.halts.last!.stop.name)
           .font(.headline)
       }
       // Trips
-      JourneyRowOrigg(journey: journey)
+      JourneyRow(journey: journey)
     }
     .padding(.vertical, 10)
   }

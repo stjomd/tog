@@ -38,8 +38,15 @@ extension Journey {
             id: 0,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 0, name: "Stop", latitude: 0, longitude: 0),
+            stop: Stop(id: 0, name: "Wien Penzing Bahnhof", latitude: 0, longitude: 0),
             stopSequence: 1
+          ),
+          Halt(
+            id: 1,
+            arrival: Date(),
+            departure: Date(),
+            stop: Stop(id: 1, name: "Wien Hütteldorf Bahnhof", latitude: 0, longitude: 0),
+            stopSequence: 2
           )
         ],
         trip: Trip(
