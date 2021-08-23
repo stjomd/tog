@@ -34,13 +34,15 @@ struct JourneyQueryComponents {
   var date: Date
   var dateMode: DateMode
   var passengers: Int
+  var limit: Int?
 
-  init(origin: Stop, destination: Stop, date: Date, dateMode: DateMode, passengers: Int) {
+  init(origin: Stop, destination: Stop, date: Date, dateMode: DateMode, passengers: Int, limit: Int? = nil) {
     self.origin = origin
     self.destination = destination
     self.date = date
     self.dateMode = dateMode
     self.passengers = passengers
+    self.limit = limit
   }
 
   init() {

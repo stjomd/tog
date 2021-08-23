@@ -30,7 +30,7 @@ extension TogDataService: DataService {
     let url = url(baseURL.appendingPathComponent("stops"), parameters: ["name": name])
     return urlSession.dataTaskPublisher(for: url)
       .map(\.data)
-      .decode(type: [Stop].self, decoder: JSONDecoder())
+      .decode(type: [Stop].self, decoder: jsonDecoder)
       .replaceError(with: [])
       .eraseToAnyPublisher()
   }
@@ -46,7 +46,8 @@ extension TogDataService: DataService {
         "destinationId": query.destination.id.description,
         "date": DateFormatter.longDateFormatter.string(from: query.date),
         "dateMode": query.dateMode.description.uppercased(),
-        "passengers": query.passengers.description
+        "passengers": query.passengers.description,
+        "limit": query.limit?.description
       ]
     )
     return urlSession.dataTaskPublisher(for: url)
@@ -64,14 +65,14 @@ extension TogDataService {
   ///   - url: The URL.
   ///   - parameters: A dictionary with query parameters.
   /// - returns: The `url` with appended query `parameters`. If `parameters` is nil, the original `url` is returned.
-  private func url(_ url: URL, parameters: [String: String]? = nil) -> URL {
+  private func url(_ url: URL, parameters: [String: String?]? = nil) -> URL {
     guard let parameters = parameters else {
       return url
     }
     var components = URLComponents(string: url.absoluteString)!
     if !parameters.isEmpty {
       components.queryItems = []
-      for (name, value) in parameters {
+      for (name, value) in parameters where value != nil {
         components.queryItems!.append(
           URLQueryItem(name: name, value: value)
         )
