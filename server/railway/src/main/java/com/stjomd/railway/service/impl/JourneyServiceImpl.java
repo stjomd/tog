@@ -72,10 +72,16 @@ public class JourneyServiceImpl implements JourneyService {
                     // Empty leg
                     continue;
                 }
-                // Successfully found a journey, proceed
+                // Successfully found a journey, add leg
                 List<JourneyLeg> journeyLegs = new ArrayList<>();
                 journeyLegs.add(new JourneyLeg(leg, trip));
-                Journey journey = new Journey(journeyLegs, 1L);
+                // Add to journeys
+                int last = leg.size() - 1;
+                Long price = price(
+                    leg.get(0).getStop().getLatitude(),    leg.get(0).getStop().getLongitude(),
+                    leg.get(last).getStop().getLatitude(), leg.get(last).getStop().getLongitude()
+                );
+                Journey journey = new Journey(journeyLegs, price);
                 journeys.add(journey);
             }
             journeys.sort(Comparator.comparing(a -> a.getLegs().get(0).getHalts().get(0).getDeparture()));
@@ -83,6 +89,10 @@ public class JourneyServiceImpl implements JourneyService {
             // TODO
         }
         return journeys;
+    }
+
+    private Long price(Double x1, Double y1, Double x2, Double y2) {
+        return (long) (Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)) * 100 * 13.5);
     }
 
 }
