@@ -67,7 +67,11 @@ extension Time: CustomStringConvertible {
   }
 
   public var textualDescription: String {
-    String(format: "%dh %dm", self.hours, self.minutes)
+    if hours > 0 {
+      return String(format: "%dh %dm", self.hours, self.minutes)
+    } else {
+      return String(format: "%dm", self.minutes)
+    }
   }
 
 }
