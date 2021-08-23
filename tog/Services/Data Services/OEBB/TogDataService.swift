@@ -27,7 +27,7 @@ class TogDataService {
 extension TogDataService: DataService {
 
   func stops(by name: String) -> AnyPublisher<[Stop], Never> {
-    let url = url(baseURL.appendingPathComponent("stops"), parameters: ["name": name])
+    let url = urlOf(baseURL.appendingPathComponent("stops"), parameters: ["name": name])
     return urlSession.dataTaskPublisher(for: url)
       .map(\.data)
       .decode(type: [Stop].self, decoder: jsonDecoder)
@@ -39,7 +39,7 @@ extension TogDataService: DataService {
     guard let query = query else {
       return Just([]).eraseToAnyPublisher()
     }
-    let url = url(
+    let url = urlOf(
       baseURL.appendingPathComponent("journeys"),
       parameters: [
         "originId": query.origin.id.description,
@@ -65,7 +65,7 @@ extension TogDataService {
   ///   - url: The URL.
   ///   - parameters: A dictionary with query parameters.
   /// - returns: The `url` with appended query `parameters`. If `parameters` is nil, the original `url` is returned.
-  private func url(_ url: URL, parameters: [String: String?]? = nil) -> URL {
+  private func urlOf(_ url: URL, parameters: [String: String?]? = nil) -> URL {
     guard let parameters = parameters else {
       return url
     }
