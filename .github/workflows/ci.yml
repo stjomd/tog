@@ -25,7 +25,7 @@ jobs:
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
-          name: Report
+          name: Report (Client)
           path: ~/Library/Developer/Xcode/DerivedData/tog-*/Logs/Test/*.xcresult
 
   test-server:
@@ -42,8 +42,9 @@ jobs:
         run: |
           cd server/railway
           mvn --batch-mode clean install
-      - name: Upload reports
+      - name: Upload report
         if: ${{ always() }}
-        uses: scacap/action-surefire-report@v1
+        uses: actions/upload-artifact@v2
         with:
-          check_name: Server Test Report
+          name: Report (Server)
+          path: target/surefire-reports/*.txt
