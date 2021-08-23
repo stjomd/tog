@@ -18,6 +18,8 @@ public struct JourneyLeg: Codable, Hashable {
 }
 
 extension Journey {
+  // `legs` is guaranteed to have at least one JourneyLeg;
+  // `journeyLeg.halts` is guaranteed to have at least one halt.
   public var departure: Time {
     legs.first!.halts.first!.departureTime
   }
