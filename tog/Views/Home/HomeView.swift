@@ -75,10 +75,8 @@ class DisjunctSearchResultsSection: DisjunctSection<SearchResultsSection> {
 struct FavoriteDestinationsSection: View {
   var body: some View {
     Section(header: Text("Favorite Destinations")) {
-      FavoriteView(origin: "Wien Penzing", destination: "Wien Westbahnhof",
-                   journeys: [Journey.example, Journey.example])
-      FavoriteView(origin: "Wien", destination: "Flughafen Wien",
-                   journeys: [Journey.example, Journey.example, Journey.example])
+      FavoriteView(origin: Stop.penzing, destination: Stop.westbahnhof, amount: 2)
+      FavoriteView(origin: Stop.westbahnhof, destination: Stop.penzing, amount: 3)
     }
   }
 }

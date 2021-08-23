@@ -19,9 +19,9 @@
 		953C0F0D26C44ED300EF44DB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953C0F0C26C44ED300EF44DB /* Preview Assets.xcassets */; };
 		953C0F2326C44ED300EF44DB /* togUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F2226C44ED300EF44DB /* togUITests.swift */; };
 		953C0F4526C4626000EF44DB /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4426C4626000EF44DB /* Globals.swift */; };
-		953C0F4826C4626D00EF44DB /* JourneyOrigg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4726C4626D00EF44DB /* JourneyOrigg.swift */; };
 		953C0F4C26C4627C00EF44DB /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4A26C4627C00EF44DB /* FavoriteView.swift */; };
 		953C0F4D26C4627C00EF44DB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4B26C4627C00EF44DB /* HomeView.swift */; };
+		958D106A26D3E2460052E47B /* FavoriteDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D106926D3E2460052E47B /* FavoriteDestination.swift */; };
 		95A2926326CC48AC00972011 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926226CC48AC00972011 /* Time.swift */; };
 		95A2926526CC50EF00972011 /* TimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926426CC50EF00972011 /* TimeTests.swift */; };
 		95A2926726CED86000972011 /* TogDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926626CED86000972011 /* TogDataService.swift */; };
@@ -93,9 +93,9 @@
 		953C0F2226C44ED300EF44DB /* togUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = togUITests.swift; sourceTree = "<group>"; };
 		953C0F2426C44ED300EF44DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953C0F4426C4626000EF44DB /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
-		953C0F4726C4626D00EF44DB /* JourneyOrigg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JourneyOrigg.swift; sourceTree = "<group>"; };
 		953C0F4A26C4627C00EF44DB /* FavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		953C0F4B26C4627C00EF44DB /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		958D106926D3E2460052E47B /* FavoriteDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDestination.swift; sourceTree = "<group>"; };
 		95A2926226CC48AC00972011 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		95A2926426CC50EF00972011 /* TimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTests.swift; sourceTree = "<group>"; };
 		95A2926626CED86000972011 /* TogDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogDataService.swift; sourceTree = "<group>"; };
@@ -292,12 +292,12 @@
 			isa = PBXGroup;
 			children = (
 				95A2926226CC48AC00972011 /* Time.swift */,
+				958D106926D3E2460052E47B /* FavoriteDestination.swift */,
 				95A2925726CC3C8600972011 /* Stop */,
 				951AB54226D24FE7008C1468 /* Journey */,
 				951AB54D26D2A194008C1468 /* Halt */,
 				951AB54E26D2A19A008C1468 /* Trip */,
 				951AB54F26D2A19F008C1468 /* Route */,
-				953C0F4726C4626D00EF44DB /* JourneyOrigg.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -680,7 +680,6 @@
 			files = (
 				95A2926326CC48AC00972011 /* Time.swift in Sources */,
 				95FDDF1026C67DA70086ECAE /* SettingsRow.swift in Sources */,
-				953C0F4826C4626D00EF44DB /* JourneyOrigg.swift in Sources */,
 				953C0F4D26C4627C00EF44DB /* HomeView.swift in Sources */,
 				951AB54A26D2559C008C1468 /* Trip.swift in Sources */,
 				95A2926726CED86000972011 /* TogDataService.swift in Sources */,
@@ -701,6 +700,7 @@
 				95FDDF1B26C6B6C10086ECAE /* DataService.swift in Sources */,
 				95FDDF3626C8459D0086ECAE /* SearchResultsSection.swift in Sources */,
 				951AB55126D2BE53008C1468 /* JourneyRow.swift in Sources */,
+				958D106A26D3E2460052E47B /* FavoriteDestination.swift in Sources */,
 				95E5D7E826C9AD9600A20AA5 /* ClearableInputField.swift in Sources */,
 				951AB54C26D29985008C1468 /* Route.swift in Sources */,
 				95E911D626C5387B00863A30 /* MainView.swift in Sources */,

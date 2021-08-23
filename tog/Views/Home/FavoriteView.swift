@@ -9,9 +9,20 @@ import SwiftUI
 
 struct FavoriteView: View {
 
-  let origin: String
-  let destination: String
-  var journeys: [Journey]
+  let origin: Stop
+  let destination: Stop
+  let amount: Int
+
+  @ObservedObject private var journeyQuery = JourneyQuery()
+
+  init(origin: Stop, destination: Stop, amount: Int) {
+    self.origin = origin
+    self.destination = destination
+    self.amount = amount
+    journeyQuery.query = .init(
+      origin: origin, destination: destination, date: Date(), dateMode: .departure, passengers: 1
+    )
+  }
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -19,19 +30,19 @@ struct FavoriteView: View {
       HStack(alignment: .firstTextBaseline) {
         VStack(alignment: .leading) {
           HStack(spacing: 6) {
-            Text("\(origin)")
+            Text(origin.name)
               .font(.headline)
             Globals.Icons.rightArrow
               .foregroundColor(.gray)
           }
-          Text(destination)
+          Text(destination.name)
             .font(.headline)
         }
         Spacer()
         Globals.Icons.more
       }
       // Trips
-      ForEach(journeys, id: \.self) { journey in
+      ForEach(journeyQuery.results, id: \.self) { journey in
         JourneyRow(journey: journey)
       }
     }
@@ -41,22 +52,20 @@ struct FavoriteView: View {
 }
 
 struct FavoriteJourneyView_Previews: PreviewProvider {
+
   static var previews: some View {
 
-    FavoriteView(origin: "Wien Penzing", destination: "Wien Westbahnhof",
-                 journeys: [Journey.example])
+    FavoriteView(origin: Stop.penzing, destination: Stop.westbahnhof, amount: 2)
       .previewLayout(.sizeThatFits)
       .padding()
 
-    FavoriteView(origin: "Wien Penzing", destination: "Wien Westbahnhof",
-                 journeys: [Journey.example])
+    FavoriteView(origin: Stop.penzing, destination: Stop.westbahnhof, amount: 3)
       .preferredColorScheme(.dark)
       .previewLayout(.sizeThatFits)
       .padding()
 
     List {
-      FavoriteView(origin: "Wien Penzing", destination: "Wien Westbahnhof",
-                   journeys: [Journey.example])
+      FavoriteView(origin: Stop.penzing, destination: Stop.westbahnhof, amount: 1)
     }
     .listStyle(InsetGroupedListStyle())
 
