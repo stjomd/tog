@@ -27,28 +27,55 @@ struct FavoriteView: View {
   var body: some View {
     VStack(alignment: .leading) {
       // Title
-      HStack(alignment: .firstTextBaseline) {
-        VStack(alignment: .leading) {
-          HStack(spacing: 6) {
-            Text(origin.name)
-              .font(.headline)
-            Globals.Icons.rightArrow
-              .foregroundColor(.gray)
-          }
-          Text(destination.name)
-            .font(.headline)
-        }
-        Spacer()
-        Globals.Icons.more
-      }
+      FavoriteJourneyTitle(origin: origin, destination: destination, isShowingMoreIcon: true)
       // Trips
-      ForEach(journeyQuery.results, id: \.self) { journey in
-        JourneyRow(journey: journey)
-      }
+      FavoriteJourneyTrips(journeys: journeyQuery.results)
     }
     .padding(.vertical, 10)
   }
 
+}
+
+struct FavoriteJourneyTitle: View {
+
+  let origin: Stop
+  let destination: Stop
+  let isShowingMoreIcon: Bool
+
+  var body: some View {
+    HStack(alignment: .firstTextBaseline) {
+      VStack(alignment: .leading) {
+        HStack(spacing: 6) {
+          Text(origin.name)
+            .font(.headline)
+          Globals.Icons.rightArrow
+            .foregroundColor(.gray)
+        }
+        Text(destination.name)
+          .font(.headline)
+      }
+      if isShowingMoreIcon {
+        Spacer()
+        Globals.Icons.more
+      }
+    }
+  }
+
+}
+
+struct FavoriteJourneyTrips: View {
+  let journeys: [Journey]
+  var body: some View {
+    if !journeys.isEmpty {
+      ForEach(journeys, id: \.self) { journey in
+        JourneyRow(journey: journey)
+      }
+    } else {
+      Text("No journeys")
+        .padding(.top, 2)
+        .opacity(0.3)
+    }
+  }
 }
 
 struct FavoriteJourneyView_Previews: PreviewProvider {
@@ -65,7 +92,7 @@ struct FavoriteJourneyView_Previews: PreviewProvider {
       .padding()
 
     List {
-      FavoriteView(origin: Stop.penzing, destination: Stop.westbahnhof, amount: 1)
+      FavoriteView(origin: Stop.penzing, destination: Stop.westbahnhof, amount: 5)
     }
     .listStyle(InsetGroupedListStyle())
 

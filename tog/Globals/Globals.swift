@@ -38,6 +38,7 @@ enum Globals {
     static let swap = Image(systemName: "arrow.up.arrow.down")
     static let clock = Image(systemName: "timer")
     static let money = Image(systemName: "banknote")
+    static let star = Image(systemName: "star")
   }
 
 }

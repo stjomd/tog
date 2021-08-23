@@ -22,6 +22,7 @@
 		953C0F4C26C4627C00EF44DB /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4A26C4627C00EF44DB /* FavoriteView.swift */; };
 		953C0F4D26C4627C00EF44DB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C0F4B26C4627C00EF44DB /* HomeView.swift */; };
 		958D106A26D3E2460052E47B /* FavoriteDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D106926D3E2460052E47B /* FavoriteDestination.swift */; };
+		958D106C26D429F80052E47B /* AddToFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D106B26D429F80052E47B /* AddToFavoritesView.swift */; };
 		95A2926326CC48AC00972011 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926226CC48AC00972011 /* Time.swift */; };
 		95A2926526CC50EF00972011 /* TimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926426CC50EF00972011 /* TimeTests.swift */; };
 		95A2926726CED86000972011 /* TogDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926626CED86000972011 /* TogDataService.swift */; };
@@ -96,6 +97,7 @@
 		953C0F4A26C4627C00EF44DB /* FavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		953C0F4B26C4627C00EF44DB /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		958D106926D3E2460052E47B /* FavoriteDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDestination.swift; sourceTree = "<group>"; };
+		958D106B26D429F80052E47B /* AddToFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToFavoritesView.swift; sourceTree = "<group>"; };
 		95A2926226CC48AC00972011 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		95A2926426CC50EF00972011 /* TimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTests.swift; sourceTree = "<group>"; };
 		95A2926626CED86000972011 /* TogDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogDataService.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				95D5045626C9A72C0008652A /* TicketsSearchViewContents.swift */,
+				958D106B26D429F80052E47B /* AddToFavoritesView.swift */,
 				951AB55226D2C17B008C1468 /* JourneyCell.swift */,
 			);
 			path = "Tickets Search";
@@ -699,6 +702,7 @@
 				95E911D926C53AE600863A30 /* TicketsView.swift in Sources */,
 				95FDDF1B26C6B6C10086ECAE /* DataService.swift in Sources */,
 				95FDDF3626C8459D0086ECAE /* SearchResultsSection.swift in Sources */,
+				958D106C26D429F80052E47B /* AddToFavoritesView.swift in Sources */,
 				951AB55126D2BE53008C1468 /* JourneyRow.swift in Sources */,
 				958D106A26D3E2460052E47B /* FavoriteDestination.swift in Sources */,
 				95E5D7E826C9AD9600A20AA5 /* ClearableInputField.swift in Sources */,

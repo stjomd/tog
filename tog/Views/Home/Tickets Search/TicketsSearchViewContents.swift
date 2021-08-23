@@ -11,20 +11,30 @@ import SwiftUI
 // as the stop is selected in the stations search.
 struct TicketsSearchView: View {
 
+  @State var isShowingAddToFavorites = false
+
   let origin: Stop
   let destination: Stop
 
   var body: some View {
-    TicketsSearchViewContents(origin: origin, destination: destination)
+    TicketsSearchViewContents(
+      origin: origin,
+      destination: destination,
+      isShowingAddToFavorites: $isShowingAddToFavorites
+    )
+    .navigationTitle("Select Journey")
+    .navigationBarTitleDisplayMode(.inline)
   }
 
 }
 
 struct TicketsSearchViewContents: View {
 
+  @Binding var isShowingAddToFavorites: Bool
   @ObservedObject var journeyQuery = JourneyQuery()
 
-  init(origin: Stop, destination: Stop) {
+  init(origin: Stop, destination: Stop, isShowingAddToFavorites: Binding<Bool>) {
+    self._isShowingAddToFavorites = isShowingAddToFavorites
     self.journeyQuery.query = .init(
       origin: origin,
       destination: destination,
@@ -74,9 +84,24 @@ struct TicketsSearchViewContents: View {
       }
     }
     .listStyle(InsetGroupedListStyle())
-    .navigationTitle("Select Journey")
-    .navigationBarTitleDisplayMode(.inline)
-    .navigationBarItems(trailing:
+    .toolbar {
+      ToolbarItemGroup(placement: .navigationBarTrailing) {
+        toolbarItems
+      }
+    }
+    .sheet(isPresented: $isShowingAddToFavorites) {
+      AddToFavoritesView(origin: journeyQuery.query.origin, destination: journeyQuery.query.destination,
+                         journeys: journeyQuery.results, isPresent: $isShowingAddToFavorites)
+    }
+  }
+
+  var toolbarItems: some View {
+    HStack {
+      Button(action: {
+        isShowingAddToFavorites = true
+      }, label: {
+        Globals.Icons.star
+      })
       Button(action: {
         journeyQuery.query = .init(
           origin: journeyQuery.query.destination,
@@ -88,7 +113,7 @@ struct TicketsSearchViewContents: View {
       }, label: {
         Globals.Icons.swap
       })
-    )
+    }
   }
 
 }
@@ -102,7 +127,7 @@ struct TicketsSearchView_Previews: PreviewProvider {
 
   static var previews: some View {
     NavigationView {
-      TicketsSearchViewContents(origin: results[0], destination: results[1])
+      TicketsSearchView(origin: results[0], destination: results[1])
         .navigationTitle("Select Journey")
     }
   }
