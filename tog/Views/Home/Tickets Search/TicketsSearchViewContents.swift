@@ -7,7 +7,20 @@
 
 import SwiftUI
 
+// Wrapper to load contents lazily - otherwise the request is sent immediately
+// as the stop is selected in the stations search.
 struct TicketsSearchView: View {
+
+  let origin: Stop
+  let destination: Stop
+
+  var body: some View {
+    TicketsSearchViewContents(origin: origin, destination: destination)
+  }
+
+}
+
+struct TicketsSearchViewContents: View {
 
   @ObservedObject var journeyQuery = JourneyQuery()
 
@@ -89,7 +102,7 @@ struct TicketsSearchView_Previews: PreviewProvider {
 
   static var previews: some View {
     NavigationView {
-      TicketsSearchView(origin: results[0], destination: results[1])
+      TicketsSearchViewContents(origin: results[0], destination: results[1])
         .navigationTitle("Select Journey")
     }
   }

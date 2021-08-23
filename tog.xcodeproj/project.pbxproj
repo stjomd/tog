@@ -29,7 +29,7 @@
 		95A2926D26CEF29B00972011 /* StopQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926C26CEF29B00972011 /* StopQuery.swift */; };
 		95D5045326C93EB20008652A /* DisjunctSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D5045226C93EB20008652A /* DisjunctSections.swift */; };
 		95D5045526C95EB30008652A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D5045426C95EB30008652A /* Extensions.swift */; };
-		95D5045726C9A72C0008652A /* TicketsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D5045626C9A72C0008652A /* TicketsSearchView.swift */; };
+		95D5045726C9A72C0008652A /* TicketsSearchViewContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D5045626C9A72C0008652A /* TicketsSearchViewContents.swift */; };
 		95E5D7E826C9AD9600A20AA5 /* ClearableInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E5D7E726C9AD9600A20AA5 /* ClearableInputField.swift */; };
 		95E5D81A26CA897E00A20AA5 /* DataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E5D81926CA897E00A20AA5 /* DataServiceTests.swift */; };
 		95E5D81C26CA93CC00A20AA5 /* ColorServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E5D81B26CA93CC00A20AA5 /* ColorServiceTests.swift */; };
@@ -106,7 +106,7 @@
 		95A2926C26CEF29B00972011 /* StopQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopQuery.swift; sourceTree = "<group>"; };
 		95D5045226C93EB20008652A /* DisjunctSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjunctSections.swift; sourceTree = "<group>"; };
 		95D5045426C95EB30008652A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		95D5045626C9A72C0008652A /* TicketsSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsSearchView.swift; sourceTree = "<group>"; };
+		95D5045626C9A72C0008652A /* TicketsSearchViewContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsSearchViewContents.swift; sourceTree = "<group>"; };
 		95E5D7E726C9AD9600A20AA5 /* ClearableInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearableInputField.swift; sourceTree = "<group>"; };
 		95E5D81926CA897E00A20AA5 /* DataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceTests.swift; sourceTree = "<group>"; };
 		95E5D81B26CA93CC00A20AA5 /* ColorServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorServiceTests.swift; sourceTree = "<group>"; };
@@ -344,7 +344,7 @@
 		95E5D7EA26C9AF2000A20AA5 /* Tickets Search */ = {
 			isa = PBXGroup;
 			children = (
-				95D5045626C9A72C0008652A /* TicketsSearchView.swift */,
+				95D5045626C9A72C0008652A /* TicketsSearchViewContents.swift */,
 				951AB55226D2C17B008C1468 /* JourneyCell.swift */,
 			);
 			path = "Tickets Search";
@@ -699,7 +699,7 @@
 				95E911DD26C53D7400863A30 /* SettingsView.swift in Sources */,
 				95E911E226C541EF00863A30 /* TicketPreview.swift in Sources */,
 				95A2926D26CEF29B00972011 /* StopQuery.swift in Sources */,
-				95D5045726C9A72C0008652A /* TicketsSearchView.swift in Sources */,
+				95D5045726C9A72C0008652A /* TicketsSearchViewContents.swift in Sources */,
 				95E911DB26C53BB400863A30 /* ServicesView.swift in Sources */,
 				95FDDF2626C7E04C0086ECAE /* Model.xcdatamodeld in Sources */,
 				953C0F4C26C4627C00EF44DB /* FavoriteView.swift in Sources */,
