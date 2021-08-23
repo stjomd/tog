@@ -26,4 +26,9 @@ public class HaltServiceImpl implements HaltService {
         return haltRepository.findByStopIdAndDepartureGreaterThanEqual(stopId, afterTime);
     }
 
+    public List<Halt> getArrivals(Long stopId, LocalTime beforeTime) {
+        log.trace("getArrivals({}, {})", stopId, beforeTime);
+        return haltRepository.findByStopIdAndArrivalLessThanEqual(stopId, beforeTime);
+    }
+
 }

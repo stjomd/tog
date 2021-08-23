@@ -10,4 +10,6 @@ public interface HaltRepository extends JpaRepository<Halt, Long> {
 
     List<Halt> findByStopIdAndDepartureGreaterThanEqual(Long stopId, LocalTime departure);
 
+    List<Halt> findByStopIdAndArrivalLessThanEqual(Long stopId, LocalTime arrival);
+
 }

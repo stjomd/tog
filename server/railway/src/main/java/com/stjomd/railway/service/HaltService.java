@@ -9,4 +9,6 @@ public interface HaltService {
 
     List<Halt> getDepartures(Long stopId, LocalTime afterTime);
 
+    List<Halt> getArrivals(Long stopId, LocalTime beforeTime);
+
 }
