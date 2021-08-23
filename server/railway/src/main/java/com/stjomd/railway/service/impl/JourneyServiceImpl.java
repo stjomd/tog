@@ -90,9 +90,6 @@ public class JourneyServiceImpl implements JourneyService {
             );
             Journey journey = new Journey(journeyLegs, price * query.getPassengers());
             journeys.add(journey);
-            // Take limit into account
-            if (query.getLimit() != null && query.getLimit().equals(journeys.size()))
-                break;
         }
 
         // Sort by time
@@ -102,7 +99,17 @@ public class JourneyServiceImpl implements JourneyService {
             journeys.sort(Comparator.comparing(a -> a.getLegs().get(0).getHalts().get(0).getArrival()));
             Collections.reverse(journeys);
         }
-        return journeys;
+
+        // Take limit into account
+        if (query.getLimit() == null) {
+            return journeys;
+        } else {
+            List<Journey> cutJourneys = new ArrayList<>();
+            for (int i = 0; i < query.getLimit() && i < journeys.size(); i++) {
+                cutJourneys.add(journeys.get(i));
+            }
+            return cutJourneys;
+        }
     }
 
     private Long price(Double x1, Double y1, Double x2, Double y2) {
