@@ -43,7 +43,7 @@ extension TogDataService: DataService {
       URLQueryItem(name: "originId", value: query.origin.id.description),
       URLQueryItem(name: "destinationId", value: query.destination.id.description),
       URLQueryItem(name: "date", value: DateFormatter.longDateFormatter.string(from: query.date)),
-      URLQueryItem(name: "dateMode", value: (query.dateMode == .arrival) ? "ARRIVAL" : "DEPARTURE"),
+      URLQueryItem(name: "dateMode", value: query.dateMode.description.uppercased()),
       URLQueryItem(name: "passengers", value: query.passengers.description)
     ]
     return urlSession.dataTaskPublisher(for: comps.url!)

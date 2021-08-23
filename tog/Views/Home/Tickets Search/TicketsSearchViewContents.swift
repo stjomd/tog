@@ -43,7 +43,7 @@ struct TicketsSearchViewContents: View {
       Section(footer: Text("Press and hold to choose between departure and arrival")) {
         HStack {
           // Separate text and date picker because the padding doesn't look nice
-          Text(journeyQuery.query.dateMode == .departure ? "Departure" : "Arrival")
+          Text(journeyQuery.query.dateMode.description)
           DatePicker("", selection: $journeyQuery.query.date)
             .offset(x: 10)
         }

@@ -10,8 +10,6 @@ import Combine
 
 class JourneyQuery: ObservableObject {
 
-  // MARK: - Properties
-
   @Autowired private var dataService: DataService!
 
   @Published var query: JourneyQueryComponents = JourneyQueryComponents()
@@ -29,17 +27,14 @@ class JourneyQuery: ObservableObject {
 
 }
 
-enum DateMode {
-  case departure
-  case arrival
-}
-
 struct JourneyQueryComponents {
+  
   var origin: Stop
   var destination: Stop
   var date: Date
   var dateMode: DateMode
   var passengers: Int
+  
   init(origin: Stop, destination: Stop, date: Date, dateMode: DateMode, passengers: Int) {
     self.origin = origin
     self.destination = destination
@@ -47,11 +42,23 @@ struct JourneyQueryComponents {
     self.dateMode = dateMode
     self.passengers = passengers
   }
+  
   init() {
     self.origin = Stop(id: -1, name: "", latitude: 0, longitude: 0)
     self.destination = Stop(id: -2, name: "", latitude: 0, longitude: 0)
     self.date = Date()
     self.dateMode = .departure
     self.passengers = 0
+  }
+  
+}
+
+enum DateMode: String {
+  case departure
+  case arrival
+}
+extension DateMode: CustomStringConvertible {
+  var description: String {
+    self.rawValue.capitalized
   }
 }
