@@ -90,6 +90,9 @@ public class JourneyServiceImpl implements JourneyService {
             );
             Journey journey = new Journey(journeyLegs, price * query.getPassengers());
             journeys.add(journey);
+            // Take limit into account
+            if (query.getLimit() != null && query.getLimit().equals(journeys.size()))
+                break;
         }
 
         // Sort by time

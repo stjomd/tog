@@ -29,6 +29,8 @@ public class JourneyQuery {
 
     private Integer passengers;
 
+    private Integer limit;
+
     public enum DateMode {
         ARRIVAL, DEPARTURE
     }

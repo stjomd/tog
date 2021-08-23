@@ -20,7 +20,7 @@ struct FavoriteView: View {
     self.destination = destination
     self.amount = amount
     journeyQuery.query = .init(
-      origin: origin, destination: destination, date: Date(), dateMode: .departure, passengers: 1
+      origin: origin, destination: destination, date: Date(), dateMode: .departure, passengers: 1, limit: amount
     )
   }
 
