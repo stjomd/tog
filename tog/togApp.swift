@@ -34,7 +34,6 @@ struct TogApp: SwiftUI.App {
     // Realm
     do {
       let realm = try Realm()
-      print(Realm.Configuration.defaultConfiguration.fileURL!.absoluteString)
       Self.container.register(Realm.self) { _ in realm }
     } catch {
       fatalError("Couldn't open Realm file: \(error)")

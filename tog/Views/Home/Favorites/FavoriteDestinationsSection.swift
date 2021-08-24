@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FavoriteDestinationsSection: View {
 
-  let query: FavoritesQuery
+  @ObservedObject private var query = FavoritesQuery()
 
   var body: some View {
     Section(header: Text("Favorite Destinations")) {
@@ -26,7 +26,7 @@ struct FavoriteDestinationsSection: View {
 struct FavoriteDestinationsSectionPreview: View {
   var body: some View {
     List {
-      FavoriteDestinationsSection(query: FavoritesQuery())
+      FavoriteDestinationsSection()
     }
     .listStyle(InsetGroupedListStyle())
   }

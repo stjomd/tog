@@ -73,6 +73,12 @@ extension TogDataService: DataService {
 
   func addFavorite(_ favorite: FavoriteDestination) {
     do {
+      let origin      = realm.object(ofType: Stop.self, forPrimaryKey: favorite.origin!.id)
+                        ?? favorite.origin!
+      let destination = realm.object(ofType: Stop.self, forPrimaryKey: favorite.destination!.id)
+                        ?? favorite.destination!
+      favorite.origin = origin
+      favorite.destination = destination
       try realm.write {
         realm.add(favorite)
       }

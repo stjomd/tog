@@ -14,9 +14,11 @@ struct HomeView: View {
 
   @ObservedObject var originQuery = StopQuery()
   @ObservedObject var destinationQuery = StopQuery()
-  @ObservedObject var favoritesQuery = FavoritesQuery()
 
   @State private var showing = [false, false]
+
+  // Property with meaningless value to force reload of favorite destinations section
+  @State private var reloadForcer = false
 
   private var completedSearch: Bool {
     guard let origin = origin, let destination = destination else { return false }
@@ -31,7 +33,9 @@ struct HomeView: View {
           ClearableInputField("Origin", id: 0, text: $originQuery.query, isEditing: $showing[0])
           ClearableInputField("Destination", id: 1, text: $destinationQuery.query, isEditing: $showing[1])
           if completedSearch, let origin = origin, let destination = destination {
-            NavigationLink(destination: TicketsSearchView(origin: origin, destination: destination)) {
+            NavigationLink(destination:
+              TicketsSearchView(origin: origin, destination: destination)
+            ) {
               HStack {
                 Image(systemName: "magnifyingglass")
                 Text("Find tickets...")
@@ -52,7 +56,7 @@ struct HomeView: View {
             InputField.unfocus(from: 1)
           }
         ], otherwise: {
-          FavoriteDestinationsSection(query: favoritesQuery)
+          FavoriteDestinationsSection()
         })
       }
       .listStyle(InsetGroupedListStyle())
