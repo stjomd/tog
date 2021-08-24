@@ -71,16 +71,6 @@ class DisjunctSearchResultsSection: DisjunctSection<SearchResultsSection> {
   }
 }
 
-// MARK: - Wrapper for an 'otherwise' section
-struct FavoriteDestinationsSection: View {
-  var body: some View {
-    Section(header: Text("Favorite Destinations")) {
-      FavoriteView(origin: Stop.penzing, destination: Stop.westbahnhof, amount: 2)
-      FavoriteView(origin: Stop.westbahnhof, destination: Stop.penzing, amount: 3)
-    }
-  }
-}
-
 // MARK: - Previews
 struct HomeView_Previews: PreviewProvider {
   static var previews: some View {

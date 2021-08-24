@@ -11,7 +11,7 @@ import RealmSwift
 class FavoriteDestination: Object {
 
   @Persisted(primaryKey: true)
-  private var id = ObjectId()
+  private var id: ObjectId
 
   @Persisted
   var origin: Stop?

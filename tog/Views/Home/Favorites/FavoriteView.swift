@@ -48,11 +48,13 @@ struct FavoriteJourneyTitle: View {
         HStack(spacing: 6) {
           Text(origin.name)
             .font(.headline)
+            .lineLimit(1)
           Globals.Icons.rightArrow
             .foregroundColor(.gray)
         }
         Text(destination.name)
           .font(.headline)
+          .lineLimit(1)
       }
       if isShowingMoreIcon {
         Spacer()
