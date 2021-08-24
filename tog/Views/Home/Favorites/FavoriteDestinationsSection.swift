@@ -23,7 +23,6 @@ struct FavoriteDestinationsSection: View {
 
   init() {
     self.favorites = Array(realm.objects(FavoriteDestination.self))
-    print(favorites)
   }
 
 }
