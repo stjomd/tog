@@ -52,6 +52,10 @@ extension MockDataService: DataService {
 
   }
 
+  func deleteFavorite(_ favorite: FavoriteDestination) {
+
+  }
+
 }
 
 // MARK: - MockableDataService Methods

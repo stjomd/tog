@@ -15,6 +15,10 @@ struct AddToFavoritesView: View {
   let destination: Stop
   let journeys: [Journey]
 
+  private var favorite: FavoriteDestination {
+    FavoriteDestination(origin: origin, destination: destination, amount: amount)
+  }
+
   @State var amount = 5
   var journeysToShow: [Journey] {
     let bound = min(amount, journeys.count)
@@ -32,7 +36,7 @@ struct AddToFavoritesView: View {
           }
           Section(header: Text("Preview")) {
             VStack(alignment: .leading) {
-              FavoriteJourneyTitle(origin: origin, destination: destination, isShowingMoreIcon: false)
+              FavoriteJourneyTitle(favorite: favorite, query: nil, isShowingMoreIcon: false)
               FavoriteJourneyTrips(journeys: journeysToShow)
             }
             .padding(.vertical, 10)

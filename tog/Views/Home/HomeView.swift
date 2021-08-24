@@ -14,6 +14,7 @@ struct HomeView: View {
 
   @ObservedObject var originQuery = StopQuery()
   @ObservedObject var destinationQuery = StopQuery()
+  @ObservedObject var favoritesQuery = FavoritesQuery()
 
   @State private var showing = [false, false]
 
@@ -51,7 +52,7 @@ struct HomeView: View {
             InputField.unfocus(from: 1)
           }
         ], otherwise: {
-          FavoriteDestinationsSection()
+          FavoriteDestinationsSection(query: favoritesQuery)
         })
       }
       .listStyle(InsetGroupedListStyle())

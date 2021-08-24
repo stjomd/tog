@@ -32,6 +32,10 @@ protocol DataService {
   /// - parameter favorite: A favorite destination to be saved.
   func addFavorite(_ favorite: FavoriteDestination)
 
+  /// Deletes a favorite destination.
+  /// - parameter favorite: A favorite destination to be deleted.
+  func deleteFavorite(_ favorite: FavoriteDestination)
+
 }
 
 protocol MockableDataService: DataService {

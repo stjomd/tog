@@ -81,6 +81,30 @@ extension TogDataService: DataService {
     }
   }
 
+  func deleteFavorite(_ favorite: FavoriteDestination) {
+    do {
+      // If no other favorites link to the stops, should delete the stops as well
+      let favs = realm.objects(FavoriteDestination.self)
+      let (deleteOrigin, deleteDestination) = (
+        favs.filter("origin.id == %@", favorite.origin!.id).count <= 1,
+        favs.filter("destination.id == %@", favorite.destination!.id).count <= 1
+      )
+      // Delete
+      try realm.write {
+        realm.delete(favorite)
+        if deleteOrigin {
+          realm.delete(favorite.origin!)
+        }
+        if deleteDestination {
+          realm.delete(favorite.destination!)
+        }
+      }
+    } catch {
+      return
+    }
+    print("a")
+  }
+
 }
 
 extension TogDataService {
