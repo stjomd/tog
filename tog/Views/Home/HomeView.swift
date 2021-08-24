@@ -17,9 +17,6 @@ struct HomeView: View {
 
   @State private var showing = [false, false]
 
-  // Property with meaningless value to force reload of favorite destinations section
-  @State private var reloadForcer = false
-
   private var completedSearch: Bool {
     guard let origin = origin, let destination = destination else { return false }
     // The following line guarantees that the text input & station name match (after a selection)
