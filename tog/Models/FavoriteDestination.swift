@@ -6,9 +6,30 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct FavoriteDestination {
-  let origin: Stop
-  let destination: Stop
-  let amount: Int
+class FavoriteDestination: Object {
+
+  @Persisted(primaryKey: true)
+  private var id = ObjectId()
+
+  @Persisted
+  var origin: Stop?
+
+  @Persisted
+  var destination: Stop?
+
+  @Persisted
+  var amount: Int
+
+  // `origin` and `destination` have to be declared as optional because of Realm requirements.
+  // These are guaranteed to have a value.
+
+  convenience init(origin: Stop, destination: Stop, amount: Int) {
+    self.init()
+    self.origin = origin
+    self.destination = destination
+    self.amount = amount
+  }
+
 }

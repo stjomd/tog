@@ -7,10 +7,10 @@
 
 import SwiftUI
 import Swinject
-import CoreData.NSManagedObjectContext
+import RealmSwift
 
 @main
-struct TogApp: App {
+struct TogApp: SwiftUI.App {
 
   static let calendar = Calendar.current
   static let isUITest = ProcessInfo.processInfo.arguments.contains("UITEST")
@@ -31,6 +31,14 @@ struct TogApp: App {
   // MARK: - Register components with Swinject
 
   private func registerDependencies() {
+    // Realm
+    do {
+      let realm = try Realm()
+      print(Realm.Configuration.defaultConfiguration.fileURL!.absoluteString)
+      Self.container.register(Realm.self) { _ in realm }
+    } catch {
+      fatalError("Couldn't open Realm file: \(error)")
+    }
     // DataService
     let dataService = retrieveDataService()
     Self.container.register(DataService.self) { _ in dataService }

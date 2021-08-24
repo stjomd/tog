@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct AddToFavoritesView: View {
+
+  @Autowired private var realm: Realm!
 
   let origin: Stop
   let destination: Stop
@@ -49,11 +52,23 @@ struct AddToFavoritesView: View {
           }),
         trailing:
           Button(action: {
+            saveFavorite()
             dismiss()
           }, label: {
             Text("Save")
           })
       )
+    }
+  }
+
+  private func saveFavorite() {
+    do {
+      try realm.write {
+        let fav = FavoriteDestination(origin: origin, destination: destination, amount: amount)
+        realm.add(fav)
+      }
+    } catch {
+      return
     }
   }
 

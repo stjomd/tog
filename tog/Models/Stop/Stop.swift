@@ -6,12 +6,30 @@
 //
 
 import Foundation
+import RealmSwift
 
-public struct Stop: Codable, Hashable {
+public class Stop: Object, Codable {
+
+  @Persisted(primaryKey: true)
   public var id: Int
+
+  @Persisted
   public var name: String
+
+  @Persisted
   public var latitude: Double
+
+  @Persisted
   public var longitude: Double
+
+  convenience init(id: Int, name: String, latitude: Double, longitude: Double) {
+    self.init()
+    self.id = id
+    self.name = name
+    self.latitude = latitude
+    self.longitude = longitude
+  }
+
 }
 
 extension Stop {
