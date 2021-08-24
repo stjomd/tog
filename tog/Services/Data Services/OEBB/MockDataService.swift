@@ -28,6 +28,8 @@ class MockDataService {
 // MARK: - DataService Methods
 extension MockDataService: DataService {
 
+  // MARK: Fetchers
+
   func stops(by name: String) -> AnyPublisher<[Stop], Never> {
     let query = name.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
     let results = stops.filter {
@@ -38,6 +40,16 @@ extension MockDataService: DataService {
 
   func journeys(by query: JourneyQueryComponents?) -> AnyPublisher<[Journey], Never> {
     Just([]).eraseToAnyPublisher()
+  }
+
+  func favorites() -> AnyPublisher<[FavoriteDestination], Never> {
+    Just([]).eraseToAnyPublisher()
+  }
+
+  // MARK: Posters
+
+  func addFavorite(_ favorite: FavoriteDestination) {
+
   }
 
 }

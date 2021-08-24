@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import RealmSwift
 import Combine
 
 class TogDataService {
+
+  @Autowired private var realm: Realm!
 
   private let baseURL = Globals.baseURL
 
@@ -25,6 +28,8 @@ class TogDataService {
 // MARK: - DataService Methods
 
 extension TogDataService: DataService {
+
+  // MARK: Fetchers
 
   func stops(by name: String) -> AnyPublisher<[Stop], Never> {
     let url = urlOf(baseURL.appendingPathComponent("stops"), parameters: ["name": name])
@@ -55,6 +60,25 @@ extension TogDataService: DataService {
       .decode(type: [Journey].self, decoder: jsonDecoder)
       .replaceError(with: [])
       .eraseToAnyPublisher()
+  }
+
+  func favorites() -> AnyPublisher<[FavoriteDestination], Never> {
+    let favorites = realm.objects(FavoriteDestination.self)
+    return Just(favorites)
+      .map { Array($0) }
+      .eraseToAnyPublisher()
+  }
+
+  // MARK: Posters
+
+  func addFavorite(_ favorite: FavoriteDestination) {
+    do {
+      try realm.write {
+        realm.add(favorite)
+      }
+    } catch {
+      return
+    }
   }
 
 }

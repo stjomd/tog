@@ -24,6 +24,7 @@
 		958D106A26D3E2460052E47B /* FavoriteDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D106926D3E2460052E47B /* FavoriteDestination.swift */; };
 		958D106C26D429F80052E47B /* AddToFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D106B26D429F80052E47B /* AddToFavoritesView.swift */; };
 		958D106F26D4EE530052E47B /* FavoriteDestinationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D106E26D4EE530052E47B /* FavoriteDestinationsSection.swift */; };
+		958D107226D4F7BA0052E47B /* FavoritesQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D107126D4F7BA0052E47B /* FavoritesQuery.swift */; };
 		95A2926326CC48AC00972011 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926226CC48AC00972011 /* Time.swift */; };
 		95A2926526CC50EF00972011 /* TimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926426CC50EF00972011 /* TimeTests.swift */; };
 		95A2926726CED86000972011 /* TogDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926626CED86000972011 /* TogDataService.swift */; };
@@ -100,6 +101,7 @@
 		958D106926D3E2460052E47B /* FavoriteDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDestination.swift; sourceTree = "<group>"; };
 		958D106B26D429F80052E47B /* AddToFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToFavoritesView.swift; sourceTree = "<group>"; };
 		958D106E26D4EE530052E47B /* FavoriteDestinationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDestinationsSection.swift; sourceTree = "<group>"; };
+		958D107126D4F7BA0052E47B /* FavoritesQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesQuery.swift; sourceTree = "<group>"; };
 		95A2926226CC48AC00972011 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		95A2926426CC50EF00972011 /* TimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTests.swift; sourceTree = "<group>"; };
 		95A2926626CED86000972011 /* TogDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogDataService.swift; sourceTree = "<group>"; };
@@ -296,7 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				95A2926226CC48AC00972011 /* Time.swift */,
-				958D106926D3E2460052E47B /* FavoriteDestination.swift */,
+				958D107026D4F7A30052E47B /* Favorites */,
 				95A2925726CC3C8600972011 /* Stop */,
 				951AB54226D24FE7008C1468 /* Journey */,
 				951AB54D26D2A194008C1468 /* Halt */,
@@ -324,6 +326,15 @@
 			children = (
 				958D106E26D4EE530052E47B /* FavoriteDestinationsSection.swift */,
 				953C0F4A26C4627C00EF44DB /* FavoriteView.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		958D107026D4F7A30052E47B /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				958D106926D3E2460052E47B /* FavoriteDestination.swift */,
+				958D107126D4F7BA0052E47B /* FavoritesQuery.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -707,6 +718,7 @@
 				95E911DB26C53BB400863A30 /* ServicesView.swift in Sources */,
 				953C0F4C26C4627C00EF44DB /* FavoriteView.swift in Sources */,
 				95D5045326C93EB20008652A /* DisjunctSections.swift in Sources */,
+				958D107226D4F7BA0052E47B /* FavoritesQuery.swift in Sources */,
 				951AB54426D24FF4008C1468 /* Journey.swift in Sources */,
 				951AB55326D2C17B008C1468 /* JourneyCell.swift in Sources */,
 				95D5045526C95EB30008652A /* Extensions.swift in Sources */,

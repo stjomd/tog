@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
-import RealmSwift
 
 struct AddToFavoritesView: View {
 
-  @Autowired private var realm: Realm!
+  @Autowired private var dataService: DataService!
 
   let origin: Stop
   let destination: Stop
@@ -52,23 +51,14 @@ struct AddToFavoritesView: View {
           }),
         trailing:
           Button(action: {
-            saveFavorite()
+            dataService.addFavorite(
+              FavoriteDestination(origin: origin, destination: destination, amount: amount)
+            )
             dismiss()
           }, label: {
             Text("Save")
           })
       )
-    }
-  }
-
-  private func saveFavorite() {
-    do {
-      try realm.write {
-        let fav = FavoriteDestination(origin: origin, destination: destination, amount: amount)
-        realm.add(fav)
-      }
-    } catch {
-      return
     }
   }
 

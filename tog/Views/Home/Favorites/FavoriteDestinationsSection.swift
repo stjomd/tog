@@ -6,23 +6,17 @@
 //
 
 import SwiftUI
-import RealmSwift
 
 struct FavoriteDestinationsSection: View {
 
-  @Autowired private var realm: Realm!
-  private var favorites: [FavoriteDestination] = []
+  @ObservedObject private var query = FavoritesQuery()
 
   var body: some View {
     Section(header: Text("Favorite Destinations")) {
-      ForEach(favorites, id: \.self) { favorite in
+      ForEach(query.results, id: \.self) { favorite in
         FavoriteView(origin: favorite.origin!, destination: favorite.destination!, amount: favorite.amount)
       }
     }
-  }
-
-  init() {
-    self.favorites = Array(realm.objects(FavoriteDestination.self))
   }
 
 }

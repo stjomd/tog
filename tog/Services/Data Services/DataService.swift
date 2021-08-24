@@ -10,6 +10,8 @@ import Combine
 
 protocol DataService {
 
+  // MARK: - Fetchers
+
   /// Fetches stops that match the given name.
   /// - parameter name: The name against which the search is to be performed.
   /// - returns: A publisher that emits an array of stops.
@@ -19,6 +21,16 @@ protocol DataService {
   /// - parameter query: A `JourneyQueryComponents` object that encapsulates the required parameters.
   /// - returns: A publisher that emits an array of journeys.
   func journeys(by query: JourneyQueryComponents?) -> AnyPublisher<[Journey], Never>
+
+  /// Fetches favorite destinations.
+  /// - returns: A publisher that emits an array of favorite destinations.
+  func favorites() -> AnyPublisher<[FavoriteDestination], Never>
+
+  // MARK: - Posters
+
+  /// Saves a favorite destination.
+  /// - parameter favorite: A favorite destination to be saved.
+  func addFavorite(_ favorite: FavoriteDestination)
 
 }
 
