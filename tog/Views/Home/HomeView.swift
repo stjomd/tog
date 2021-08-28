@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
 
+  @Autowired private var dataService: DataService!
+
   @State private var origin: Stop?
   @State private var destination: Stop?
 
@@ -16,6 +18,8 @@ struct HomeView: View {
   @ObservedObject var destinationQuery = StopQuery()
 
   @State private var showing = [false, false]
+
+  @State private var favorites: [FavoriteDestination] = []
 
   private var completedSearch: Bool {
     guard let origin = origin, let destination = destination else { return false }
@@ -41,24 +45,50 @@ struct HomeView: View {
             }
           }
         }
-        DisjunctSections(sections: [
-          DisjunctSearchResultsSection(when: $showing[0], results: originQuery.results) { selectedStop in
-            originQuery.query = selectedStop.name
-            origin = selectedStop
-            InputField.focus(on: 1)
-          },
-          DisjunctSearchResultsSection(when: $showing[1], results: destinationQuery.results) { selectedStop in
-            destinationQuery.query = selectedStop.name
-            destination = selectedStop
-            InputField.unfocus(from: 1)
-          }
-        ], otherwise: {
-          FavoriteDestinationsSection()
-        })
+        HomeViewDisjunctSections(
+          origin: $origin, destination: $destination,
+          originQuery: originQuery, destinationQuery: destinationQuery,
+          showing: $showing,
+          favorites: $favorites
+        )
+      }
+      .onAppear {
+        _ = dataService.favorites().sink { self.favorites = $0 }
       }
       .listStyle(InsetGroupedListStyle())
       .navigationTitle("Tog")
     }
+  }
+
+}
+
+struct HomeViewDisjunctSections: View {
+
+  @Binding var origin: Stop?
+  @Binding var destination: Stop?
+
+  @ObservedObject var originQuery: StopQuery
+  @ObservedObject var destinationQuery: StopQuery
+
+  @Binding var showing: [Bool]
+
+  @Binding var favorites: [FavoriteDestination]
+
+  var body: some View {
+    DisjunctSections(sections: [
+      DisjunctSearchResultsSection(when: $showing[0], results: originQuery.results) { selectedStop in
+        originQuery.query = selectedStop.name
+        origin = selectedStop
+        InputField.focus(on: 1)
+      },
+      DisjunctSearchResultsSection(when: $showing[1], results: destinationQuery.results) { selectedStop in
+        destinationQuery.query = selectedStop.name
+        destination = selectedStop
+        InputField.unfocus(from: 1)
+      }
+    ], otherwise: {
+      FavoriteDestinationsSection(favorites: $favorites)
+    })
   }
 
 }

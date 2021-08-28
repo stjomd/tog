@@ -12,6 +12,8 @@ class FavoritesQuery: ObservableObject {
 
   @Autowired private var dataService: DataService!
 
+  @Published private var changeNotifier = true
+
   @Published var results: [FavoriteDestination] = []
   private var subscriptions: Set<AnyCancellable> = []
 
@@ -19,6 +21,10 @@ class FavoritesQuery: ObservableObject {
     dataService.favorites()
       .assign(to: \.results, on: self)
       .store(in: &subscriptions)
+  }
+
+  func notify() {
+    changeNotifier.toggle()
   }
 
 }

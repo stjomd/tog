@@ -10,7 +10,7 @@ import SwiftUI
 struct FavoriteView: View {
 
   let favorite: FavoriteDestination
-  let query: FavoritesQuery
+  @ObservedObject var query: FavoritesQuery
 
   @ObservedObject private var journeyQuery = JourneyQuery()
 
@@ -39,7 +39,7 @@ struct FavoriteJourneyTitle: View {
   @Autowired private var dataService: DataService!
 
   let favorite: FavoriteDestination
-  let query: FavoritesQuery?
+  @ObservedObject var query: FavoritesQuery
   let isShowingMoreIcon: Bool
 
   var body: some View {
@@ -60,10 +60,12 @@ struct FavoriteJourneyTitle: View {
         Spacer()
         Menu(content: {
           Button(action: {
-            if let query = query {
+            query.objectWillChange.send()
+            // if let query = query {
               query.results.removeAll { $0.id == favorite.id }
-            }
+            // }
             dataService.deleteFavorite(favorite)
+            // query.objectWillChange.send()
           }, label: {
             Label("Delete", systemImage: "trash")
           })

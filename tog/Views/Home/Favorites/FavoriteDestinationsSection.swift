@@ -9,12 +9,14 @@ import SwiftUI
 
 struct FavoriteDestinationsSection: View {
 
-  @ObservedObject private var query = FavoritesQuery()
+  @StateObject private var query = FavoritesQuery()
+
+  @Binding var favorites: [FavoriteDestination]
 
   var body: some View {
     Section(header: Text("Favorite Destinations")) {
-      ForEach(query.results, id: \.id) { favorite in
-          FavoriteView(favorite: favorite, query: query)
+      ForEach(favorites, id: \.id) { favorite in
+        FavoriteView(favorite: favorite, query: query)
       }
     }
   }
@@ -26,7 +28,9 @@ struct FavoriteDestinationsSection: View {
 struct FavoriteDestinationsSectionPreview: View {
   var body: some View {
     List {
-      FavoriteDestinationsSection()
+      FavoriteDestinationsSection(favorites: .constant([
+        .init(origin: Stop.penzing, destination: Stop.westbahnhof, amount: 2)
+      ]))
     }
     .listStyle(InsetGroupedListStyle())
   }
