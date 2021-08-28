@@ -9,14 +9,12 @@ import SwiftUI
 
 struct FavoriteDestinationsSection: View {
 
-  @StateObject private var query = FavoritesQuery()
-
   @Binding var favorites: [FavoriteDestination]
 
   var body: some View {
     Section(header: Text("Favorite Destinations")) {
       ForEach(favorites, id: \.id) { favorite in
-        FavoriteView(favorite: favorite, query: query)
+        FavoriteView(favorite: favorite, allFavorites: $favorites)
       }
     }
   }

@@ -10,13 +10,14 @@ import SwiftUI
 struct FavoriteView: View {
 
   let favorite: FavoriteDestination
-  @ObservedObject var query: FavoritesQuery
 
   @ObservedObject private var journeyQuery = JourneyQuery()
 
-  init(favorite: FavoriteDestination, query: FavoritesQuery) {
+  @Binding var allFavorites: [FavoriteDestination]
+
+  init(favorite: FavoriteDestination, allFavorites: Binding<[FavoriteDestination]>) {
     self.favorite = favorite
-    self.query = query
+    self._allFavorites = allFavorites
     journeyQuery.query = .init(
       origin: favorite.origin!, destination: favorite.destination!,
       date: Date(), dateMode: .departure,
@@ -26,7 +27,7 @@ struct FavoriteView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      FavoriteJourneyTitle(favorite: favorite, query: query, isShowingMoreIcon: true)
+      FavoriteJourneyTitle(favorite: favorite, isShowingMoreIcon: true, allFavorites: $allFavorites)
       FavoriteJourneyTrips(journeys: journeyQuery.results)
     }
     .padding(.vertical, 10)
@@ -39,8 +40,9 @@ struct FavoriteJourneyTitle: View {
   @Autowired private var dataService: DataService!
 
   let favorite: FavoriteDestination
-  @ObservedObject var query: FavoritesQuery
   let isShowingMoreIcon: Bool
+
+  @Binding var allFavorites: [FavoriteDestination]
 
   var body: some View {
     HStack(alignment: .firstTextBaseline) {
@@ -60,12 +62,8 @@ struct FavoriteJourneyTitle: View {
         Spacer()
         Menu(content: {
           Button(action: {
-            query.objectWillChange.send()
-            // if let query = query {
-              query.results.removeAll { $0.id == favorite.id }
-            // }
+            allFavorites.removeAll { $0.id == favorite.id }
             dataService.deleteFavorite(favorite)
-            // query.objectWillChange.send()
           }, label: {
             Label("Delete", systemImage: "trash")
           })
@@ -100,17 +98,17 @@ struct FavoriteJourneyView_Previews: PreviewProvider {
 
   static var previews: some View {
 
-    FavoriteView(favorite: fav, query: FavoritesQuery())
+    FavoriteView(favorite: fav, allFavorites: .constant([]))
       .previewLayout(.sizeThatFits)
       .padding()
 
-    FavoriteView(favorite: fav, query: FavoritesQuery())
+    FavoriteView(favorite: fav, allFavorites: .constant([]))
       .preferredColorScheme(.dark)
       .previewLayout(.sizeThatFits)
       .padding()
 
     List {
-      FavoriteView(favorite: fav, query: FavoritesQuery())
+      FavoriteView(favorite: fav, allFavorites: .constant([]))
     }
     .listStyle(InsetGroupedListStyle())
 

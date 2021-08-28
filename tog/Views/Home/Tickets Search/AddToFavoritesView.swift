@@ -33,15 +33,11 @@ struct AddToFavoritesView: View {
         List {
           Section(header: Text("Settings")) {
             Stepper("Amount: \(amount)", value: $amount, in: 1...5)
-//            Button(action: {
-//
-//            }, label: {
-//              Text("Remove")
-//            })
           }
           Section(header: Text("Preview")) {
             VStack(alignment: .leading) {
-              FavoriteJourneyTitle(favorite: favorite, query: FavoritesQuery(), isShowingMoreIcon: false)
+              FavoriteJourneyTitle(favorite: favorite, isShowingMoreIcon: false,
+                                   allFavorites: .constant([]))
               FavoriteJourneyTrips(journeys: journeysToShow)
             }
             .padding(.vertical, 10)
