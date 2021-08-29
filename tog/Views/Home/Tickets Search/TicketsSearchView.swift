@@ -35,7 +35,7 @@ struct TicketsSearchViewContents: View {
 
   @Binding private var isShowingAddToFavorites: Bool
   @ObservedObject private var journeyQuery = JourneyQuery()
-  
+
   @ObservedObject private var favorites = FavoritesQuery()
   private var existingFavorite: FavoriteDestination? {
     favorites.results.filter {
@@ -115,7 +115,8 @@ struct TicketsSearchViewContents: View {
     }
     .sheet(isPresented: $isShowingAddToFavorites) {
       AddToFavoritesView(origin: journeyQuery.query.origin, destination: journeyQuery.query.destination,
-                         journeys: journeyQuery.results, isPresent: $isShowingAddToFavorites)
+                         journeys: journeyQuery.results, existingFavorite: existingFavorite,
+                         isPresent: $isShowingAddToFavorites)
     }
   }
 

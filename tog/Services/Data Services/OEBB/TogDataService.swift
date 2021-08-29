@@ -87,6 +87,16 @@ extension TogDataService: DataService {
     }
   }
 
+  func updateFavorite(_ favorite: FavoriteDestination, block: () -> Void) {
+    do {
+      try realm.write {
+        block()
+      }
+    } catch {
+      return
+    }
+  }
+
   func deleteFavorite(_ favorite: FavoriteDestination) {
     do {
       // If no other favorites link to the stops, should delete the stops as well

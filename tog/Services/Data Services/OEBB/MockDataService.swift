@@ -52,6 +52,10 @@ extension MockDataService: DataService {
 
   }
 
+  func updateFavorite(_ favorite: FavoriteDestination, block: () -> Void) {
+
+  }
+
   func deleteFavorite(_ favorite: FavoriteDestination) {
 
   }

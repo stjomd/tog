@@ -32,6 +32,8 @@ protocol DataService {
   /// - parameter favorite: A favorite destination to be saved.
   func addFavorite(_ favorite: FavoriteDestination)
 
+  func updateFavorite(_ favorite: FavoriteDestination, block: () -> Void)
+
   /// Deletes a favorite destination.
   /// - parameter favorite: A favorite destination to be deleted.
   func deleteFavorite(_ favorite: FavoriteDestination)
