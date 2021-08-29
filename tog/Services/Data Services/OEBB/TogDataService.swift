@@ -108,7 +108,6 @@ extension TogDataService: DataService {
     } catch {
       return
     }
-    print("a")
   }
 
 }

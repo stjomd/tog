@@ -14,7 +14,19 @@ struct FavoriteDestinationsSection: View {
   var body: some View {
     Section(header: Text("Favorite Destinations")) {
       ForEach(favorites, id: \.id) { favorite in
-        FavoriteView(favorite: favorite, allFavorites: $favorites)
+        ZStack {
+          FavoriteView(favorite: favorite, allFavorites: $favorites)
+          // Trick to hide navigation link arrow
+          NavigationLink(
+            destination: TicketsSearchView(
+              origin: favorite.origin!,
+              destination: favorite.destination!
+            )
+          ) {
+            EmptyView()
+          }
+          .hidden()
+        }
       }
     }
   }
