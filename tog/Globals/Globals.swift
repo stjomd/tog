@@ -39,6 +39,7 @@ enum Globals {
     static let clock = Image(systemName: "timer")
     static let money = Image(systemName: "banknote")
     static let star = Image(systemName: "star")
+    static let starFill = Image(systemName: "star.fill")
   }
 
 }

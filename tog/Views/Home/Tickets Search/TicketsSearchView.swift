@@ -31,10 +31,19 @@ struct TicketsSearchView: View {
 
 struct TicketsSearchViewContents: View {
 
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.presentationMode) private var presentationMode
 
-  @Binding var isShowingAddToFavorites: Bool
-  @ObservedObject var journeyQuery = JourneyQuery()
+  @Binding private var isShowingAddToFavorites: Bool
+  @ObservedObject private var journeyQuery = JourneyQuery()
+  
+  @ObservedObject private var favorites = FavoritesQuery()
+  private var existingFavorite: FavoriteDestination? {
+    favorites.results.filter {
+      $0.origin!.id == self.journeyQuery.query.origin.id &&
+      $0.destination!.id == self.journeyQuery.query.destination.id
+    }
+    .first
+  }
 
   init(origin: Stop, destination: Stop, isShowingAddToFavorites: Binding<Bool>) {
     self._isShowingAddToFavorites = isShowingAddToFavorites
@@ -115,9 +124,14 @@ struct TicketsSearchViewContents: View {
       Button(action: {
         isShowingAddToFavorites = true
       }, label: {
-        Globals.Icons.star
+        if existingFavorite != nil {
+          Globals.Icons.starFill
+        } else {
+          Globals.Icons.star
+        }
       })
       Button(action: {
+        // Swap origin and destination
         journeyQuery.query = .init(
           origin: journeyQuery.query.destination,
           destination: journeyQuery.query.origin,
