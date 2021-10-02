@@ -6,30 +6,33 @@
 //
 
 import Foundation
-import RealmSwift
 
-public class Stop: Object, Codable {
+public class Stop: Codable {
 
-  @Persisted(primaryKey: true)
   public var id: Int
 
-  @Persisted
   public var name: String
 
-  @Persisted
   public var latitude: Double
 
-  @Persisted
   public var longitude: Double
 
-  convenience init(id: Int, name: String, latitude: Double, longitude: Double) {
-    self.init()
+  init(id: Int, name: String, latitude: Double, longitude: Double) {
     self.id = id
     self.name = name
     self.latitude = latitude
     self.longitude = longitude
   }
 
+}
+
+extension Stop: Equatable, Hashable {
+  public static func == (lhs: Stop, rhs: Stop) -> Bool {
+    lhs.id == rhs.id
+  }
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
 }
 
 extension Stop {

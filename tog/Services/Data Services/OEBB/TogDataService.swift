@@ -6,12 +6,9 @@
 //
 
 import Foundation
-import RealmSwift
 import Combine
 
 class TogDataService {
-
-  @Autowired private var realm: Realm!
 
   private let baseURL = Globals.baseURL
   private let favoritesURL = FileManager.documentsDirectoryURL.appendingPathComponent("favs.json")
@@ -105,9 +102,9 @@ extension TogDataService: DataService {
       print(error)
     }
   }
-  
+
   // MARK: Helpers
-  
+
   private func rawFavorites() -> [FavoriteDestination] {
     if FileManager.default.fileExists(atPath: favoritesURL.path) {
       do {

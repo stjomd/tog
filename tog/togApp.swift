@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Swinject
-import RealmSwift
 
 @main
 struct TogApp: SwiftUI.App {
@@ -26,19 +25,11 @@ struct TogApp: SwiftUI.App {
 
   init() {
     registerDependencies()
-    print(FileManager.documentsDirectoryURL)
   }
 
   // MARK: - Register components with Swinject
 
   private func registerDependencies() {
-    // Realm
-    do {
-      let realm = try Realm()
-      Self.container.register(Realm.self) { _ in realm }
-    } catch {
-      fatalError("Couldn't open Realm file: \(error)")
-    }
     // DataService
     let dataService = retrieveDataService()
     Self.container.register(DataService.self) { _ in dataService }

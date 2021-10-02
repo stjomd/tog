@@ -6,27 +6,19 @@
 //
 
 import Foundation
-import RealmSwift
 
-class FavoriteDestination: Object, Codable {
+class FavoriteDestination: Codable {
 
-  @Persisted(primaryKey: true)
-  var id: ObjectId
+  var id: UUID
 
-  @Persisted
   var origin: Stop?
 
-  @Persisted
   var destination: Stop?
 
-  @Persisted
   var amount: Int
 
-  // `origin` and `destination` have to be declared as optional because of Realm requirements.
-  // These are guaranteed to have a value.
-
-  convenience init(origin: Stop, destination: Stop, amount: Int) {
-    self.init()
+  init(origin: Stop, destination: Stop, amount: Int) {
+    self.id = UUID()
     self.origin = origin
     self.destination = destination
     self.amount = amount

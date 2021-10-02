@@ -6,7 +6,6 @@ target 'tog' do
   use_frameworks!
 
   # Pods for tog
-  pod 'RealmSwift', '~> 10'
   pod 'SwiftCSV', '~> 0.6'
   pod 'SwiftLint', '~> 0.43.1'
   pod 'Swinject', '~> 2.8.0'

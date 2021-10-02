@@ -1,16 +1,10 @@
 PODS:
-  - Realm (10.12.0):
-    - Realm/Headers (= 10.12.0)
-  - Realm/Headers (10.12.0)
-  - RealmSwift (10.12.0):
-    - Realm (= 10.12.0)
   - SwiftCSV (0.6.0)
   - SwiftLint (0.43.1)
   - Swinject (2.8.0)
   - Zip (2.1.1)
 
 DEPENDENCIES:
-  - RealmSwift (~> 10)
   - SwiftCSV (~> 0.6)
   - SwiftLint (~> 0.43.1)
   - Swinject (~> 2.8.0)
@@ -18,21 +12,17 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Realm
-    - RealmSwift
     - SwiftCSV
     - SwiftLint
     - Swinject
     - Zip
 
 SPEC CHECKSUMS:
-  Realm: 32488213acb44660539c619d620cec1bac046166
-  RealmSwift: 0abdca6231d5ff8a4f84cef9c1121ef95a483faf
   SwiftCSV: ebc63cacc3820042537288c0cc647946261f7c2c
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Swinject: db795b8d6d78559b25fbebb0170d2635be1176e2
   Zip: 414f59909701fda9a84ab774ebe0f5449b1082cc
 
-PODFILE CHECKSUM: 90191bcd9e91d6556a42c8658a10d09f786bbc06
+PODFILE CHECKSUM: 94beb94370c69ced6e93843cbb2bb400b0a78b0f
 
 COCOAPODS: 1.10.2
