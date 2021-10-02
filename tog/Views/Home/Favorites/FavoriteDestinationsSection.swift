@@ -16,17 +16,13 @@ struct FavoriteDestinationsSection: View {
       ForEach(favoritesQuery.results, id: \.id) { favorite in
         ZStack {
           FavoriteView(favorite: favorite, favoritesQuery: favoritesQuery)
-          // Trick to hide navigation link arrow
-          NavigationLink(
-            destination: TicketsSearchView(
-              origin: favorite.origin!,
-              destination: favorite.destination!,
-              favoritesQuery: favoritesQuery
+            .background(
+              NavigationLink("", destination: TicketsSearchView(
+                origin: favorite.origin!, destination: favorite.destination!,
+                favoritesQuery: favoritesQuery
+              ))
+              .opacity(0) // Hides the navigation link chevron
             )
-          ) {
-            EmptyView()
-          }
-          .hidden()
         }
       }
     }
