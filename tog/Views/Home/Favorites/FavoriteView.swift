@@ -44,6 +44,8 @@ struct FavoriteJourneyTitle: View {
 
   @Binding var allFavorites: [FavoriteDestination]
 
+  @State private var isPresentingEditFavoriteView = false
+
   var body: some View {
     HStack(alignment: .firstTextBaseline) {
       VStack(alignment: .leading) {
@@ -60,18 +62,26 @@ struct FavoriteJourneyTitle: View {
       }
       if isShowingMoreIcon {
         Spacer()
-        Menu(content: {
-          Button(action: {
-            allFavorites.removeAll { $0.id == favorite.id }
-            dataService.deleteFavorite(favorite)
-          }, label: {
-            Label("Delete", systemImage: "trash")
-          })
-        }, label: {
+        Button(action: { isPresentingEditFavoriteView = true }, label: {
           Globals.Icons.more
         })
         .foregroundColor(.primary)
+//        Menu(content: {
+//          Button(action: {
+//            allFavorites.removeAll { $0.id == favorite.id }
+//            dataService.deleteFavorite(favorite)
+//          }, label: {
+//            Label("Delete", systemImage: "trash")
+//          })
+//        }, label: {
+//          Globals.Icons.more
+//        })
+//        .foregroundColor(.primary)
       }
+    }
+    .sheet(isPresented: $isPresentingEditFavoriteView) {
+      AddToFavoritesView(origin: favorite.origin!, destination: favorite.destination!, journeys: [],
+                         existingFavorite: favorite, isPresent: $isPresentingEditFavoriteView)
     }
   }
 
