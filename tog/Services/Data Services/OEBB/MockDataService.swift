@@ -48,11 +48,7 @@ extension MockDataService: DataService {
 
   // MARK: Posters
 
-  func addFavorite(_ favorite: FavoriteDestination) {
-
-  }
-
-  func updateFavorite(_ favorite: FavoriteDestination, block: () -> Void) {
+  func saveFavorite(_ favorite: FavoriteDestination) {
 
   }
 

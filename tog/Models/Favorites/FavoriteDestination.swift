@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class FavoriteDestination: Object {
+class FavoriteDestination: Object, Codable {
 
   @Persisted(primaryKey: true)
   var id: ObjectId

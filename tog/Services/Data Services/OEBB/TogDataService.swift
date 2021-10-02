@@ -14,12 +14,18 @@ class TogDataService {
   @Autowired private var realm: Realm!
 
   private let baseURL = Globals.baseURL
+  private let favoritesURL = FileManager.documentsDirectoryURL.appendingPathComponent("favs.json")
 
   private let urlSession = URLSession.shared
 
   private let jsonDecoder: JSONDecoder = {
     let js = JSONDecoder()
     js.dateDecodingStrategy = .togServerDateStrategy
+    return js
+  }()
+  private let jsonEncoder: JSONEncoder = {
+    let js = JSONEncoder()
+    js.outputFormatting = .prettyPrinted
     return js
   }()
 
@@ -63,61 +69,55 @@ extension TogDataService: DataService {
   }
 
   func favorites() -> AnyPublisher<[FavoriteDestination], Never> {
-    let favorites = realm.objects(FavoriteDestination.self)
-    return Just(favorites)
-      .map { Array($0) }
-      .eraseToAnyPublisher()
+    if FileManager.default.fileExists(atPath: favoritesURL.path) {
+      return Just(rawFavorites()).eraseToAnyPublisher()
+    } else {
+      return Just([]).eraseToAnyPublisher()
+    }
   }
 
   // MARK: Posters
 
-  func addFavorite(_ favorite: FavoriteDestination) {
-    do {
-      let origin      = realm.object(ofType: Stop.self, forPrimaryKey: favorite.origin!.id)
-                        ?? favorite.origin!
-      let destination = realm.object(ofType: Stop.self, forPrimaryKey: favorite.destination!.id)
-                        ?? favorite.destination!
-      favorite.origin = origin
-      favorite.destination = destination
-      try realm.write {
-        realm.add(favorite)
-      }
-    } catch {
-      return
+  func saveFavorite(_ favorite: FavoriteDestination) {
+    var newFavs = rawFavorites()
+    if let indexOfOldFavorite = newFavs.firstIndex(where: { $0.id == favorite.id }) {
+      newFavs[indexOfOldFavorite] = favorite
+    } else {
+      newFavs.append(favorite)
     }
-  }
-
-  func updateFavorite(_ favorite: FavoriteDestination, block: () -> Void) {
     do {
-      try realm.write {
-        block()
-      }
-    } catch {
-      return
+      let data = try jsonEncoder.encode(newFavs)
+      try data.write(to: favoritesURL)
+    } catch let error {
+      print(error)
     }
   }
 
   func deleteFavorite(_ favorite: FavoriteDestination) {
-    do {
-      // If no other favorites link to the stops, should delete the stops as well
-      let favs = realm.objects(FavoriteDestination.self)
-      let (deleteOrigin, deleteDestination) = (
-        favs.filter("origin.id == %@", favorite.origin!.id).count <= 1,
-        favs.filter("destination.id == %@", favorite.destination!.id).count <= 1
-      )
-      // Delete
-      try realm.write {
-        realm.delete(favorite)
-        if deleteOrigin {
-          realm.delete(favorite.origin!)
-        }
-        if deleteDestination {
-          realm.delete(favorite.destination!)
-        }
-      }
-    } catch {
-      return
+    var newFavs = rawFavorites()
+    if let indexOfFavorite = newFavs.firstIndex(where: { $0.id == favorite.id }) {
+      newFavs.remove(at: indexOfFavorite)
     }
+    do {
+      let data = try jsonEncoder.encode(newFavs)
+      try data.write(to: favoritesURL)
+    } catch let error {
+      print(error)
+    }
+  }
+  
+  // MARK: Helpers
+  
+  private func rawFavorites() -> [FavoriteDestination] {
+    if FileManager.default.fileExists(atPath: favoritesURL.path) {
+      do {
+        let data = try Data(contentsOf: favoritesURL)
+        return try jsonDecoder.decode([FavoriteDestination].self, from: data)
+      } catch let error {
+        print(error)
+      }
+    }
+    return []
   }
 
 }

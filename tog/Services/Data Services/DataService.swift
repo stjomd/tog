@@ -28,11 +28,9 @@ protocol DataService {
 
   // MARK: - Posters
 
-  /// Saves a favorite destination.
+  /// Saves a favorite destination. If this favorite already exists, it will be updated.
   /// - parameter favorite: A favorite destination to be saved.
-  func addFavorite(_ favorite: FavoriteDestination)
-
-  func updateFavorite(_ favorite: FavoriteDestination, block: () -> Void)
+  func saveFavorite(_ favorite: FavoriteDestination)
 
   /// Deletes a favorite destination.
   /// - parameter favorite: A favorite destination to be deleted.

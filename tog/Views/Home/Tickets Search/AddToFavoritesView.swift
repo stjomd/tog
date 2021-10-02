@@ -69,11 +69,10 @@ struct AddToFavoritesView: View {
         trailing:
           Button(action: {
             if let existingFavorite = existingFavorite {
-              dataService.updateFavorite(existingFavorite) {
-                existingFavorite.amount = self.amount
-              }
+              existingFavorite.amount = amount
+              dataService.saveFavorite(existingFavorite)
             } else {
-              dataService.addFavorite(
+              dataService.saveFavorite(
                 FavoriteDestination(origin: origin, destination: destination, amount: amount)
               )
             }
