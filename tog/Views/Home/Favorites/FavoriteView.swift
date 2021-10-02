@@ -46,6 +46,8 @@ struct FavoriteJourneyTitle: View {
 
   @State private var isPresentingEditFavoriteView = false
 
+  @ObservedObject private var journeyQuery = JourneyQuery()
+
   var body: some View {
     HStack(alignment: .firstTextBaseline) {
       VStack(alignment: .leading) {
@@ -63,6 +65,13 @@ struct FavoriteJourneyTitle: View {
       if isShowingMoreIcon {
         Spacer()
         Menu(content: {
+          // Edit button
+          Button(action: {
+            isPresentingEditFavoriteView = true
+          }, label: {
+            Label("Edit", systemImage: "square.and.pencil")
+          })
+          // Remove button
           Button(action: {
             allFavorites.removeAll { $0.id == favorite.id }
             dataService.deleteFavorite(favorite)
@@ -76,9 +85,23 @@ struct FavoriteJourneyTitle: View {
       }
     }
     .sheet(isPresented: $isPresentingEditFavoriteView) {
-      AddToFavoritesView(origin: favorite.origin!, destination: favorite.destination!, journeys: [],
-                         existingFavorite: favorite, isPresent: $isPresentingEditFavoriteView)
+      AddToFavoritesView(
+        origin: favorite.origin!, destination: favorite.destination!,
+        journeys: journeyQuery.results, existingFavorite: favorite,
+        isPresent: $isPresentingEditFavoriteView
+      )
     }
+  }
+
+  init(favorite: FavoriteDestination, isShowingMoreIcon: Bool, allFavorites: Binding<[FavoriteDestination]>) {
+    self.favorite = favorite
+    self.isShowingMoreIcon = isShowingMoreIcon
+    self._allFavorites = allFavorites
+    self.journeyQuery.query = .init(
+      origin: favorite.origin!, destination: favorite.destination!,
+      date: Date(), dateMode: .departure,
+      passengers: 1, limit: 5
+    )
   }
 
 }
