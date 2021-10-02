@@ -17,15 +17,20 @@ struct AddToFavoritesView: View {
   let existingFavorite: FavoriteDestination?
   @Binding var isPresent: Bool
 
+  private var favoritesQuery: FavoritesQuery
+
   private var amountRange =  1...5
 
   init(origin: Stop, destination: Stop, journeys: [Journey],
-       existingFavorite: FavoriteDestination?, isPresent: Binding<Bool>) {
+       existingFavorite: FavoriteDestination?, isPresent: Binding<Bool>,
+       favoritesQuery: FavoritesQuery
+      ) {
     self.origin = origin
     self.destination = destination
     self.journeys = journeys
     self.existingFavorite = existingFavorite
     self._isPresent = isPresent
+    self.favoritesQuery = favoritesQuery
     // Derived
     self._amount = State(initialValue: existingFavorite?.amount ?? amountRange.max()!)
   }
@@ -49,7 +54,7 @@ struct AddToFavoritesView: View {
           Section(header: Text("Preview")) {
             VStack(alignment: .leading) {
               FavoriteJourneyTitle(favorite: newFavorite, isShowingMoreIcon: false,
-                                   allFavorites: .constant([]))
+                                   favoritesQuery: favoritesQuery)
               FavoriteJourneyTrips(journeys: journeysToShow)
             }
             .padding(.vertical, 10)
@@ -72,10 +77,11 @@ struct AddToFavoritesView: View {
               existingFavorite.amount = amount
               dataService.saveFavorite(existingFavorite)
             } else {
-              dataService.saveFavorite(
-                FavoriteDestination(origin: origin, destination: destination, amount: amount)
-              )
+              let newFavorite = FavoriteDestination(origin: origin, destination: destination, amount: amount)
+              favoritesQuery.results.append(newFavorite)
+              dataService.saveFavorite(newFavorite)
             }
+            favoritesQuery.objectWillChange.send()
             dismiss()
           }, label: {
             Text("Save")
@@ -93,6 +99,7 @@ struct AddToFavoritesView: View {
 struct AddToFavoritesView_Previews: PreviewProvider {
   static var previews: some View {
     AddToFavoritesView(origin: Stop.penzing, destination: Stop.westbahnhof,
-                       journeys: [.example, .example], existingFavorite: nil, isPresent: .constant(true))
+                       journeys: [.example, .example], existingFavorite: nil, isPresent: .constant(true),
+                       favoritesQuery: FavoritesQuery())
   }
 }

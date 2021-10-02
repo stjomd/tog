@@ -16,11 +16,14 @@ struct TicketsSearchView: View {
   let origin: Stop
   let destination: Stop
 
+  @ObservedObject var favoritesQuery: FavoritesQuery
+
   var body: some View {
     TicketsSearchViewContents(
       origin: origin,
       destination: destination,
-      isShowingAddToFavorites: $isShowingAddToFavorites
+      isShowingAddToFavorites: $isShowingAddToFavorites,
+      favoritesQuery: favoritesQuery
     )
     .navigationTitle("Select Journey")
     .navigationBarTitleDisplayMode(.inline)
@@ -34,19 +37,21 @@ struct TicketsSearchViewContents: View {
   @Environment(\.presentationMode) private var presentationMode
 
   @Binding private var isShowingAddToFavorites: Bool
-  @ObservedObject private var journeyQuery = JourneyQuery()
 
-  @ObservedObject private var favorites = FavoritesQuery()
+  @ObservedObject private var journeyQuery = JourneyQuery()
+  @ObservedObject private var favoritesQuery: FavoritesQuery
+
   private var existingFavorite: FavoriteDestination? {
-    favorites.results.filter {
+    favoritesQuery.results.filter {
       $0.origin!.id == self.journeyQuery.query.origin.id &&
       $0.destination!.id == self.journeyQuery.query.destination.id
     }
     .first
   }
 
-  init(origin: Stop, destination: Stop, isShowingAddToFavorites: Binding<Bool>) {
+  init(origin: Stop, destination: Stop, isShowingAddToFavorites: Binding<Bool>, favoritesQuery: FavoritesQuery) {
     self._isShowingAddToFavorites = isShowingAddToFavorites
+    self.favoritesQuery = favoritesQuery
     self.journeyQuery.query = .init(
       origin: origin,
       destination: destination,
@@ -116,7 +121,7 @@ struct TicketsSearchViewContents: View {
     .sheet(isPresented: $isShowingAddToFavorites) {
       AddToFavoritesView(origin: journeyQuery.query.origin, destination: journeyQuery.query.destination,
                          journeys: journeyQuery.results, existingFavorite: existingFavorite,
-                         isPresent: $isShowingAddToFavorites)
+                         isPresent: $isShowingAddToFavorites, favoritesQuery: favoritesQuery)
     }
   }
 
@@ -157,7 +162,7 @@ struct TicketsSearchView_Previews: PreviewProvider {
 
   static var previews: some View {
     NavigationView {
-      TicketsSearchView(origin: results[0], destination: results[1])
+      TicketsSearchView(origin: results[0], destination: results[1], favoritesQuery: FavoritesQuery())
         .navigationTitle("Select Journey")
     }
   }

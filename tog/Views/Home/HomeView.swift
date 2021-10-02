@@ -16,10 +16,9 @@ struct HomeView: View {
 
   @ObservedObject var originQuery = StopQuery()
   @ObservedObject var destinationQuery = StopQuery()
+  @ObservedObject private var favoritesQuery = FavoritesQuery()
 
   @State private var showing = [false, false]
-
-  @State private var favorites: [FavoriteDestination] = []
 
   private var completedSearch: Bool {
     guard let origin = origin, let destination = destination else { return false }
@@ -32,10 +31,12 @@ struct HomeView: View {
       List {
         Section(header: Text("Buy tickets")) {
           ClearableInputField("Origin", id: 0, text: $originQuery.query, isEditing: $showing[0])
+            .disableAutocorrection(true)
           ClearableInputField("Destination", id: 1, text: $destinationQuery.query, isEditing: $showing[1])
+            .disableAutocorrection(true)
           if completedSearch, let origin = origin, let destination = destination {
             NavigationLink(destination:
-              TicketsSearchView(origin: origin, destination: destination)
+                TicketsSearchView(origin: origin, destination: destination, favoritesQuery: favoritesQuery)
             ) {
               HStack {
                 Image(systemName: "magnifyingglass")
@@ -47,13 +48,9 @@ struct HomeView: View {
         }
         HomeViewDisjunctSections(
           origin: $origin, destination: $destination,
-          originQuery: originQuery, destinationQuery: destinationQuery,
-          showing: $showing,
-          favorites: $favorites
+          originQuery: originQuery, destinationQuery: destinationQuery, favoritesQuery: favoritesQuery,
+          showing: $showing
         )
-      }
-      .onAppear {
-        _ = dataService.favorites().sink { self.favorites = $0 }
       }
       .listStyle(InsetGroupedListStyle())
       .navigationTitle("Tog")
@@ -69,10 +66,9 @@ struct HomeViewDisjunctSections: View {
 
   @ObservedObject var originQuery: StopQuery
   @ObservedObject var destinationQuery: StopQuery
+  @ObservedObject var favoritesQuery: FavoritesQuery
 
   @Binding var showing: [Bool]
-
-  @Binding var favorites: [FavoriteDestination]
 
   var body: some View {
     DisjunctSections(sections: [
@@ -87,7 +83,7 @@ struct HomeViewDisjunctSections: View {
         InputField.unfocus(from: 1)
       }
     ], otherwise: {
-      FavoriteDestinationsSection(favorites: $favorites)
+      FavoriteDestinationsSection(favoritesQuery: favoritesQuery)
     })
   }
 

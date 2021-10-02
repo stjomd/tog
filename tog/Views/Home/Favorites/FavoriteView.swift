@@ -12,12 +12,11 @@ struct FavoriteView: View {
   let favorite: FavoriteDestination
 
   @ObservedObject private var journeyQuery = JourneyQuery()
+  @ObservedObject private var favoritesQuery: FavoritesQuery
 
-  @Binding var allFavorites: [FavoriteDestination]
-
-  init(favorite: FavoriteDestination, allFavorites: Binding<[FavoriteDestination]>) {
+  init(favorite: FavoriteDestination, favoritesQuery: FavoritesQuery) {
     self.favorite = favorite
-    self._allFavorites = allFavorites
+    self.favoritesQuery = favoritesQuery
     journeyQuery.query = .init(
       origin: favorite.origin!, destination: favorite.destination!,
       date: Date(), dateMode: .departure,
@@ -27,7 +26,7 @@ struct FavoriteView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      FavoriteJourneyTitle(favorite: favorite, isShowingMoreIcon: true, allFavorites: $allFavorites)
+      FavoriteJourneyTitle(favorite: favorite, isShowingMoreIcon: true, favoritesQuery: favoritesQuery)
       FavoriteJourneyTrips(journeys: journeyQuery.results)
     }
     .padding(.vertical, 10)
@@ -42,11 +41,10 @@ struct FavoriteJourneyTitle: View {
   let favorite: FavoriteDestination
   let isShowingMoreIcon: Bool
 
-  @Binding var allFavorites: [FavoriteDestination]
+  @ObservedObject private var favoritesQuery: FavoritesQuery
+  @ObservedObject private var journeyQuery = JourneyQuery()
 
   @State private var isPresentingEditFavoriteView = false
-
-  @ObservedObject private var journeyQuery = JourneyQuery()
 
   var body: some View {
     HStack(alignment: .firstTextBaseline) {
@@ -73,7 +71,7 @@ struct FavoriteJourneyTitle: View {
           })
           // Remove button
           Button(action: {
-            allFavorites.removeAll { $0.id == favorite.id }
+            favoritesQuery.results.removeAll { $0.id == favorite.id }
             dataService.deleteFavorite(favorite)
           }, label: {
             Label("Delete", systemImage: "trash")
@@ -88,15 +86,15 @@ struct FavoriteJourneyTitle: View {
       AddToFavoritesView(
         origin: favorite.origin!, destination: favorite.destination!,
         journeys: journeyQuery.results, existingFavorite: favorite,
-        isPresent: $isPresentingEditFavoriteView
+        isPresent: $isPresentingEditFavoriteView, favoritesQuery: favoritesQuery
       )
     }
   }
 
-  init(favorite: FavoriteDestination, isShowingMoreIcon: Bool, allFavorites: Binding<[FavoriteDestination]>) {
+  init(favorite: FavoriteDestination, isShowingMoreIcon: Bool, favoritesQuery: FavoritesQuery) {
     self.favorite = favorite
     self.isShowingMoreIcon = isShowingMoreIcon
-    self._allFavorites = allFavorites
+    self.favoritesQuery = favoritesQuery
     self.journeyQuery.query = .init(
       origin: favorite.origin!, destination: favorite.destination!,
       date: Date(), dateMode: .departure,
@@ -127,17 +125,17 @@ struct FavoriteJourneyView_Previews: PreviewProvider {
 
   static var previews: some View {
 
-    FavoriteView(favorite: fav, allFavorites: .constant([]))
+    FavoriteView(favorite: fav, favoritesQuery: FavoritesQuery())
       .previewLayout(.sizeThatFits)
       .padding()
 
-    FavoriteView(favorite: fav, allFavorites: .constant([]))
+    FavoriteView(favorite: fav, favoritesQuery: FavoritesQuery())
       .preferredColorScheme(.dark)
       .previewLayout(.sizeThatFits)
       .padding()
 
     List {
-      FavoriteView(favorite: fav, allFavorites: .constant([]))
+      FavoriteView(favorite: fav, favoritesQuery: FavoritesQuery())
     }
     .listStyle(InsetGroupedListStyle())
 

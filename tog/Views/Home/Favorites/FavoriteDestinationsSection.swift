@@ -9,18 +9,19 @@ import SwiftUI
 
 struct FavoriteDestinationsSection: View {
 
-  @Binding var favorites: [FavoriteDestination]
+  @ObservedObject var favoritesQuery: FavoritesQuery
 
   var body: some View {
     Section(header: Text("Favorite Destinations")) {
-      ForEach(favorites, id: \.id) { favorite in
+      ForEach(favoritesQuery.results, id: \.id) { favorite in
         ZStack {
-          FavoriteView(favorite: favorite, allFavorites: $favorites)
+          FavoriteView(favorite: favorite, favoritesQuery: favoritesQuery)
           // Trick to hide navigation link arrow
           NavigationLink(
             destination: TicketsSearchView(
               origin: favorite.origin!,
-              destination: favorite.destination!
+              destination: favorite.destination!,
+              favoritesQuery: favoritesQuery
             )
           ) {
             EmptyView()
@@ -38,9 +39,7 @@ struct FavoriteDestinationsSection: View {
 struct FavoriteDestinationsSectionPreview: View {
   var body: some View {
     List {
-      FavoriteDestinationsSection(favorites: .constant([
-        .init(origin: Stop.penzing, destination: Stop.westbahnhof, amount: 2)
-      ]))
+      FavoriteDestinationsSection(favoritesQuery: FavoritesQuery())
     }
     .listStyle(InsetGroupedListStyle())
   }

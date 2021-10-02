@@ -22,3 +22,13 @@ class FavoritesQuery: ObservableObject {
   }
 
 }
+
+class ReloadToggle: ObservableObject {
+
+  private var subscriptions: Set<AnyCancellable> = []
+
+  func toggle() {
+    self.objectWillChange.send()
+  }
+
+}
