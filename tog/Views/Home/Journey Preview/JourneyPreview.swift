@@ -114,7 +114,6 @@ struct HaltRow: View {
       if halt.isLastIn(leg: leg) {
         Globals.Icons.arrivalArrow
         Text(halt.arrivalTime.shortDescription)
-          .italic()
           .frame(width: 50, alignment: .center)
       } else {
         // Show arrow on first halt in a leg, "hide" the rest
