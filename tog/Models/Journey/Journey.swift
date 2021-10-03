@@ -56,28 +56,28 @@ extension Journey {
             id: 50,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 50, name: "Wien Meidling", latitude: 0, longitude: 0),
+            stop: Stop(id: 50, name: "Wien Meidling Bahnhof", latitude: 48.174582, longitude: 16.333737),
             stopSequence: 0
           ),
           Halt(
             id: 0,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 0, name: "Wien Westbahnhof", latitude: 0, longitude: 0),
+            stop: Stop(id: 0, name: "Wien Westbahnhof", latitude: 48.196753, longitude: 16.337255),
             stopSequence: 1
           ),
           Halt(
             id: 1,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 1, name: "Wien Penzing Bahnhof", latitude: 0, longitude: 0),
+            stop: Stop(id: 1, name: "Wien Penzing Bahnhof", latitude: 48.192694, longitude: 16.30486),
             stopSequence: 2
           ),
           Halt(
             id: 2,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 2, name: "Wien Hütteldorf Bahnhof", latitude: 0, longitude: 0),
+            stop: Stop(id: 2, name: "Wien Hütteldorf Bahnhof", latitude: 48.197354, longitude: 16.261117),
             stopSequence: 3
           )
         ],
@@ -94,21 +94,21 @@ extension Journey {
             id: 0,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 2, name: "Wien Hütteldorf", latitude: 0, longitude: 0),
+            stop: Stop(id: 2, name: "Wien Hütteldorf", latitude: 48.197354, longitude: 16.261117),
             stopSequence: 1
           ),
           Halt(
             id: 1,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 10, name: "Tullnerfeld Bahnhof", latitude: 0, longitude: 0),
+            stop: Stop(id: 10, name: "Tullnerfeld Bahnhof", latitude: 48.295274, longitude: 15.996528),
             stopSequence: 2
           ),
           Halt(
             id: 2,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 11, name: "St. Pölten Hbf", latitude: 0, longitude: 0),
+            stop: Stop(id: 11, name: "St. Pölten Hbf", latitude: 48.208332, longitude: 15.623804),
             stopSequence: 3
           )
         ],
@@ -125,14 +125,14 @@ extension Journey {
             id: 0,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 79, name: "St. Pölten Hbf", latitude: 0, longitude: 0),
+            stop: Stop(id: 79, name: "St. Pölten Hbf", latitude: 48.208332, longitude: 15.623804),
             stopSequence: 0
           ),
           Halt(
             id: 1,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 78, name: "Prinzersdorf", latitude: 0, longitude: 0),
+            stop: Stop(id: 78, name: "Prinzersdorf", latitude: 48.203095, longitude: 15.526097),
             stopSequence: 1
           )
         ],

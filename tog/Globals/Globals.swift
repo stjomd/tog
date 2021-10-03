@@ -23,6 +23,7 @@ enum Globals {
   }()
 
   enum Colors {
+    static let mapPolyline = Color("MapPolylineColor")
     enum Transport {
       static let sBahn = Color("SBahnColor")
       static let rex   = Color("REXColor")

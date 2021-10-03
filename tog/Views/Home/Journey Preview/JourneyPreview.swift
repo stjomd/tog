@@ -11,6 +11,8 @@ struct JourneyPreview: View {
 
   let journey: Journey
 
+  @State private var isShowingMap = false
+
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack(alignment: .leading) {
@@ -41,6 +43,19 @@ struct JourneyPreview: View {
           }
         }
       }
+    }
+    .toolbar {
+      ToolbarItemGroup(placement: .navigationBarTrailing) {
+        Button(action: {
+          isShowingMap = true
+        }, label: {
+          Image(systemName: "map")
+        })
+      }
+    }
+    .sheet(isPresented: $isShowingMap, onDismiss: {}) {
+      JourneyMap(journey: journey)
+        .edgesIgnoringSafeArea(.bottom)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(.horizontal)
