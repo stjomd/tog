@@ -35,4 +35,13 @@ extension Halt {
     let seconds = TogApp.calendar.component(.second, from: departure)
     return Time(hours: hours, minutes: minutes, seconds: seconds)!
   }
+  public func isFirstIn(leg: JourneyLeg) -> Bool {
+    return leg.halts.first!.id == self.id
+  }
+  public func isLastIn(leg: JourneyLeg) -> Bool {
+    return leg.halts.last!.id == self.id
+  }
+  public func isCornerIn(leg: JourneyLeg) -> Bool {
+    return leg.halts.first!.id == self.id || leg.halts.last!.id == self.id
+  }
 }

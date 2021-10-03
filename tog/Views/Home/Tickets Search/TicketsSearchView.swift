@@ -92,7 +92,11 @@ struct TicketsSearchViewContents: View {
       Section(header: Text("Search Results")) {
         if !journeyQuery.results.isEmpty {
           ForEach(journeyQuery.results, id: \.self) { journey in
-            JourneyCell(journey: journey)
+            ZStack {
+              JourneyCell(journey: journey)
+              NavigationLink("", destination: JourneyPreview(journey: journey))
+                .opacity(0) // hides chevron
+            }
           }
         } else {
           Text("No results")

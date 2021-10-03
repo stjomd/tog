@@ -40,6 +40,7 @@ enum Globals {
     static let money = Image(systemName: "banknote")
     static let star = Image(systemName: "star")
     static let starFill = Image(systemName: "star.fill")
+    static let train = Image(systemName: "tram.fill")
   }
 
 }
