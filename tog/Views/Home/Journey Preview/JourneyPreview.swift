@@ -12,10 +12,54 @@ struct JourneyPreview: View {
   let journey: Journey
 
   @State private var isShowingMap = false
+  @State private var isShowingAlert = false
 
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack(alignment: .leading) {
+        // Top info
+        HStack(alignment: .lastTextBaseline) {
+          Text(
+            journey.legs.first!.halts.first!.departureTime.duration(
+              to: journey.legs.last!.halts.last!.arrivalTime
+            )
+            .textualDescription
+          )
+          Spacer()
+          Text(journey.priceString)
+            .font(.title)
+            .bold()
+        }
+        .padding(.top, 0)
+        .padding(.bottom, -4)
+        Divider()
+        // Blue buttons
+        HStack {
+          FlatButton(action: {
+            isShowingMap = true
+          }, contents: {
+            Globals.Icons.map
+            Text("Show Map")
+          })
+          FlatButton(action: {
+            isShowingAlert = true
+          }, contents: {
+            Globals.Icons.money
+            Text("Buy")
+          })
+          .alert(isPresented: $isShowingAlert) {
+            Alert(
+              title: Text("Buying Simulation"),
+              message: Text("Pretend this is a real purchase!"),
+              primaryButton: .default(Text("Buy"), action: {
+                // post purchase to data service
+              }),
+              secondaryButton: .cancel()
+            )
+          }
+        }
+        Divider()
+        // Journey legs:
         ForEach(journey.legs, id: \.self) { leg in
           ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 6)
@@ -43,22 +87,13 @@ struct JourneyPreview: View {
           }
         }
       }
-    }
-    .toolbar {
-      ToolbarItemGroup(placement: .navigationBarTrailing) {
-        Button(action: {
-          isShowingMap = true
-        }, label: {
-          Image(systemName: "map")
-        })
-      }
+      .padding(.horizontal)
     }
     .sheet(isPresented: $isShowingMap, onDismiss: {}) {
       JourneyMap(journey: journey)
         .edgesIgnoringSafeArea(.bottom)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
-    .padding(.horizontal)
     .navigationTitle("Journey Preview")
     .navigationBarTitleDisplayMode(.inline)
   }
@@ -74,15 +109,23 @@ struct HaltRow: View {
 
   var body: some View {
     HStack {
+      // Arrows & Time
       if halt.isLastIn(leg: leg) {
         Globals.Icons.arrivalArrow
         Text(halt.arrivalTime.shortDescription)
           .frame(width: 50, alignment: .center)
       } else {
-        Globals.Icons.departureArrow
+        // Show arrow on first halt in a leg, "hide" the rest
+        if halt.isFirstIn(leg: leg) {
+          Globals.Icons.departureArrow
+        } else {
+          Globals.Icons.departureArrow
+            .foregroundColor(Globals.Colors.monochrome)
+        }
         Text(halt.departureTime.shortDescription)
           .frame(width: 50, alignment: .center)
       }
+      // Circle & Stop & Platform
       if halt.isFirstIn(leg: leg) {
         // First halt in a leg
         Circle()

@@ -27,6 +27,7 @@
 		958D106F26D4EE530052E47B /* FavoriteDestinationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D106E26D4EE530052E47B /* FavoriteDestinationsSection.swift */; };
 		958D107226D4F7BA0052E47B /* FavoritesQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D107126D4F7BA0052E47B /* FavoritesQuery.swift */; };
 		95983310270A2E99000F7ADF /* JourneyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9598330F270A2E99000F7ADF /* JourneyMap.swift */; };
+		95983312270A6265000F7ADF /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95983311270A6265000F7ADF /* Buttons.swift */; };
 		95A2926326CC48AC00972011 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926226CC48AC00972011 /* Time.swift */; };
 		95A2926526CC50EF00972011 /* TimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926426CC50EF00972011 /* TimeTests.swift */; };
 		95A2926726CED86000972011 /* TogDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926626CED86000972011 /* TogDataService.swift */; };
@@ -106,6 +107,7 @@
 		958D106E26D4EE530052E47B /* FavoriteDestinationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDestinationsSection.swift; sourceTree = "<group>"; };
 		958D107126D4F7BA0052E47B /* FavoritesQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesQuery.swift; sourceTree = "<group>"; };
 		9598330F270A2E99000F7ADF /* JourneyMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyMap.swift; sourceTree = "<group>"; };
+		95983311270A6265000F7ADF /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		95A2926226CC48AC00972011 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		95A2926426CC50EF00972011 /* TimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTests.swift; sourceTree = "<group>"; };
 		95A2926626CED86000972011 /* TogDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogDataService.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 			children = (
 				95E911D526C5387B00863A30 /* MainView.swift */,
 				951AB55026D2BE53008C1468 /* JourneyRow.swift */,
+				95983311270A6265000F7ADF /* Buttons.swift */,
 				95E911D726C5395400863A30 /* Home */,
 				95E911DE26C53F7100863A30 /* Tickets */,
 				95E911DF26C53F7800863A30 /* Services */,
@@ -752,6 +755,7 @@
 				95FDDF3326C80B640086ECAE /* InputField.swift in Sources */,
 				95A2926926CED9FE00972011 /* Stop.swift in Sources */,
 				951AB54826D2501B008C1468 /* Halt.swift in Sources */,
+				95983312270A6265000F7ADF /* Buttons.swift in Sources */,
 				953C0F4526C4626000EF44DB /* Globals.swift in Sources */,
 				95FDDF1326C67FF30086ECAE /* ColorService.swift in Sources */,
 			);

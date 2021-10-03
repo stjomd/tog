@@ -24,6 +24,7 @@ enum Globals {
 
   enum Colors {
     static let mapPolyline = Color("MapPolylineColor")
+    static let monochrome = Color("MonochromeColor")
     enum Transport {
       static let sBahn = Color("SBahnColor")
       static let rex   = Color("REXColor")
@@ -45,6 +46,7 @@ enum Globals {
     static let arrivalArrow = Image(systemName: "arrow.down.to.line.compact")
     static let departureArrow = Image(systemName: "arrow.up")
     static let cross = Image(systemName: "xmark")
+    static let map = Image(systemName: "map")
   }
 
 }
