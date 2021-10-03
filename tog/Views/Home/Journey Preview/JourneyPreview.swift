@@ -15,25 +15,30 @@ struct JourneyPreview: View {
     ScrollView(showsIndicators: false) {
       VStack(alignment: .leading) {
         ForEach(journey.legs, id: \.self) { leg in
-          Divider()
-            .padding(.bottom, 4)
-          HStack {
-            Globals.Icons.train
-            Text(leg.trip.name)
-              .fontWeight(.bold)
-            Text(leg.trip.headsign)
+          ZStack(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 6)
+              .opacity(0.1)
+            HStack {
+              Globals.Icons.train
+              Text(leg.trip.name)
+                .fontWeight(.bold)
+              Text(leg.trip.headsign)
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
           }
           ForEach(leg.halts, id: \.id) { halt in
             HaltRow(halt: halt, leg: leg)
           }
-          Divider()
-            .padding(.bottom, 4)
           if leg.trip.id != journey.legs.last!.trip.id {
+            Divider()
+              .padding(.bottom, 4)
             if let transferTime = journey.transferTime(after: leg)?.textualDescription {
               Text("\(transferTime) to transfer in \(leg.halts.last!.stop.name)")
             } else {
               Text("Transfer in \(leg.halts.last!.stop.name)")
             }
+            Divider()
           }
         }
       }
