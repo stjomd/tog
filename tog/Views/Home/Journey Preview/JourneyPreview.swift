@@ -19,7 +19,6 @@ struct JourneyPreview: View {
             RoundedRectangle(cornerRadius: 6)
               .opacity(0.1)
             HStack {
-              Globals.Icons.train
               Text(leg.trip.name)
                 .fontWeight(.bold)
               Text(leg.trip.headsign)
