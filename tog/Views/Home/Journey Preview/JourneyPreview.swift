@@ -17,7 +17,7 @@ struct JourneyPreview: View {
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack(alignment: .leading) {
-        // Top info
+        // MARK: Top info
         HStack(alignment: .lastTextBaseline) {
           Text(
             journey.legs.first!.halts.first!.departureTime.duration(
@@ -33,7 +33,7 @@ struct JourneyPreview: View {
         .padding(.top, 0)
         .padding(.bottom, -4)
         Divider()
-        // Blue buttons
+        // MARK: Blue buttons
         HStack {
           FlatButton(action: {
             isShowingMap = true
@@ -59,7 +59,7 @@ struct JourneyPreview: View {
           }
         }
         Divider()
-        // Journey legs:
+        // MARK: Journey legs
         ForEach(journey.legs, id: \.self) { leg in
           ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 6)
@@ -88,6 +88,7 @@ struct JourneyPreview: View {
         }
       }
       .padding(.horizontal)
+      .padding(.bottom, 16)
     }
     .sheet(isPresented: $isShowingMap, onDismiss: {}) {
       JourneyMap(journey: journey)
@@ -113,6 +114,7 @@ struct HaltRow: View {
       if halt.isLastIn(leg: leg) {
         Globals.Icons.arrivalArrow
         Text(halt.arrivalTime.shortDescription)
+          .italic()
           .frame(width: 50, alignment: .center)
       } else {
         // Show arrow on first halt in a leg, "hide" the rest
