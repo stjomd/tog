@@ -8,6 +8,8 @@
 import SwiftUI
 import MapKit
 
+// MARK: - SwiftUI View
+
 struct JourneyMap: View {
 
   let journey: Journey
@@ -18,7 +20,6 @@ struct JourneyMap: View {
     ZStack(alignment: .topTrailing) {
       UIJourneyMap(journey: journey)
       Button(action: {
-        print("Map dismissed")
         presentationMode.wrappedValue.dismiss()
       }, label: {
         ZStack {
@@ -26,7 +27,7 @@ struct JourneyMap: View {
             .foregroundColor(.primary)
             .frame(width: 25, height: 25)
             .opacity(0.3)
-          Image(systemName: "xmark")
+          Globals.Icons.cross
             .foregroundColor(.white)
         }
       })
@@ -35,6 +36,8 @@ struct JourneyMap: View {
   }
 
 }
+
+// MARK: - UIKit View
 
 struct UIJourneyMap: UIViewRepresentable {
 
@@ -68,8 +71,6 @@ struct UIJourneyMap: UIViewRepresentable {
     return array
   }
 
-  private let edgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
-
   init(journey: Journey) {
     self.journey = journey
   }
@@ -96,7 +97,7 @@ struct UIJourneyMap: UIViewRepresentable {
 
 }
 
-// MARK: - Coordinator
+// MARK: - UIKit Coordinator
 final class MapViewCoordinator: NSObject, MKMapViewDelegate {
 
   private let map: UIJourneyMap

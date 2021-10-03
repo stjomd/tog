@@ -44,6 +44,7 @@ enum Globals {
     static let train = Image(systemName: "tram.fill")
     static let arrivalArrow = Image(systemName: "arrow.down.to.line.compact")
     static let departureArrow = Image(systemName: "arrow.up")
+    static let cross = Image(systemName: "xmark")
   }
 
 }
