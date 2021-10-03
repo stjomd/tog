@@ -53,8 +53,15 @@ struct HaltRow: View {
 
   var body: some View {
     HStack {
-      Text("\(halt.departureTime.shortDescription) dep.")
-        .frame(width: 85, alignment: .trailing)
+      if halt.isLastIn(leg: leg) {
+        Globals.Icons.arrivalArrow
+        Text(halt.arrivalTime.shortDescription)
+          .frame(width: 50, alignment: .center)
+      } else {
+        Globals.Icons.departureArrow
+        Text(halt.departureTime.shortDescription)
+          .frame(width: 50, alignment: .center)
+      }
       if halt.isFirstIn(leg: leg) {
         // First halt in a leg
         Circle()
