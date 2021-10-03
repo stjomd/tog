@@ -70,6 +70,8 @@ struct HaltRow: View {
   let halt: Halt
   let leg: JourneyLeg
 
+  private let trackColor = Globals.Colors.mapPolyline
+
   var body: some View {
     HStack {
       if halt.isLastIn(leg: leg) {
@@ -84,7 +86,7 @@ struct HaltRow: View {
       if halt.isFirstIn(leg: leg) {
         // First halt in a leg
         Circle()
-          .foregroundColor(.blue)
+          .foregroundColor(trackColor)
           .frame(width: 15, height: 15)
         Text(halt.stop.name)
           .bold()
@@ -94,7 +96,7 @@ struct HaltRow: View {
       } else if halt.isLastIn(leg: leg) {
         // Last halt in a leg
         Circle()
-          .foregroundColor(.blue)
+          .foregroundColor(trackColor)
           .frame(width: 15, height: 15)
           .overlay(circleConnector)
         Text(halt.stop.name)
@@ -106,7 +108,7 @@ struct HaltRow: View {
         // All other halts
         VStack {
           Circle()
-            .foregroundColor(.blue)
+            .foregroundColor(trackColor)
             .frame(width: 10, height: 10)
             .overlay(circleConnector)
         }
@@ -119,7 +121,7 @@ struct HaltRow: View {
 
   private var circleConnector: some View {
     Rectangle()
-      .foregroundColor(.blue)
+      .foregroundColor(trackColor)
       .frame(width: 3, height: 25)
       .offset(y: -17)
   }
