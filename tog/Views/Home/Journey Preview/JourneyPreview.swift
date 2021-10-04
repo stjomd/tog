@@ -16,6 +16,10 @@ struct JourneyPreview: View {
   @State private var isShowingMap = false
   @State private var isShowingAlert = false
 
+  private var canBuy: Bool {
+    Date() < journey.departureDate
+  }
+
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack(alignment: .leading) {
@@ -35,15 +39,15 @@ struct JourneyPreview: View {
         .padding(.top, 0)
         .padding(.bottom, -4)
         Divider()
-        // MARK: Blue buttons
+        // MARK: Buttons
         HStack {
-          FlatButton(action: {
+          FlatButton(disabled: false, action: {
             isShowingMap = true
           }, contents: {
             Globals.Icons.map
             Text("Show Map")
           })
-          FlatButton(action: {
+          FlatButton(disabled: !canBuy, action: {
             isShowingAlert = true
           }, contents: {
             Globals.Icons.money

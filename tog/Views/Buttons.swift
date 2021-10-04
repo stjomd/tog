@@ -9,10 +9,12 @@ import SwiftUI
 
 struct FlatButton<Contents: View>: View {
 
+  let disabled: Bool
   let action: () -> Void
   let contents: () -> Contents
 
-  init(action: @escaping () -> Void, @ViewBuilder contents: @escaping () -> Contents) {
+  init(disabled: Bool, action: @escaping () -> Void, @ViewBuilder contents: @escaping () -> Contents) {
+    self.disabled = disabled
     self.action = action
     self.contents = contents
   }
@@ -21,7 +23,7 @@ struct FlatButton<Contents: View>: View {
     Button(action: action, label: {
       ZStack {
         RoundedRectangle(cornerRadius: 6)
-          .foregroundColor(.blue)
+          .foregroundColor(disabled ? .gray : .blue)
         HStack {
           contents()
         }
@@ -29,13 +31,14 @@ struct FlatButton<Contents: View>: View {
         .padding(.vertical, 6)
       }
     })
+    .disabled(disabled)
   }
 
 }
 
 struct Buttons_Previews: PreviewProvider {
   static var previews: some View {
-    FlatButton(action: {}, contents: { Text("Button") })
+    FlatButton(disabled: false, action: {}, contents: { Text("Button") })
       .previewLayout(.sizeThatFits)
       .frame(width: 200, height: 40)
       .padding()
