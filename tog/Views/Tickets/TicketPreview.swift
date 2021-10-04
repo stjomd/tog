@@ -11,13 +11,6 @@ struct TicketPreview: View {
 
   let ticket: Ticket
 
-  private var origin: Stop {
-    ticket.journey.legs.first!.halts.first!.stop
-  }
-  private var destination: Stop {
-    ticket.journey.legs.last!.halts.last!.stop
-  }
-
   private var dateFormatter: DateFormatter {
     let df = DateFormatter()
     df.dateFormat = "HH:mm"
@@ -28,24 +21,15 @@ struct TicketPreview: View {
     ZStack {
       VStack(alignment: .leading) {
         // Title
-        VStack(alignment: .leading) {
-          HStack(spacing: 6) {
-            Text(origin.name)
-              .font(.headline)
-            Globals.Icons.rightArrow
-              .foregroundColor(.gray)
-          }
-          Text(destination.name)
-            .font(.headline)
-        }
+        TicketTitle(ticket: ticket)
         // Trips
         JourneyRow(journey: ticket.journey)
         HStack {
-          Image(systemName: "person")
+          Globals.Icons.person
             .padding(.trailing, -4)
           Text("\(ticket.passengers)")
           Spacer()
-          Image(systemName: "clock")
+          Globals.Icons.clock
             .padding(.trailing, -4)
           Text(ticket.expirationString)
         }
@@ -55,6 +39,25 @@ struct TicketPreview: View {
       // Navigation link without chevron
       NavigationLink("", destination: TicketDetailsView(ticket: ticket))
         .opacity(0)
+    }
+  }
+
+}
+
+struct TicketTitle: View {
+
+  let ticket: Ticket
+
+  var body: some View {
+    VStack(alignment: .leading) {
+      HStack(spacing: 6) {
+        Text(ticket.origin.name)
+          .font(.headline)
+        Globals.Icons.rightArrow
+          .foregroundColor(.gray)
+      }
+      Text(ticket.destination.name)
+        .font(.headline)
     }
   }
 

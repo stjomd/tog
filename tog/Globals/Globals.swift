@@ -47,6 +47,7 @@ enum Globals {
     static let departureArrow = Image(systemName: "arrow.up")
     static let cross = Image(systemName: "xmark")
     static let map = Image(systemName: "map")
+    static let person = Image(systemName: "person")
   }
 
 }
