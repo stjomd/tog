@@ -25,7 +25,7 @@ struct JourneyMap: View {
         ZStack {
           Circle()
             .foregroundColor(.primary)
-            .frame(width: 25, height: 25)
+            .frame(width: 30, height: 30)
             .opacity(0.3)
           Globals.Icons.cross
             .foregroundColor(.white)
