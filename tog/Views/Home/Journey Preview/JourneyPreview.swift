@@ -65,32 +65,7 @@ struct JourneyPreview: View {
         }
         Divider()
         // MARK: Journey legs
-        ForEach(journey.legs, id: \.self) { leg in
-          ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 6)
-              .opacity(0.1)
-            HStack {
-              Text(leg.trip.name)
-                .fontWeight(.bold)
-              Text(leg.trip.headsign)
-            }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-          }
-          ForEach(leg.halts, id: \.id) { halt in
-            HaltRow(halt: halt, leg: leg)
-          }
-          if leg.trip.id != journey.legs.last!.trip.id {
-            Divider()
-              .padding(.bottom, 4)
-            if let transferTime = journey.transferTime(after: leg)?.textualDescription {
-              Text("\(transferTime) to transfer in \(leg.halts.last!.stop.name)")
-            } else {
-              Text("Transfer in \(leg.halts.last!.stop.name)")
-            }
-            Divider()
-          }
-        }
+        JourneyLegsPreview(journey: journey)
       }
       .padding(.horizontal)
       .padding(.bottom, 16)
@@ -102,6 +77,43 @@ struct JourneyPreview: View {
     .frame(maxWidth: .infinity, alignment: .leading)
     .navigationTitle("Journey Preview")
     .navigationBarTitleDisplayMode(.inline)
+  }
+
+}
+
+struct JourneyLegsPreview: View {
+
+  let journey: Journey
+
+  var body: some View {
+    VStack(alignment: .leading) {
+      ForEach(journey.legs, id: \.self) { leg in
+        ZStack(alignment: .leading) {
+          RoundedRectangle(cornerRadius: 6)
+            .opacity(0.1)
+          HStack {
+            Text(leg.trip.name)
+              .fontWeight(.bold)
+            Text(leg.trip.headsign)
+          }
+          .padding(.horizontal, 8)
+          .padding(.vertical, 4)
+        }
+        ForEach(leg.halts, id: \.id) { halt in
+          HaltRow(halt: halt, leg: leg)
+        }
+        if leg.trip.id != journey.legs.last!.trip.id {
+          Divider()
+            .padding(.bottom, 4)
+          if let transferTime = journey.transferTime(after: leg)?.textualDescription {
+            Text("\(transferTime) to transfer in \(leg.halts.last!.stop.name)")
+          } else {
+            Text("Transfer in \(leg.halts.last!.stop.name)")
+          }
+          Divider()
+        }
+      }
+    }
   }
 
 }

@@ -25,32 +25,37 @@ struct TicketPreview: View {
   }
 
   var body: some View {
-    VStack(alignment: .leading) {
-      // Title
+    ZStack {
       VStack(alignment: .leading) {
-        HStack(spacing: 6) {
-          Text(origin.name)
+        // Title
+        VStack(alignment: .leading) {
+          HStack(spacing: 6) {
+            Text(origin.name)
+              .font(.headline)
+            Globals.Icons.rightArrow
+              .foregroundColor(.gray)
+          }
+          Text(destination.name)
             .font(.headline)
-          Globals.Icons.rightArrow
-            .foregroundColor(.gray)
         }
-        Text(destination.name)
-          .font(.headline)
+        // Trips
+        JourneyRow(journey: ticket.journey)
+        HStack {
+          Image(systemName: "person")
+            .padding(.trailing, -4)
+          Text("\(ticket.passengers)")
+          Spacer()
+          Image(systemName: "clock")
+            .padding(.trailing, -4)
+          Text(ticket.expirationString)
+        }
+        .opacity(0.4)
       }
-      // Trips
-      JourneyRow(journey: ticket.journey)
-      HStack {
-        Image(systemName: "person")
-          .padding(.trailing, -4)
-        Text("\(ticket.passengers)")
-        Spacer()
-        Image(systemName: "clock")
-          .padding(.trailing, -4)
-        Text(ticket.expirationString)
-      }
-      .opacity(0.4)
+      .padding(.vertical, 10)
+      // Navigation link without chevron
+      NavigationLink("", destination: TicketDetailsView(ticket: ticket))
+        .opacity(0)
     }
-    .padding(.vertical, 10)
   }
 
 }

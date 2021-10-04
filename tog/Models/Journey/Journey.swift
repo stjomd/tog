@@ -24,6 +24,9 @@ extension Journey {
   public var departure: Time {
     legs.first!.halts.first!.departureTime
   }
+  public var departureDate: Date {
+    legs.first!.halts.first!.departure
+  }
   public var arrival: Time {
     legs.last!.halts.last!.arrivalTime
   }

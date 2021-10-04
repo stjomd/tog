@@ -30,6 +30,7 @@
 		95983312270A6265000F7ADF /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95983311270A6265000F7ADF /* Buttons.swift */; };
 		95983315270AEF3B000F7ADF /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95983314270AEF3B000F7ADF /* Ticket.swift */; };
 		95983317270AF9DE000F7ADF /* TicketsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95983316270AF9DE000F7ADF /* TicketsQuery.swift */; };
+		95983319270B33AA000F7ADF /* TicketDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95983318270B33AA000F7ADF /* TicketDetailsView.swift */; };
 		95A2926326CC48AC00972011 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926226CC48AC00972011 /* Time.swift */; };
 		95A2926526CC50EF00972011 /* TimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926426CC50EF00972011 /* TimeTests.swift */; };
 		95A2926726CED86000972011 /* TogDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926626CED86000972011 /* TogDataService.swift */; };
@@ -112,6 +113,7 @@
 		95983311270A6265000F7ADF /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		95983314270AEF3B000F7ADF /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		95983316270AF9DE000F7ADF /* TicketsQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsQuery.swift; sourceTree = "<group>"; };
+		95983318270B33AA000F7ADF /* TicketDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketDetailsView.swift; sourceTree = "<group>"; };
 		95A2926226CC48AC00972011 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		95A2926426CC50EF00972011 /* TimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTests.swift; sourceTree = "<group>"; };
 		95A2926626CED86000972011 /* TogDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogDataService.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 			children = (
 				95E911D826C53AE600863A30 /* TicketsView.swift */,
 				95E911E126C541EF00863A30 /* TicketPreview.swift */,
+				95983318270B33AA000F7ADF /* TicketDetailsView.swift */,
 			);
 			path = Tickets;
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				95983317270AF9DE000F7ADF /* TicketsQuery.swift in Sources */,
 				954C55522709DF170017D19A /* JourneyPreview.swift in Sources */,
 				95983315270AEF3B000F7ADF /* Ticket.swift in Sources */,
+				95983319270B33AA000F7ADF /* TicketDetailsView.swift in Sources */,
 				951AB55326D2C17B008C1468 /* JourneyCell.swift in Sources */,
 				95D5045526C95EB30008652A /* Extensions.swift in Sources */,
 				95E911D926C53AE600863A30 /* TicketsView.swift in Sources */,

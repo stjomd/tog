@@ -52,6 +52,7 @@ struct TicketsView: View {
           Section(header: Text("Expired Tickets")) {
             ForEach(expiredTicketsQuery.results, id: \.id) { ticket in
               TicketPreview(ticket: ticket)
+                .opacity(0.3)
             }
           }
         }
