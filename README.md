@@ -2,6 +2,8 @@
 
 A remake of the ÖBB app for iOS.
 
+![Screenshots](resources/screenshots.png)
+
 ## Running
 
 You need `CocoaPods` to run this application. Install the dependencies with the following command in the project folder:
