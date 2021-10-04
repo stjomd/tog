@@ -6,6 +6,7 @@ target 'tog' do
   use_frameworks!
 
   # Pods for tog
+  pod 'EFQRCode', '~> 6.1.0'
   pod 'SwiftCSV', '~> 0.6'
   pod 'SwiftLint', '~> 0.43.1'
   pod 'Swinject', '~> 2.8.0'
