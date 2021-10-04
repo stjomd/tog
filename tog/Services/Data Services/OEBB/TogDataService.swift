@@ -24,7 +24,7 @@ class TogDataService {
   }()
   private let jsonTicketDecoder: JSONDecoder = {
     let js = JSONDecoder()
-    js.dateDecodingStrategy = .ticketDateStrategy
+    js.dateDecodingStrategy = .togServerDateStrategy
     return js
   }()
   private let jsonEncoder: JSONEncoder = {

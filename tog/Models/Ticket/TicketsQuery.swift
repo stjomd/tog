@@ -21,7 +21,6 @@ class TicketsQuery: ObservableObject {
     $query
       .flatMap(dataService.tickets)
       .receive(on: DispatchQueue.main)
-      .print()
       .assign(to: \.results, on: self)
       .store(in: &subscriptions)
   }
@@ -32,18 +31,4 @@ class TicketsQuery: ObservableObject {
     self.query = t
   }
 
-}
-
-class TicketQueries: ObservableObject {
-  static let placeholder = TicketQueries(valid: TicketsQuery(.valid), expired: TicketsQuery(.expired))
-  @Published var valid: TicketsQuery
-  @Published var expired: TicketsQuery
-  init(valid: TicketsQuery, expired: TicketsQuery) {
-    self.valid = valid
-    self.expired = expired
-  }
-  func update() {
-    self.valid = TicketsQuery(.valid)
-    self.expired = TicketsQuery(.expired)
-  }
 }

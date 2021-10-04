@@ -6,8 +6,6 @@ import com.stjomd.railway.entity.Trip;
 import com.stjomd.railway.generator.util.CSVHandler;
 import com.stjomd.railway.repository.HaltRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;

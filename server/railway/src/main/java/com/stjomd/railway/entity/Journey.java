@@ -15,6 +15,8 @@ public class Journey {
 
     private List<JourneyLeg> legs;
 
+    private Integer passengers;
+
     private Long price;
 
 }

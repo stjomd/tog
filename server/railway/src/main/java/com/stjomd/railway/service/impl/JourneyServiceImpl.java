@@ -88,7 +88,7 @@ public class JourneyServiceImpl implements JourneyService {
                     leg.get(0).getStop().getLatitude(), leg.get(0).getStop().getLongitude(),
                     leg.get(last).getStop().getLatitude(), leg.get(last).getStop().getLongitude()
             );
-            Journey journey = new Journey(journeyLegs, price * query.getPassengers());
+            Journey journey = new Journey(journeyLegs, query.getPassengers(), price * query.getPassengers());
             journeys.add(journey);
         }
 

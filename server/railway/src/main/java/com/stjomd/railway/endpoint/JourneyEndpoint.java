@@ -33,7 +33,9 @@ public class JourneyEndpoint {
     @ResponseBody
     public List<JourneyDto> journey(JourneyQuery query) {
         log.info("GET /journeys?{}", query);
-        return journeyMapper.toDto(journeyService.getJourneys(query));
+        List<JourneyDto> dtos = journeyMapper.toDto(journeyService.getJourneys(query));
+        journeyMapper.fixDates(dtos, query.getDate());
+        return dtos;
     }
 
 }

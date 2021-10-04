@@ -54,9 +54,10 @@ struct JourneyPreview: View {
               title: Text("Buying Simulation"),
               message: Text("Pretend this is a real purchase!"),
               primaryButton: .default(Text("Buy"), action: {
-                let ticket = Ticket(journey: journey, expiration: journey.arrivalDate, passengers: 1)
+                print("ARRDATE")
+                print(journey.arrivalDate)
+                let ticket = Ticket(journey: journey, expiration: journey.arrivalDate, passengers: journey.passengers)
                 dataService.buyTicket(ticket)
-                // ticketQueries.objectWillChange.send()
               }),
               secondaryButton: .cancel()
             )

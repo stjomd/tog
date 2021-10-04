@@ -9,6 +9,7 @@ import Foundation
 
 public struct Journey: Codable, Hashable {
   public var legs: [JourneyLeg]
+  public var passengers: Int
   public var price: Int
 }
 
@@ -147,6 +148,7 @@ extension Journey {
         )
       )
     ],
+    passengers: 1,
     price: 3450
   )
 }
