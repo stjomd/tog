@@ -20,9 +20,9 @@ After that, you can start the server without the `datagen` profile.
 ### Running on a physical device
 
 The iOS app is configured to send requests to `localhost`, which will not work if you're running the app on an iPhone.
-You will need to relay traffic through `ngrok` (already provided - no need to install). In `/server/railway`, run:
+You will need to relay traffic through `ngrok`. In `/server/railway`, run:
 ```
-./ngrok http 8080
+ngrok http 8080
 ```
 `ngrok` will display an address for forwarding. Copy the secure (`https`) one, open `Info.plist` in Xcode and paste
 the address in the `SERVER_URL` field. As long as the server and `ngrok` are running, you can run the iOS app on a
