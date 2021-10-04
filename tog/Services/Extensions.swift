@@ -43,4 +43,27 @@ extension JSONDecoder.DateDecodingStrategy {
       throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(string)")
     }
   }
+  static let ticketDateStrategy = custom {
+    let container = try $0.singleValueContainer()
+    let string = try container.decode(String.self)
+    if let date = DateFormatter.longDateFormatter.date(from: string) {
+      return date
+    } else {
+      throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(string)")
+    }
+  }
+}
+
+extension JSONEncoder.DateEncodingStrategy {
+  static let ticketDateStrategy = custom { date, encoder in
+    var container = encoder.singleValueContainer()
+    try container.encode(
+      DateFormatter.longDateFormatter.string(from: date)
+    )
+//    if let date = DateFormatter.shortDateFormatter.date(from: string) {
+//      return date
+//    } else {
+//      throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(string)")
+//    }
+  }
 }

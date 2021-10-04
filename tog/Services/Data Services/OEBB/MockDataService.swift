@@ -46,15 +46,17 @@ extension MockDataService: DataService {
     Just([]).eraseToAnyPublisher()
   }
 
+  func tickets(_ selection: TicketSelection) -> AnyPublisher<[Ticket], Never> {
+    Just([]).eraseToAnyPublisher()
+  }
+
   // MARK: Posters
 
-  func saveFavorite(_ favorite: FavoriteDestination) {
+  func saveFavorite(_ favorite: FavoriteDestination) {}
 
-  }
+  func deleteFavorite(_ favorite: FavoriteDestination) {}
 
-  func deleteFavorite(_ favorite: FavoriteDestination) {
-
-  }
+  func buyTicket(_ ticket: Ticket) {}
 
 }
 

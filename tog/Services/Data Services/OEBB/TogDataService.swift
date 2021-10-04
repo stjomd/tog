@@ -11,7 +11,9 @@ import Combine
 class TogDataService {
 
   private let baseURL = Globals.baseURL
+
   private let favoritesURL = FileManager.documentsDirectoryURL.appendingPathComponent("favs.json")
+  private let ticketsURL   = FileManager.documentsDirectoryURL.appendingPathComponent("tickets.json")
 
   private let urlSession = URLSession.shared
 
@@ -20,8 +22,14 @@ class TogDataService {
     js.dateDecodingStrategy = .togServerDateStrategy
     return js
   }()
+  private let jsonTicketDecoder: JSONDecoder = {
+    let js = JSONDecoder()
+    js.dateDecodingStrategy = .ticketDateStrategy
+    return js
+  }()
   private let jsonEncoder: JSONEncoder = {
     let js = JSONEncoder()
+    js.dateEncodingStrategy = .ticketDateStrategy
     js.outputFormatting = .prettyPrinted
     return js
   }()
@@ -73,6 +81,24 @@ extension TogDataService: DataService {
     }
   }
 
+  func tickets(_ selection: TicketSelection) -> AnyPublisher<[Ticket], Never> {
+    let tickets = rawTickets().filter {
+      switch selection {
+      case .valid:
+        return $0.isValid
+      case .expired:
+        return !$0.isValid
+      case .all:
+        return true
+      }
+    }
+    if FileManager.default.fileExists(atPath: ticketsURL.path) {
+      return Just(tickets).eraseToAnyPublisher()
+    } else {
+      return Just([]).eraseToAnyPublisher()
+    }
+  }
+
   // MARK: Posters
 
   func saveFavorite(_ favorite: FavoriteDestination) {
@@ -103,6 +129,17 @@ extension TogDataService: DataService {
     }
   }
 
+  func buyTicket(_ ticket: Ticket) {
+    var newTickets = rawTickets()
+    newTickets.append(ticket)
+    do {
+      let data = try jsonEncoder.encode(newTickets)
+      try data.write(to: ticketsURL)
+    } catch let error {
+      print(error)
+    }
+  }
+
   // MARK: Helpers
 
   private func rawFavorites() -> [FavoriteDestination] {
@@ -110,6 +147,18 @@ extension TogDataService: DataService {
       do {
         let data = try Data(contentsOf: favoritesURL)
         return try jsonDecoder.decode([FavoriteDestination].self, from: data)
+      } catch let error {
+        print(error)
+      }
+    }
+    return []
+  }
+
+  private func rawTickets() -> [Ticket] {
+    if FileManager.default.fileExists(atPath: ticketsURL.path) {
+      do {
+        let data = try Data(contentsOf: ticketsURL)
+        return try jsonTicketDecoder.decode([Ticket].self, from: data)
       } catch let error {
         print(error)
       }

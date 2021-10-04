@@ -9,6 +9,8 @@ import SwiftUI
 
 struct JourneyPreview: View {
 
+  @Autowired private var dataService: DataService!
+
   let journey: Journey
 
   @State private var isShowingMap = false
@@ -52,7 +54,9 @@ struct JourneyPreview: View {
               title: Text("Buying Simulation"),
               message: Text("Pretend this is a real purchase!"),
               primaryButton: .default(Text("Buy"), action: {
-                // post purchase to data service
+                let ticket = Ticket(journey: journey, expiration: journey.arrivalDate, passengers: 1)
+                dataService.buyTicket(ticket)
+                // ticketQueries.objectWillChange.send()
               }),
               secondaryButton: .cancel()
             )

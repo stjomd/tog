@@ -25,6 +25,7 @@ struct TogApp: SwiftUI.App {
 
   init() {
     registerDependencies()
+    print(FileManager.documentsDirectoryURL)
   }
 
   // MARK: - Register components with Swinject

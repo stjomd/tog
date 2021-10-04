@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+enum TicketSelection {
+  case valid, expired, all
+}
+
 protocol DataService {
 
   // MARK: - Fetchers
@@ -26,6 +30,11 @@ protocol DataService {
   /// - returns: A publisher that emits an array of favorite destinations.
   func favorites() -> AnyPublisher<[FavoriteDestination], Never>
 
+  /// Fetches tickets.
+  /// - parameter selection: An option that determines which tickets are to be fetched.
+  /// - returns: A publisher that emits an array of chosen tickets.
+  func tickets(_ selection: TicketSelection) -> AnyPublisher<[Ticket], Never>
+
   // MARK: - Posters
 
   /// Saves a favorite destination. If this favorite already exists, it will be updated.
@@ -35,6 +44,10 @@ protocol DataService {
   /// Deletes a favorite destination.
   /// - parameter favorite: A favorite destination to be deleted.
   func deleteFavorite(_ favorite: FavoriteDestination)
+
+  /// Performs a purchase of a ticket.
+  /// - parameter ticket: A ticket object to be persisted.
+  func buyTicket(_ ticket: Ticket)
 
 }
 

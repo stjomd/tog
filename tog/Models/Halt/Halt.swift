@@ -9,8 +9,8 @@ import Foundation
 
 public struct Halt: Codable, Hashable {
   public  var id: Int
-  private var arrival: Date
-  private var departure: Date
+  public  var arrival: Date
+  public  var departure: Date
   public  var stop: Stop
   public  var stopSequence: Int
   init(id: Int, arrival: Date, departure: Date, stop: Stop, stopSequence: Int) {

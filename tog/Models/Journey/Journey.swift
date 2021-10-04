@@ -26,6 +26,9 @@ extension Journey {
   public var arrival: Time {
     legs.last!.halts.last!.arrivalTime
   }
+  public var arrivalDate: Date {
+    legs.last!.halts.last!.arrival
+  }
   public var priceString: String {
     String(format: "%.2f €", Double(price)/100)
   }
@@ -83,7 +86,7 @@ extension Journey {
         ],
         trip: Trip(
           id: 0,
-          headsign: "Neulengbach",
+          headsign: "Neulengbach Bahnhof",
           shortName: nil,
           route: Route(id: 0, shortName: "S50")
         )
@@ -94,7 +97,7 @@ extension Journey {
             id: 0,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 2, name: "Wien Hütteldorf", latitude: 48.197354, longitude: 16.261117),
+            stop: Stop(id: 2, name: "Wien Hütteldorf Bahnhof", latitude: 48.197354, longitude: 16.261117),
             stopSequence: 1
           ),
           Halt(
@@ -132,13 +135,13 @@ extension Journey {
             id: 1,
             arrival: Date(),
             departure: Date(),
-            stop: Stop(id: 78, name: "Prinzersdorf", latitude: 48.203095, longitude: 15.526097),
+            stop: Stop(id: 78, name: "Prinzersdorf Bahnhof", latitude: 48.203095, longitude: 15.526097),
             stopSequence: 1
           )
         ],
         trip: Trip(
           id: 13,
-          headsign: "Pöchlarn",
+          headsign: "Pöchlarn Bahnhof",
           shortName: nil,
           route: Route(id: 67, shortName: "R52")
         )

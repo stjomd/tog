@@ -36,7 +36,6 @@ struct TicketsSearchViewContents: View {
 
   @Environment(\.presentationMode) private var presentationMode
 
-  // @State private var passengersCount = 1
   @Binding private var isShowingAddToFavorites: Bool
 
   @ObservedObject private var journeyQuery = JourneyQuery()
