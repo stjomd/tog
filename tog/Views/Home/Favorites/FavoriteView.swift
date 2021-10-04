@@ -47,7 +47,7 @@ struct FavoriteJourneyTitle: View {
   @State private var isPresentingEditFavoriteView = false
 
   var body: some View {
-    HStack(alignment: .firstTextBaseline) {
+    HStack(alignment: .top) {
       VStack(alignment: .leading) {
         HStack(spacing: 6) {
           Text(favorite.origin!.name)
@@ -78,6 +78,9 @@ struct FavoriteJourneyTitle: View {
           })
         }, label: {
           Globals.Icons.more
+            .resizable()
+            .scaledToFit()
+            .frame(width: 20, height: 20)
         })
         .foregroundColor(.primary)
       }

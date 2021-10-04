@@ -13,6 +13,28 @@ struct FavoriteDestinationsSection: View {
 
   var body: some View {
     Section(header: Text("Favorite Destinations")) {
+      if favoritesQuery.results.isEmpty {
+        HStack {
+          Spacer()
+          VStack(alignment: .center) {
+            Image(systemName: "star.circle")
+              .resizable()
+              .scaledToFit()
+              .frame(width: 50, height: 50)
+            Text("Frequented Destinations")
+              .font(.title3)
+              .bold()
+              .multilineTextAlignment(.center)
+              .padding(.vertical, 2)
+            Text("Add destinations to favorites to always have next departures at hand.")
+              .multilineTextAlignment(.center)
+              .fixedSize(horizontal: false, vertical: true) // prevents from collapsing to one line
+          }
+          .padding(.vertical, 8)
+          .opacity(0.5)
+          Spacer()
+        }
+      }
       ForEach(favoritesQuery.results, id: \.id) { favorite in
         ZStack {
           FavoriteView(favorite: favorite, favoritesQuery: favoritesQuery)
