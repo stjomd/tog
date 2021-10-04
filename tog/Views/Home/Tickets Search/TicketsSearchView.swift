@@ -36,6 +36,7 @@ struct TicketsSearchViewContents: View {
 
   @Environment(\.presentationMode) private var presentationMode
 
+  // @State private var passengersCount = 1
   @Binding private var isShowingAddToFavorites: Bool
 
   @ObservedObject private var journeyQuery = JourneyQuery()
@@ -72,7 +73,6 @@ struct TicketsSearchViewContents: View {
           // Separate text and date picker because the padding doesn't look nice
           Text(journeyQuery.query.dateMode.description)
           DatePicker("", selection: $journeyQuery.query.date)
-            .offset(x: 10)
         }
         .contextMenu {
           Button(action: { journeyQuery.query.dateMode = .departure }, label: {
@@ -83,10 +83,12 @@ struct TicketsSearchViewContents: View {
           })
         }
         HStack {
-          Text("Passengers")
-          Spacer()
-          Text("Me")
-            .opacity(0.3)
+          if journeyQuery.query.passengers == 1 {
+            Text("1 passenger")
+          } else {
+            Text("\(journeyQuery.query.passengers) passengers")
+          }
+          Stepper("", value: $journeyQuery.query.passengers, in: 1...10)
         }
       }
       Section(header: Text("Search Results")) {
