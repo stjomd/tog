@@ -46,15 +46,10 @@ extension JSONDecoder.DateDecodingStrategy {
 }
 
 extension JSONEncoder.DateEncodingStrategy {
-  static let ticketDateStrategy = custom { date, encoder in
+  static let togServerDateStrategy = custom { date, encoder in
     var container = encoder.singleValueContainer()
     try container.encode(
       DateFormatter.longDateFormatter.string(from: date)
     )
-//    if let date = DateFormatter.shortDateFormatter.date(from: string) {
-//      return date
-//    } else {
-//      throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(string)")
-//    }
   }
 }

@@ -22,14 +22,9 @@ class TogDataService {
     js.dateDecodingStrategy = .togServerDateStrategy
     return js
   }()
-  private let jsonTicketDecoder: JSONDecoder = {
-    let js = JSONDecoder()
-    js.dateDecodingStrategy = .togServerDateStrategy
-    return js
-  }()
   private let jsonEncoder: JSONEncoder = {
     let js = JSONEncoder()
-    js.dateEncodingStrategy = .ticketDateStrategy
+    js.dateEncodingStrategy = .togServerDateStrategy
     js.outputFormatting = .prettyPrinted
     return js
   }()
@@ -158,7 +153,7 @@ extension TogDataService: DataService {
     if FileManager.default.fileExists(atPath: ticketsURL.path) {
       do {
         let data = try Data(contentsOf: ticketsURL)
-        return try jsonTicketDecoder.decode([Ticket].self, from: data)
+        return try jsonDecoder.decode([Ticket].self, from: data)
       } catch let error {
         print(error)
       }
