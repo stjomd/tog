@@ -7,10 +7,8 @@ target 'tog' do
 
   # Pods for tog
   pod 'EFQRCode', '~> 6.1.0'
-  pod 'SwiftCSV', '~> 0.6'
   pod 'SwiftLint', '~> 0.43.1'
   pod 'Swinject', '~> 2.8.0'
-  pod 'Zip', '~> 2.1'
 
   target 'togTests' do
     inherit! :search_paths

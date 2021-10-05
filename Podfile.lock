@@ -1,33 +1,25 @@
 PODS:
   - EFQRCode (6.1.0):
     - swift_qrcodejs (~> 2.2.2)
-  - SwiftCSV (0.6.0)
   - SwiftLint (0.43.1)
   - Swinject (2.8.0)
-  - Zip (2.1.1)
 
 DEPENDENCIES:
   - EFQRCode (~> 6.1.0)
-  - SwiftCSV (~> 0.6)
   - SwiftLint (~> 0.43.1)
   - Swinject (~> 2.8.0)
-  - Zip (~> 2.1)
 
 SPEC REPOS:
   trunk:
     - EFQRCode
-    - SwiftCSV
     - SwiftLint
     - Swinject
-    - Zip
 
 SPEC CHECKSUMS:
   EFQRCode: 994654b3ad1657ab751b92422cef8b8f7d1b1496
-  SwiftCSV: ebc63cacc3820042537288c0cc647946261f7c2c
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Swinject: db795b8d6d78559b25fbebb0170d2635be1176e2
-  Zip: 414f59909701fda9a84ab774ebe0f5449b1082cc
 
-PODFILE CHECKSUM: 1ab810d2f492bc6cf5c3c18bc235210a8e708fde
+PODFILE CHECKSUM: 0ce31810b73d59a4377590bb83371cd78c7cc711
 
 COCOAPODS: 1.10.2
