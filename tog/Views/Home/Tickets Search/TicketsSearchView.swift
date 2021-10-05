@@ -126,6 +126,7 @@ struct TicketsSearchViewContents: View {
           Globals.Icons.star
         }
       })
+      .accessibilityIdentifier("starButton")
       Button(action: {
         // Swap origin and destination
         journeyQuery.query = .init(

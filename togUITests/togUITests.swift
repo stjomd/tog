@@ -90,7 +90,7 @@ class TogUITests: XCTestCase {
     tablesQuery.buttons["Find tickets..."].tap()
     // -- Add to favorites
     let selectJourneyNavigationBar = app.navigationBars["Select Journey"]
-    selectJourneyNavigationBar.buttons["Favorite"].tap()
+    selectJourneyNavigationBar.buttons["starButton"].tap()
     app.navigationBars["Add to Favorites"].buttons["Save"].tap()
     // -- Go back
     selectJourneyNavigationBar.buttons["Tog"].tap()
