@@ -71,14 +71,17 @@ extension MockDataService: MockableDataService {
 private extension MockDataService {
 
   private func deserialize() {
+    unzipData()
     loadStops()
   }
 
   private func openCSV(named name: String) -> CSV {
-    guard let csv = try? CSV(url: unzippedURL.appendingPathComponent(name), loadColumns: false) else {
-      fatalError("CSV Error")
+    do {
+      let csv = try CSV(url: unzippedURL.appendingPathComponent(name), loadColumns: false)
+      return csv
+    } catch let error {
+      fatalError(error.localizedDescription)
     }
-    return csv
   }
 
   // Stops
@@ -98,12 +101,13 @@ private extension MockDataService {
 private extension MockDataService {
   // Download from the ÖBB's url results in a corrupted zip file that cannot be unpacked...
   // Therefore the data is loaded from the bundle :(
-  private func downloadData() {
+  private func unzipData() {
     guard let url = zipURL else {
       fatalError("No URL for data")
     }
     do {
       try Zip.unzipFile(url, destination: unzippedURL, overwrite: true, password: nil)
+      print("Unzipped")
     } catch {
       fatalError("Couldn't unzip \(error.localizedDescription)")
     }
