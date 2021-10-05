@@ -18,7 +18,7 @@ jobs:
       - name: Build
         run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'generic/platform=iOS' -configuration Release build CODE_SIGNING_ALLOWED=NO
       - name: Run tests
-        run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'platform=iOS Simulator,name=iPhone 12' -enableCodeCoverage YES -configuration Release test
+        run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'platform=iOS Simulator,name=iPhone 12' -enableCodeCoverage YES -configuration Release ENABLE_TESTABILITY=YES test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1.2.1
       - name: Upload report
