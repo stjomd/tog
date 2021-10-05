@@ -17,7 +17,7 @@ struct JourneyCell: View {
       HStack {
         Globals.Icons.clock
           .font(.callout)
-        Text(journey.departure.duration(to: journey.arrival).textualDescription)
+        Text(journey.durationString)
         Spacer()
         Globals.Icons.money
           .font(.callout)

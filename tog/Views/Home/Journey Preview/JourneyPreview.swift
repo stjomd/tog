@@ -25,12 +25,7 @@ struct JourneyPreview: View {
       VStack(alignment: .leading) {
         // MARK: Top info
         HStack(alignment: .lastTextBaseline) {
-          Text(
-            journey.legs.first!.halts.first!.departureTime.duration(
-              to: journey.legs.last!.halts.last!.arrivalTime
-            )
-            .textualDescription
-          )
+          Text(journey.durationString)
           Spacer()
           Text(journey.priceString)
             .font(.title)

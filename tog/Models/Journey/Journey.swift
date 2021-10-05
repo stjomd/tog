@@ -36,6 +36,18 @@ extension Journey {
   public var priceString: String {
     String(format: "%.2f €", Double(price)/100)
   }
+  public var durationString: String {
+    let diffComponents = Calendar.current.dateComponents(
+      [.hour, .minute], from: self.departureDate, to: self.arrivalDate
+    )
+    let hours = diffComponents.hour!
+    let minutes = diffComponents.minute!
+    if hours == 0 {
+      return "\(minutes)m"
+    } else {
+      return "\(hours)h \(minutes)m"
+    }
+  }
   /// Calculates the transfer time from a given leg to the next.
   /// - parameter leg: the journey leg from which transfer is performed.
   /// - returns: the time required to transfer, or `nil` if the next leg does not exist.
