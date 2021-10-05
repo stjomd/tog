@@ -7,20 +7,15 @@
 
 import Foundation
 import Combine
-import SwiftCSV
-import Zip
 
 class MockDataService {
 
-  private let zipURL = Bundle.main.url(forResource: "oebb-data", withExtension: "zip")
-  private let unzippedURL = FileManager.documentsDirectoryURL.appendingPathComponent("oebb-data")
-
   private var stops: [Stop] = []
+  private var halts: [Halt] = []
+  private var journeys: [Journey] = []
 
   init(populate: Bool) {
-    if populate {
-      deserialize()
-    }
+    if populate { generate() }
   }
 
 }
@@ -39,7 +34,16 @@ extension MockDataService: DataService {
   }
 
   func journeys(by query: JourneyQueryComponents?) -> AnyPublisher<[Journey], Never> {
-    Just([]).eraseToAnyPublisher()
+    guard let query = query else {
+      return Just([]).eraseToAnyPublisher()
+    }
+    let relevant = journeys.filter {
+      $0.firstHalt.stop.id == query.origin.id && $0.lastHalt.stop.id == query.destination.id
+    }
+    let result = relevant.map { journey in
+      Journey(legs: journey.legs, passengers: query.passengers, price: journey.price * query.passengers)
+    }
+    return Just(result).eraseToAnyPublisher()
   }
 
   func favorites() -> AnyPublisher<[FavoriteDestination], Never> {
@@ -70,46 +74,110 @@ extension MockDataService: MockableDataService {
 // MARK: - Deserializing
 private extension MockDataService {
 
-  private func deserialize() {
-    unzipData()
-    loadStops()
+  private func generate() {
+    generateStops()
+    generateHalts()
+    generateJourneys()
   }
 
-  private func openCSV(named name: String) -> CSV {
-    do {
-      let csv = try CSV(url: unzippedURL.appendingPathComponent(name), loadColumns: false)
-      return csv
-    } catch let error {
-      fatalError(error.localizedDescription)
-    }
+  private func generateStops() {
+    stops += [
+      Stop(id: 0, name: "Wien Hütteldorf Bahnhof", latitude: 40.0, longitude: 40.0),
+      Stop(id: 1, name: "Wien Penzing Bahnhof", latitude: 40.1, longitude: 40.0),
+      Stop(id: 2, name: "Wien Westbahnhof", latitude: 40.2, longitude: 40.0)
+    ]
+  }
+  private func generateHalts() {
+    // Hütteldorf -> Westbahnhof
+    var dates = [TogApp.calendar.date(byAdding: .hour, value: 1, to: Date())!]
+    dates.append(TogApp.calendar.date(byAdding: .minute, value: 1, to: dates.last!)!)
+    dates.append(TogApp.calendar.date(byAdding: .minute, value: 6, to: dates.last!)!)
+    dates.append(TogApp.calendar.date(byAdding: .minute, value: 1, to: dates.last!)!)
+    dates.append(TogApp.calendar.date(byAdding: .minute, value: 4, to: dates.last!)!)
+    dates.append(TogApp.calendar.date(byAdding: .minute, value: 1, to: dates.last!)!)
+    halts += [
+      Halt(id: 0, arrival: dates[0], departure: dates[1], stop: stops[0], stopSequence: 6),
+      Halt(id: 1, arrival: dates[2], departure: dates[3], stop: stops[1], stopSequence: 7),
+      Halt(id: 2, arrival: dates[4], departure: dates[5], stop: stops[2], stopSequence: 8)
+    ]
+    // Westbahnhof -> Hütteldorf
+    dates = [TogApp.calendar.date(byAdding: .hour, value: 1, to: Date())!]
+    dates.append(TogApp.calendar.date(byAdding: .minute, value: 1, to: dates.last!)!)
+    dates.append(TogApp.calendar.date(byAdding: .minute, value: 4, to: dates.last!)!)
+    dates.append(TogApp.calendar.date(byAdding: .minute, value: 1, to: dates.last!)!)
+    dates.append(TogApp.calendar.date(byAdding: .minute, value: 6, to: dates.last!)!)
+    dates.append(TogApp.calendar.date(byAdding: .minute, value: 1, to: dates.last!)!)
+    halts += [
+      Halt(id: 3, arrival: dates[0], departure: dates[1], stop: stops[2], stopSequence: 1),
+      Halt(id: 4, arrival: dates[2], departure: dates[3], stop: stops[1], stopSequence: 2),
+      Halt(id: 5, arrival: dates[4], departure: dates[5], stop: stops[0], stopSequence: 3)
+    ]
+  }
+  private func generateJourneys() {
+    journeys += [
+      // Wien Hütteldorf -> Wien Westbahnhof
+      Journey(
+        legs: [
+          JourneyLeg(
+            halts: [halts[0], halts[1], halts[2]],
+            trip: Trip(
+              id: 0,
+              headsign: "Wien Westbahnhof",
+              shortName: nil,
+              route: Route(id: 0, shortName: "S50")
+            )
+          )
+        ],
+        passengers: 1,
+        price: 120
+      ),
+      Journey(
+        legs: [
+          JourneyLeg(
+            halts: [halts[0], halts[1], halts[2]],
+            trip: Trip(
+              id: 1,
+              headsign: "Wien Westbahnhof",
+              shortName: nil,
+              route: Route(id: 1, shortName: "R33")
+            )
+          )
+        ],
+        passengers: 1,
+        price: 120
+      ),
+      // Wien Westbahnhof -> Wien Hütteldorf
+      Journey(
+        legs: [
+          JourneyLeg(
+            halts: [halts[3], halts[4], halts[5]],
+            trip: Trip(
+              id: 2,
+              headsign: "St.Pölten Hbf",
+              shortName: nil,
+              route: Route(id: 2, shortName: "R33")
+            )
+          )
+        ],
+        passengers: 1,
+        price: 120
+      ),
+      Journey(
+        legs: [
+          JourneyLeg(
+            halts: [halts[3], halts[4], halts[5]],
+            trip: Trip(
+              id: 3,
+              headsign: "Eichgraben-Altlengbach",
+              shortName: nil,
+              route: Route(id: 3, shortName: "S50")
+            )
+          )
+        ],
+        passengers: 1,
+        price: 120
+      )
+    ]
   }
 
-  // Stops
-  private func loadStops() {
-    let csv = openCSV(named: "stops.txt")
-    for row in csv.enumeratedRows {
-      if let id = Int(row[0]), let latitude = Double(row[4]), let longitude = Double(row[5]) {
-        let stop = Stop(id: id, name: row[2], latitude: latitude, longitude: longitude)
-        stops.append(stop)
-      }
-    }
-  }
-
-}
-
-// MARK: - Data Download
-private extension MockDataService {
-  // Download from the ÖBB's url results in a corrupted zip file that cannot be unpacked...
-  // Therefore the data is loaded from the bundle :(
-  private func unzipData() {
-    guard let url = zipURL else {
-      fatalError("No URL for data")
-    }
-    do {
-      try Zip.unzipFile(url, destination: unzippedURL, overwrite: true, password: nil)
-      print("Unzipped")
-    } catch {
-      fatalError("Couldn't unzip \(error.localizedDescription)")
-    }
-  }
 }
