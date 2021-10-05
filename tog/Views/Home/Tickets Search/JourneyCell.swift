@@ -25,7 +25,7 @@ struct JourneyCell: View {
           .bold()
       }
     }
-    .opacity((Date() > journey.departureDate) ? 0.3 : 1)
+    .opacity((Date() > journey.departure) ? 0.3 : 1)
     .padding(.vertical, 10)
   }
 

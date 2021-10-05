@@ -17,7 +17,7 @@ struct JourneyPreview: View {
   @State private var isShowingAlert = false
 
   private var canBuy: Bool {
-    Date() < journey.departureDate
+    Date() < journey.departure
   }
 
   var body: some View {
@@ -54,8 +54,8 @@ struct JourneyPreview: View {
               message: Text("Pretend this is a real purchase!"),
               primaryButton: .default(Text("Buy"), action: {
                 print("ARRDATE")
-                print(journey.arrivalDate)
-                let ticket = Ticket(journey: journey, expiration: journey.arrivalDate, passengers: journey.passengers)
+                print(journey.arrival)
+                let ticket = Ticket(journey: journey, expiration: journey.arrival, passengers: journey.passengers)
                 dataService.buyTicket(ticket)
               }),
               secondaryButton: .cancel()
@@ -104,7 +104,7 @@ struct JourneyLegsPreview: View {
         if leg.trip.id != journey.legs.last!.trip.id {
           Divider()
             .padding(.bottom, 4)
-          if let transferTime = journey.transferTime(after: leg)?.textualDescription {
+          if let transferTime = journey.transferTimeString(after: leg) {
             Text("\(transferTime) to transfer in \(leg.halts.last!.stop.name)")
           } else {
             Text("Transfer in \(leg.halts.last!.stop.name)")
@@ -129,7 +129,7 @@ struct HaltRow: View {
       // Arrows & Time
       if halt.isLastIn(leg: leg) {
         Globals.Icons.arrivalArrow
-        Text(halt.arrivalTime.shortDescription)
+        Text(halt.arrival.timeString)
           .frame(width: 50, alignment: .center)
       } else {
         // Show arrow on first halt in a leg, "hide" the rest
@@ -139,7 +139,7 @@ struct HaltRow: View {
           Globals.Icons.departureArrow
             .foregroundColor(Globals.Colors.monochrome)
         }
-        Text(halt.departureTime.shortDescription)
+        Text(halt.departure.timeString)
           .frame(width: 50, alignment: .center)
       }
       // Circle & Stop & Platform

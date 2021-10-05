@@ -15,7 +15,7 @@ struct JourneyRow: View {
 
   var body: some View {
     HStack {
-      Text(journey.departure.shortDescription)
+      Text(journey.departure.timeString)
       Rectangle()
         .foregroundColor(Color.gray.opacity(0.2))
         .overlay(
@@ -31,7 +31,7 @@ struct JourneyRow: View {
         .frame(height: 28)
         .cornerRadius(6)
         .padding(.horizontal, 2)
-      Text(journey.arrival.shortDescription)
+      Text(journey.arrival.timeString)
     }
   }
 

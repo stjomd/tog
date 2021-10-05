@@ -21,27 +21,23 @@ public struct JourneyLeg: Codable, Hashable {
 extension Journey {
   // `legs` is guaranteed to have at least one JourneyLeg;
   // `journeyLeg.halts` is guaranteed to have at least one halt.
-  public var departure: Time {
-    legs.first!.halts.first!.departureTime
+  public var firstHalt: Halt {
+    legs.first!.halts.first!
   }
-  public var departureDate: Date {
-    legs.first!.halts.first!.departure
+  public var lastHalt: Halt {
+    legs.last!.halts.last!
   }
-  public var arrival: Time {
-    legs.last!.halts.last!.arrivalTime
+  public var departure: Date {
+    firstHalt.departure
   }
-  public var arrivalDate: Date {
-    legs.last!.halts.last!.arrival
+  public var arrival: Date {
+    lastHalt.arrival
   }
   public var priceString: String {
     String(format: "%.2f €", Double(price)/100)
   }
   public var durationString: String {
-    let diffComponents = Calendar.current.dateComponents(
-      [.hour, .minute], from: self.departureDate, to: self.arrivalDate
-    )
-    let hours = diffComponents.hour!
-    let minutes = diffComponents.minute!
+    let (hours, minutes) = self.duration(from: self.departure, to: self.arrival)
     if hours == 0 {
       return "\(minutes)m"
     } else {
@@ -51,18 +47,29 @@ extension Journey {
   /// Calculates the transfer time from a given leg to the next.
   /// - parameter leg: the journey leg from which transfer is performed.
   /// - returns: the time required to transfer, or `nil` if the next leg does not exist.
-  public func transferTime(after leg: JourneyLeg) -> Time? {
+  public func transferTimeString(after leg: JourneyLeg) -> String? {
     for i in self.legs.indices {
       if self.legs[i].trip.id == leg.trip.id {
         if i + 1 < self.legs.count {
           let nextLeg = self.legs[i + 1]
-          return leg.halts.last!.arrivalTime.duration(to: nextLeg.halts.first!.departureTime)
+          let (hours, minutes) = self.duration(from: leg.halts.last!.arrival, to: nextLeg.halts.first!.departure)
+          if hours == 0 {
+            return "\(minutes)m"
+          } else {
+            return "\(hours)h \(minutes)m"
+          }
         } else {
           return nil
         }
       }
     }
     return nil
+  }
+  private func duration(from: Date, to: Date) -> (hours: Int, minutes: Int) {
+    let components = Calendar.current.dateComponents(
+      [.hour, .minute], from: self.departure, to: self.arrival
+    )
+    return (hours: components.hour!, minutes: components.minute!)
   }
 }
 
