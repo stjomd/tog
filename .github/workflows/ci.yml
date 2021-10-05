@@ -1,0 +1,50 @@
+name: Tests
+
+on: [push]
+
+jobs:
+
+  test-client:
+    runs-on: macos-latest
+    steps:
+      - name: Cancel previous jobs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: pod install
+      - name: Build
+        run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'generic/platform=iOS' -configuration Release build CODE_SIGNING_ALLOWED=NO
+      - name: Run tests
+        run: xcodebuild -workspace 'tog.xcworkspace' -scheme 'tog' -destination 'platform=iOS Simulator,name=iPhone 12' -enableCodeCoverage YES -configuration Release ENABLE_TESTABILITY=YES test
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1.2.1
+      - name: Upload report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: Report (Client)
+          path: ~/Library/Developer/Xcode/DerivedData/tog-*/Logs/Test/*.xcresult
+
+  test-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Build and run tests
+        run: |
+          cd server/railway
+          mvn --batch-mode clean install
+      - name: Upload report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: Report (Server)
+          path: target/surefire-reports/*.txt

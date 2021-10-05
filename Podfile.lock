@@ -1,0 +1,25 @@
+PODS:
+  - EFQRCode (6.1.0):
+    - swift_qrcodejs (~> 2.2.2)
+  - SwiftLint (0.43.1)
+  - Swinject (2.8.0)
+
+DEPENDENCIES:
+  - EFQRCode (~> 6.1.0)
+  - SwiftLint (~> 0.43.1)
+  - Swinject (~> 2.8.0)
+
+SPEC REPOS:
+  trunk:
+    - EFQRCode
+    - SwiftLint
+    - Swinject
+
+SPEC CHECKSUMS:
+  EFQRCode: 994654b3ad1657ab751b92422cef8b8f7d1b1496
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+  Swinject: db795b8d6d78559b25fbebb0170d2635be1176e2
+
+PODFILE CHECKSUM: 0ce31810b73d59a4377590bb83371cd78c7cc711
+
+COCOAPODS: 1.10.2
