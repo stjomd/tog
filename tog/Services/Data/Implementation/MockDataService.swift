@@ -118,7 +118,7 @@ private extension MockDataService {
       Stop(id: 2, name: "Wien Westbahnhof", latitude: 40.2, longitude: 40.0)
     ]
   }
-  
+
   private func generateHalts() {
     // Hütteldorf -> Westbahnhof
     var dates = [TogApp.calendar.date(byAdding: .hour, value: 1, to: Date())!]
@@ -145,7 +145,7 @@ private extension MockDataService {
       Halt(id: 5, arrival: dates[4], departure: dates[5], stop: stops[0], stopSequence: 3)
     ]
   }
-  
+
   private func generateJourneys() {
     journeys += [
       // Wien Hütteldorf -> Wien Westbahnhof
