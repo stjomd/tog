@@ -14,6 +14,9 @@ class MockDataService {
   private var halts: [Halt] = []
   private var journeys: [Journey] = []
 
+  private var favoriteDestinations: [FavoriteDestination] = []
+  private var tickets: [Ticket] = []
+
   init(populate: Bool) {
     if populate { generate() }
   }
@@ -43,24 +46,52 @@ extension MockDataService: DataService {
     let result = relevant.map { journey in
       Journey(legs: journey.legs, passengers: query.passengers, price: journey.price * query.passengers)
     }
-    return Just(result).eraseToAnyPublisher()
+    if let limit = query.limit {
+      let trimmed: [Journey] = result.dropLast(max(0, result.count - limit))
+      return Just(trimmed).eraseToAnyPublisher()
+    } else {
+      return Just(result).eraseToAnyPublisher()
+    }
   }
 
   func favorites() -> AnyPublisher<[FavoriteDestination], Never> {
-    Just([]).eraseToAnyPublisher()
+    Just(favoriteDestinations).eraseToAnyPublisher()
   }
 
   func tickets(_ selection: TicketSelection) -> AnyPublisher<[Ticket], Never> {
-    Just([]).eraseToAnyPublisher()
+    switch selection {
+    case .valid:
+      return Just(tickets.filter { $0.isValid }).eraseToAnyPublisher()
+    case .expired:
+      return Just(tickets.filter { !$0.isValid }).eraseToAnyPublisher()
+    case .all:
+      return Just(tickets).eraseToAnyPublisher()
+    }
   }
 
   // MARK: Posters
 
-  func saveFavorite(_ favorite: FavoriteDestination) {}
+  func saveFavorite(_ favorite: FavoriteDestination) {
+    if let existingIndex = favoriteDestinations.firstIndex(where: {
+             $0.origin!.id == favorite.origin!.id && $0.destination!.id == favorite.destination!.id
+           }) {
+      favoriteDestinations[existingIndex].amount = favorite.amount
+    } else {
+      favoriteDestinations.append(favorite)
+    }
+  }
 
-  func deleteFavorite(_ favorite: FavoriteDestination) {}
+  func deleteFavorite(_ favorite: FavoriteDestination) {
+    if let existingIndex = favoriteDestinations.firstIndex(where: {
+             $0.origin!.id == favorite.origin!.id && $0.destination!.id == favorite.destination!.id
+           }) {
+      favoriteDestinations.remove(at: existingIndex)
+    }
+  }
 
-  func buyTicket(_ ticket: Ticket) {}
+  func buyTicket(_ ticket: Ticket) {
+    tickets.append(ticket)
+  }
 
 }
 
@@ -87,6 +118,7 @@ private extension MockDataService {
       Stop(id: 2, name: "Wien Westbahnhof", latitude: 40.2, longitude: 40.0)
     ]
   }
+  
   private func generateHalts() {
     // Hütteldorf -> Westbahnhof
     var dates = [TogApp.calendar.date(byAdding: .hour, value: 1, to: Date())!]
@@ -113,6 +145,7 @@ private extension MockDataService {
       Halt(id: 5, arrival: dates[4], departure: dates[5], stop: stops[0], stopSequence: 3)
     ]
   }
+  
   private func generateJourneys() {
     journeys += [
       // Wien Hütteldorf -> Wien Westbahnhof
