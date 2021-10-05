@@ -8,38 +8,72 @@
 import SwiftUI
 
 struct TicketPreview: View {
-  let journey = Journey.cjx
+
+  let ticket: Ticket
+
+  private var dateFormatter: DateFormatter {
+    let df = DateFormatter()
+    df.dateFormat = "HH:mm"
+    return df
+  }
+
+  var body: some View {
+    ZStack {
+      VStack(alignment: .leading) {
+        // Title
+        TicketTitle(ticket: ticket)
+        // Trips
+        JourneyRow(journey: ticket.journey)
+        HStack {
+          Globals.Icons.person
+            .padding(.trailing, -4)
+          Text("\(ticket.passengers)")
+          Spacer()
+          Globals.Icons.clock
+            .padding(.trailing, -4)
+          Text(ticket.expirationString)
+        }
+        .opacity(0.4)
+      }
+      .padding(.vertical, 10)
+      // Navigation link without chevron
+      NavigationLink("", destination: TicketDetailsView(ticket: ticket))
+        .opacity(0)
+    }
+  }
+
+}
+
+struct TicketTitle: View {
+
+  let ticket: Ticket
+
   var body: some View {
     VStack(alignment: .leading) {
-      // Title
-      VStack(alignment: .leading) {
-        HStack(spacing: 6) {
-          Text("\(journey.origin)")
-            .font(.headline)
-          Globals.Icons.rightArrow
-            .foregroundColor(.gray)
-        }
-        Text(journey.destination)
+      HStack(spacing: 6) {
+        Text(ticket.origin.name)
           .font(.headline)
+        Globals.Icons.rightArrow
+          .foregroundColor(.gray)
       }
-      // Trips
-      JourneyRow(journey: journey)
+      Text(ticket.destination.name)
+        .font(.headline)
     }
-    .padding(.vertical, 10)
   }
+
 }
 
 struct TicketPreview_Previews: PreviewProvider {
   static var previews: some View {
-    TicketPreview()
+    TicketPreview(ticket: .valid)
       .previewLayout(.sizeThatFits)
       .padding()
-    TicketPreview()
+    TicketPreview(ticket: .expired)
       .previewLayout(.sizeThatFits)
       .preferredColorScheme(.dark)
       .padding()
     List {
-      TicketPreview()
+      TicketPreview(ticket: .valid)
     }
     .listStyle(InsetGroupedListStyle())
   }

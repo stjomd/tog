@@ -11,11 +11,11 @@ import SwiftUI
 
 class ColorServiceTests: XCTestCase {
 
-  var colorService: ColorService!
+  var colorService: StandardColorService!
 
   override func setUpWithError() throws {
     try super.setUpWithError()
-    colorService = ColorService()
+    colorService = StandardColorService()
   }
 
   override func tearDownWithError() throws {

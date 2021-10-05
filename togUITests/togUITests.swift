@@ -25,6 +25,7 @@ class TogUITests: XCTestCase {
   }
 
   func test_whenBothStopsChosen_thenFindTicketsButton() throws {
+
     let tablesQuery = XCUIApplication().tables
     let originTextField = tablesQuery.textFields["Origin"]
     let destinationTextField = tablesQuery.textFields["Destination"]
@@ -72,6 +73,77 @@ class TogUITests: XCTestCase {
     app.keyboards.keys["delete"].tap()
     // Then (2 - Find tickets button is hidden)
     XCTAssertFalse(tablesQuery.buttons["Find tickets..."].exists)
+  }
+
+  func test_whenInJourneySearchAndAddToFavorite_thenFavoriteOnMainScreen() throws {
+    let (originName, destinationName) = ("Wien Hütteldorf Bahnhof", "Wien Westbahnhof")
+    let (originKey, destinationKey) = (originName.first!.description, destinationName.first!.description)
+    // When
+    XCTAssertTrue(app.staticTexts["Frequented Destinations"].exists)
+    // -- Search
+    let tablesQuery = app.tables
+    tablesQuery.textFields["Origin"].tap()
+    app.keys[originKey].tap()
+    tablesQuery.buttons[originName].tap()
+    app.keys[destinationKey].tap()
+    tablesQuery.buttons[destinationName].tap()
+    tablesQuery.buttons["Find tickets..."].tap()
+    // -- Add to favorites
+    let selectJourneyNavigationBar = app.navigationBars["Select Journey"]
+    selectJourneyNavigationBar.buttons["starButton"].tap()
+    app.navigationBars["Add to Favorites"].buttons["Save"].tap()
+    // -- Go back
+    selectJourneyNavigationBar.buttons["Tog"].tap()
+    // Then
+    let favoriteCell = tablesQuery.cells.element(boundBy: 3)
+    XCTAssertTrue(favoriteCell.exists)
+    XCTAssertTrue(favoriteCell.staticTexts[originName].exists)
+    XCTAssertTrue(favoriteCell.staticTexts[destinationName].exists)
+    XCTAssertFalse(app.staticTexts["Frequented Destinations"].exists)
+  }
+
+  func test_whenInJourneySearchAndSelectJourney_thenShowPreview() throws {
+    let (originName, destinationName) = ("Wien Hütteldorf Bahnhof", "Wien Westbahnhof")
+    let (originKey, destinationKey) = (originName.first!.description, destinationName.first!.description)
+    // When
+    // -- Search
+    let tablesQuery = app.tables
+    tablesQuery.textFields["Origin"].tap()
+    app.keys[originKey].tap()
+    tablesQuery.buttons[originName].tap()
+    app.keys[destinationKey].tap()
+    tablesQuery.buttons[destinationName].tap()
+    tablesQuery.buttons["Find tickets..."].tap()
+    // -- Tap the first journey cell
+    tablesQuery.cells.element(boundBy: 4).tap()
+    // Then
+    XCTAssertTrue(app.staticTexts["Wien Penzing Bahnhof"].exists) // station between
+    XCTAssertTrue(app.staticTexts["S50"].exists) // train code
+  }
+
+  func test_whenInJourneyPreviewAndBuyTicket_thenTicketInTicketsTab() throws {
+    let (originName, destinationName) = ("Wien Hütteldorf Bahnhof", "Wien Westbahnhof")
+    let (originKey, destinationKey) = (originName.first!.description, destinationName.first!.description)
+    // When
+    // -- Search
+    let tablesQuery = app.tables
+    tablesQuery.textFields["Origin"].tap()
+    app.keys[originKey].tap()
+    tablesQuery.buttons[originName].tap()
+    app.keys[destinationKey].tap()
+    tablesQuery.buttons[destinationName].tap()
+    tablesQuery.buttons["Find tickets..."].tap()
+    // -- Tap the first journey cell
+    tablesQuery.cells.element(boundBy: 4).tap()
+    // -- Tap Buy
+    app.scrollViews.otherElements.buttons["Buy"].tap()
+    app.alerts["Buying Simulation"].scrollViews.otherElements.buttons["Buy"].tap()
+    // -- !!! Bug? Need to switch back and forth for the ticket to appear
+    app.tabBars["Tab Bar"].buttons["Tickets"].tap()
+    app.tabBars["Tab Bar"].buttons["Home"].tap()
+    app.tabBars["Tab Bar"].buttons["Tickets"].tap()
+    // Then
+    XCTAssertFalse(app.staticTexts["No tickets"].exists)
   }
 
 }
