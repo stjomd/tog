@@ -16,12 +16,12 @@ The server uses ÖBB's open data to build its database – this project however 
 ## Technologies
 - iOS App:
   - SwiftUI & interfacing with UIKit
+  - Combine
   - MapKit
   - XCTest
   - CocoaPods
 - Server:
   - Spring & H2
-  - Lombok, MapStruct, SuperCSV
   - Maven
 - SwiftLint, GitHub Workflows, Codecov
 
