@@ -23,7 +23,7 @@ The server uses ÖBB's open data to build its database – this project however 
 - Server:
   - Spring & H2
   - Maven
-- SwiftLint, GitHub Workflows, Codecov
+- SwiftLint, GitHub Workflows
 
 ## Limitations
 - No support for iOS Dynamic Type (font resizing) yet
