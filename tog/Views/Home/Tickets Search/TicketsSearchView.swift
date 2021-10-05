@@ -27,14 +27,11 @@ struct TicketsSearchView: View {
     )
     .navigationTitle("Select Journey")
     .navigationBarTitleDisplayMode(.inline)
-    .navigationBarBackButtonHidden(true)
   }
 
 }
 
 struct TicketsSearchViewContents: View {
-
-  @Environment(\.presentationMode) private var presentationMode
 
   @Binding private var isShowingAddToFavorites: Bool
 
@@ -107,18 +104,6 @@ struct TicketsSearchViewContents: View {
     }
     .listStyle(InsetGroupedListStyle())
     .toolbar {
-      ToolbarItemGroup(placement: .navigationBarLeading) {
-        Button(action: {
-          presentationMode.wrappedValue.dismiss()
-        }, label: {
-          HStack(spacing: 4) {
-            Image(systemName: "chevron.backward")
-              .font(Font.title2.weight(.medium))
-            Text("Tog")
-          }
-        })
-        .offset(x: -8)
-      }
       ToolbarItemGroup(placement: .navigationBarTrailing) {
         toolbarItems
       }
