@@ -35,7 +35,7 @@ struct TogApp: SwiftUI.App {
     let dataService = retrieveDataService()
     Self.container.register(DataService.self) { _ in dataService }
     // ColorService
-    let colorService = ColorService()
+    let colorService = StandardColorService()
     Self.container.register(ColorService.self) { _ in colorService }
   }
 

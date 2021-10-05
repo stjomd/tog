@@ -31,6 +31,7 @@
 		95983315270AEF3B000F7ADF /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95983314270AEF3B000F7ADF /* Ticket.swift */; };
 		95983317270AF9DE000F7ADF /* TicketsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95983316270AF9DE000F7ADF /* TicketsQuery.swift */; };
 		95983319270B33AA000F7ADF /* TicketDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95983318270B33AA000F7ADF /* TicketDetailsView.swift */; };
+		9598331D270C7A71000F7ADF /* ColorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9598331C270C7A71000F7ADF /* ColorService.swift */; };
 		95A2926726CED86000972011 /* TogDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926626CED86000972011 /* TogDataService.swift */; };
 		95A2926926CED9FE00972011 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926826CED9FE00972011 /* Stop.swift */; };
 		95A2926D26CEF29B00972011 /* StopQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2926C26CEF29B00972011 /* StopQuery.swift */; };
@@ -47,7 +48,7 @@
 		95E911E226C541EF00863A30 /* TicketPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E911E126C541EF00863A30 /* TicketPreview.swift */; };
 		95E911E626C5A02000863A30 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E911E526C5A02000863A30 /* ProductCell.swift */; };
 		95FDDF1026C67DA70086ECAE /* SettingsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF0F26C67DA70086ECAE /* SettingsRow.swift */; };
-		95FDDF1326C67FF30086ECAE /* ColorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF1226C67FF30086ECAE /* ColorService.swift */; };
+		95FDDF1326C67FF30086ECAE /* StandardColorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF1226C67FF30086ECAE /* StandardColorService.swift */; };
 		95FDDF1B26C6B6C10086ECAE /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF1A26C6B6C10086ECAE /* DataService.swift */; };
 		95FDDF1D26C6B6DA0086ECAE /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDDF1C26C6B6DA0086ECAE /* MockDataService.swift */; };
 		95FDDF1F26C6BBCD0086ECAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 95FDDF1E26C6BBCD0086ECAE /* Podfile */; };
@@ -112,6 +113,7 @@
 		95983314270AEF3B000F7ADF /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		95983316270AF9DE000F7ADF /* TicketsQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsQuery.swift; sourceTree = "<group>"; };
 		95983318270B33AA000F7ADF /* TicketDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketDetailsView.swift; sourceTree = "<group>"; };
+		9598331C270C7A71000F7ADF /* ColorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorService.swift; sourceTree = "<group>"; };
 		95A2926626CED86000972011 /* TogDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogDataService.swift; sourceTree = "<group>"; };
 		95A2926826CED9FE00972011 /* Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		95A2926C26CEF29B00972011 /* StopQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopQuery.swift; sourceTree = "<group>"; };
@@ -128,7 +130,7 @@
 		95E911E126C541EF00863A30 /* TicketPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketPreview.swift; sourceTree = "<group>"; };
 		95E911E526C5A02000863A30 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		95FDDF0F26C67DA70086ECAE /* SettingsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRow.swift; sourceTree = "<group>"; };
-		95FDDF1226C67FF30086ECAE /* ColorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorService.swift; sourceTree = "<group>"; };
+		95FDDF1226C67FF30086ECAE /* StandardColorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardColorService.swift; sourceTree = "<group>"; };
 		95FDDF1A26C6B6C10086ECAE /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		95FDDF1C26C6B6DA0086ECAE /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
 		95FDDF1E26C6BBCD0086ECAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -365,6 +367,23 @@
 			path = Ticket;
 			sourceTree = "<group>";
 		};
+		9598331A270C79F2000F7ADF /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				9598331C270C7A71000F7ADF /* ColorService.swift */,
+				9598331B270C7A60000F7ADF /* Implementation */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		9598331B270C7A60000F7ADF /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				95FDDF1226C67FF30086ECAE /* StandardColorService.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
 		95A2925726CC3C8600972011 /* Stop */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,29 +457,29 @@
 			isa = PBXGroup;
 			children = (
 				95D5045426C95EB30008652A /* Extensions.swift */,
-				95FDDF1226C67FF30086ECAE /* ColorService.swift */,
-				95FDDF1926C6B6B80086ECAE /* Data Services */,
+				9598331A270C79F2000F7ADF /* Color */,
+				95FDDF1926C6B6B80086ECAE /* Data */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		95FDDF1926C6B6B80086ECAE /* Data Services */ = {
+		95FDDF1926C6B6B80086ECAE /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				95FDDF1A26C6B6C10086ECAE /* DataService.swift */,
-				95FDDF3126C7E9540086ECAE /* OEBB */,
+				95FDDF3126C7E9540086ECAE /* Implementation */,
 			);
-			path = "Data Services";
+			path = Data;
 			sourceTree = "<group>";
 		};
-		95FDDF3126C7E9540086ECAE /* OEBB */ = {
+		95FDDF3126C7E9540086ECAE /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
 				95FDDF1C26C6B6DA0086ECAE /* MockDataService.swift */,
 				95A2926626CED86000972011 /* TogDataService.swift */,
 				95FDDF2026C6C7890086ECAE /* oebb-data.zip */,
 			);
-			path = OEBB;
+			path = Implementation;
 			sourceTree = "<group>";
 		};
 		95FDDF3426C845840086ECAE /* Search Fields */ = {
@@ -769,8 +788,9 @@
 				95A2926926CED9FE00972011 /* Stop.swift in Sources */,
 				951AB54826D2501B008C1468 /* Halt.swift in Sources */,
 				95983312270A6265000F7ADF /* Buttons.swift in Sources */,
+				9598331D270C7A71000F7ADF /* ColorService.swift in Sources */,
 				953C0F4526C4626000EF44DB /* Globals.swift in Sources */,
-				95FDDF1326C67FF30086ECAE /* ColorService.swift in Sources */,
+				95FDDF1326C67FF30086ECAE /* StandardColorService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
