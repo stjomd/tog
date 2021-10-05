@@ -25,10 +25,10 @@ public class Ticket: Codable {
 
 extension Ticket {
   public var origin: Stop {
-    self.journey.legs.first!.halts.first!.stop
+    self.journey.firstHalt.stop
   }
   public var destination: Stop {
-    self.journey.legs.last!.halts.last!.stop
+    self.journey.lastHalt.stop
   }
 }
 

@@ -63,7 +63,7 @@ struct UIJourneyMap: UIViewRepresentable {
       array.append(annotation)
     }
     // Include destination too:
-    let lastStop = journey.legs.last!.halts.last!.stop
+    let lastStop = journey.lastHalt.stop
     let lastAnnotation = MKPointAnnotation()
     lastAnnotation.title = lastStop.name
     lastAnnotation.coordinate = CLLocationCoordinate2D(latitude: lastStop.latitude, longitude: lastStop.longitude)
