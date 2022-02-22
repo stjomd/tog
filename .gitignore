@@ -41,3 +41,6 @@ DerivedData/
 
 *.xcworkspace
 Pods/
+
+.DS_Store
+
